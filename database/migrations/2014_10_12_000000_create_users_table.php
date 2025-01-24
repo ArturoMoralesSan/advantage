@@ -26,8 +26,6 @@ class CreateUsersTable extends Migration
             $table->string('provider_id')->nullable();
             $table->unsignedInteger('role_id')->nullable();
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            $table->unsignedInteger('branch_id')->nullable();
-            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
