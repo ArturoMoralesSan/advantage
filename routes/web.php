@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\BranchController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\PaymentController;
@@ -86,6 +86,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::put('roles/{id}/actualizar', [RoleController::class, 'update']);
     Route::delete('roles/eliminar/{id}', [RoleController::class, 'delete']);
 
+    //Productos
+    Route::get('productos', [ProductController::class, 'index']);
+    Route::view('agregar-productos', 'admin.productos.crear');
+    Route::post('productos/crear', [ProductController::class, 'save']);
+    Route::get('productos/{id}/editar', [ProductController::class, 'edit']);
+    Route::put('productos/{id}/actualizar', [ProductController::class, 'update']);
+    Route::delete('productos/eliminar/{id}', [ProductController::class, 'delete']);
+
     //Servicios
     Route::get('servicios', [ServiceController::class, 'index']);
     Route::get('agregar-servicio', [ServiceController::class, 'create']);
@@ -101,14 +109,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::get('gastos/{id}/editar', [ExpenseController::class, 'edit']);
     Route::put('gastos/{id}/actualizar', [ExpenseController::class, 'update']);
     Route::delete('gastos/eliminar/{id}', [ExpenseController::class, 'delete']);
-
-    //Sucursales
-    Route::get('sucursales', [BranchController::class, 'index']);
-    Route::view('agregar-sucursales', 'admin.sucursales.crear');
-    Route::post('sucursales/crear', [BranchController::class, 'save']);
-    Route::get('sucursales/{id}/editar', [BranchController::class, 'edit']);
-    Route::put('sucursales/{id}/actualizar', [BranchController::class, 'update']);
-    Route::delete('sucursales/eliminar/{id}', [BranchController::class, 'delete']);
 
     //Tipo de pago
     Route::get('pagos', [PaymentController::class, 'index']);

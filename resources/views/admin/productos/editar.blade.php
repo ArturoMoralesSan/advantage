@@ -1,16 +1,16 @@
 @extends('layout.dashboard-master')
 
 {{-- Metadata --}}
-@section('title', 'Editar sucursal')
-@section('tab_title', 'Editar sucursal | ' . config('app.name'))
-@section('description', 'Editar sucursal.')
+@section('title', 'Editar producto')
+@section('tab_title', 'Editar producto | ' . config('app.name'))
+@section('description', 'Editar producto.')
 @section('css_classes', 'dashboard')
 @section('content')
 
 <section class="mb-16">
     <div class="dashboard-heading">
         <h1 class="dashboard-heading__title">
-            Editar sucursal
+            Editar producto
         </h1>
     </div>
 
@@ -18,10 +18,10 @@
         <p class="mb-12">
             @include('components.alert')
             <span class="color-link">«</span>
-            <a href="{{ url('admin/sucursales/') }}">Ver todas las sucursales</a>
+            <a href="{{ url('admin/productos/') }}">Ver todos los productos</a>
         </p>
 
-            <base-form action="{{ url('admin/sucursales/'. $branch->id .'/actualizar') }}"
+            <base-form action="{{ url('admin/productos/'. $product->id .'/actualizar') }}"
                 method="put"
                 enctype="multipart/form-data"
                 inline-template
@@ -30,15 +30,24 @@
                 <form>
                     <section class="db-panel">
                         <h3 class="db-panel__title">
-                            Datos de la sucursal
+                            Datos del producto
                         </h3>
 
                         <div class="md:row">
-                            <div class="md:col-2/3">
+                            <div class="md:col">
                                 <div class="form-control">
                                     <label for="name">Nombre</label>
-                                    <text-field name="name" v-model="fields.name" maxlength="100" initial="{{ $branch->name }}"></text-field>
+                                    <text-field name="name" v-model="fields.name" maxlength="100" initial="{{ $product->name }}"></text-field>
                                     <field-errors name="name"></field-errors>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:row">
+                            <div class="md:col">
+                                <div class="form-control">
+                                    <label for="description">Descripción</label>
+                                    <text-field name="description" v-model="fields.description" maxlength="100" initial="{{ $product->name }}"></text-field>
+                                    <field-errors name="description"></field-errors>
                                 </div>
                             </div>
                         </div>

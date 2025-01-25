@@ -38,7 +38,6 @@
                                 <th>Nombre completo</th>
                                 <th>Correo Electrónico</th>
                                 <th>Rol</th>
-                                <th>Sucursal</th>
                                 <th class="pr-4">Acciones</th>
                             </tr>
                         </thead>
@@ -56,10 +55,6 @@
                                 <td data-label="Roles:">
                                     @{{ userItem.role.name }}
                                 </td>
-                                <td data-label="Sucursal:">
-                                    @{{ userItem.branch.name }}
-                                </td>
-
                                 <td class="table-resource__actions" data-label="Acciones:">
                                     <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/usuarios/' + userItem.id + '/editar' ">
                                         <img class="svg-icon" src="{{ url('img/svg/edit.svg')}}">

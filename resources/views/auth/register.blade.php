@@ -33,6 +33,16 @@
                     @enderror
                 </div>
                 <div class="form-control mb-2">
+                    <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Nombre de usuario') }}</label>
+                    <input id="username" type="text" class="form-field @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
+
+                    @error('last_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-control mb-2">
                     <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo electrónico') }}</label>
                     <input id="email" type="mail" class="form-field @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 

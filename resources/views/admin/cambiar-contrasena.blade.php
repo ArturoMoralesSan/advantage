@@ -11,12 +11,14 @@
             Cambiar contraseña
         </h1>
     </div>
-    @include('components.alert')
+    
     <div class="fluid-container">
+        @include('components.alert')
         <section class="db-panel mx-auto sm:col-2/3 md:col-1/2">
             <h3 class="db-panel__title">
                 Contraseña
             </h3>
+            
 
             <base-form action="{{ url('admin/perfil/cambiar-contrasena') }}" inline-template>
                 <form>

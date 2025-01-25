@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','last_name','avatar', 'email', 'password', 'provider', 'provider_id', 'role_id'
+        'name','last_name','username', 'avatar', 'email', 'password', 'provider', 'provider_id', 'role_id'
     ];
 
     /**
@@ -111,14 +111,6 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    /**
-     * Get the section that owns the role.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function branch()
-    {
-        return $this->belongsTo(Branch::class);
-    }
+
 
 }

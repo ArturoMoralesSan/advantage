@@ -37,7 +37,7 @@
                                     <field-errors name="name"></field-errors>
                                 </div>
                             </div>
-                            <div class="md:col-1/2">
+                            <div class="md:col">
                                 <div class="form-control">
                                     <label for="last_name">Apellidos</label>
                                     <text-field name="last_name" v-model="fields.last_name"></text-field>
@@ -53,15 +53,6 @@
                                         :options="{{ $roles }}">
                                     </select-field>
                                     <field-errors name="roles"></field-errors>
-                                </div>
-                            </div>
-                            <div class="md:col-1/2">
-                                <div class="form-control">
-                                    <label for="branch">Sucursal</label>
-                                    <select-field class="form-select" name="branch" v-model="fields.branch_id"
-                                        :options="{{ $branches }}">
-                                    </select-field>
-                                    <field-errors name="branch"></field-errors>
                                 </div>
                             </div>
                         </div>

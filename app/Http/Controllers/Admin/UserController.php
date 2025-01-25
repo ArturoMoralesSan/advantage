@@ -7,7 +7,6 @@ use App\Http\Requests\UserAdminRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Branch;
 use Illuminate\Support\Facades\Gate;
 use Hash;
 use Auth;
@@ -21,7 +20,7 @@ class UserController extends Controller
     {
        abort_unless(Gate::allows('view.users') || Gate::allows('create.users'), 403);
 
-        $users = User::with('role', 'branch')->get();
+        $users = User::with('role')->get();
 
         return view('admin.usuarios.index', compact('users'));
     }
@@ -31,9 +30,8 @@ class UserController extends Controller
         abort_unless(Gate::allows('view.users') || Gate::allows('create.users'), 403);
 
         $roles = Role::pluck('name','id');
-        $branches = Branch::pluck('name','id');
 
-        return view('admin.usuarios.crear', compact('roles', 'branches'));
+        return view('admin.usuarios.crear', compact('roles'));
     }
 
 
@@ -49,7 +47,6 @@ class UserController extends Controller
         $user->username  = $request->username;
         $user->password =  Hash::make($password);
         $user->role_id  = $request->role_id;
-        $user->branch_id  = $request->branch_id;
         $user->save();
 
         alert('Se ha agregado un usuario.');
@@ -65,9 +62,8 @@ class UserController extends Controller
 
         $user     = User::find($id);
         $roles    = Role::pluck('name','id');
-        $branches = Branch::pluck('name','id');
 
-        return view('admin.usuarios.editar', compact('roles', 'user', 'branches'));
+        return view('admin.usuarios.editar', compact('roles', 'user'));
     }
 
     public function update(UserAdminRequest $request, $id)
@@ -84,7 +80,6 @@ class UserController extends Controller
         $user->email     = $request->email;
         $user->username  = $request->username;
         $user->role_id   = $request->role_id;
-        $user->branch_id = $request->branch_id;
         $user->save();
 
         alert('Se ha actualizado un usuario.');

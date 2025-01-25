@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="md:row mb-4">
-                        <div class="md:col-1/2">
+                        <div class="md:col">
                             <div class="form-control">
                                 <label for="role">Rol</label>
                                 <select-field 
@@ -61,19 +61,6 @@
                                     >
                                     </select-field>
                                 <field-errors name="roles"></field-errors>
-                            </div>
-                        </div>
-                        <div class="md:col-1/2">
-                            <div class="form-control">
-                                <label for="branch">Sucursal</label>
-                                <select-field 
-                                        name="branch_id" 
-                                        v-model="fields.branch_id" 
-                                        :options="{{ $branches }}"
-                                        initial="{{ $user->branch_id }}"
-                                    >
-                                    </select-field>
-                                <field-errors name="branch"></field-errors>
                             </div>
                         </div>
                     </div>
