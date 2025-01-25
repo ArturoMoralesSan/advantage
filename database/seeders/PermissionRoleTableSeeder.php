@@ -38,7 +38,7 @@ class PermissionRoleTableSeeder extends Seeder
     private function getData()
     {
         return [
-            'branch' => [
+            'customer' => [
                 'update.profile',
                 'update.password',
             ]

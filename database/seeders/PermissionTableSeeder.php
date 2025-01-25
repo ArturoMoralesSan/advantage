@@ -40,20 +40,38 @@ class PermissionTableSeeder extends Seeder
             'update.profile'  => 'Cambiar Perfil',
 
             /*
-             * services
+             * products
              */
-            'view.services'   => 'Ver servicios',
-            'create.services' => 'Agregar servicios',
-            'edit.services'   => 'Editar servicios',
-            'delete.services' => 'Eliminar servicios',
+            'view.products'   => 'Ver productos',
+            'create.products' => 'Agregar productos',
+            'edit.products'   => 'Editar productos',
+            'delete.products' => 'Eliminar productos',
 
             /*
-             * expenses
+             * Categories
              */
-            'view.expenses'   => 'Ver gastos',
-            'create.expenses' => 'Agregar gastos',
-            'edit.expenses'   => 'Editar gastos',
-            'delete.expenses' => 'Eliminar gastos',
+            'view.categories'   => 'Ver categorias',
+            'create.categories' => 'Agregar categorias',
+            'edit.categories'   => 'Editar categorias',
+            'delete.categories' => 'Eliminar categorias',
+
+            /*
+             * payments
+             */
+            'view.orders'   => 'Ver ordenes',
+            'create.orders' => 'Agregar ordenes',
+            'edit.orders'   => 'Editar ordenes',
+            'delete.orders' => 'Eliminar ordenes',
+
+
+            /*
+             * payments
+             */
+            'view.quotations'   => 'Ver cotizaciones',
+            'create.quotations' => 'Agregar cotizaciones',
+            'edit.quotations'   => 'Editar cotizaciones',
+            'delete.quotations' => 'Eliminar cotizaciones',
+
 
             /*
              * pagos
@@ -78,30 +96,6 @@ class PermissionTableSeeder extends Seeder
             'create.roles' => 'Agregar roles',
             'edit.roles'   => 'Editar roles',
             'delete.roles' => 'Eliminar roles',
-
-            /*
-             * Type expenses
-             */
-            'view.type_expenses'   => 'Ver tipos de gastos',
-            'create.type_expenses' => 'Agregar tipos de gastos',
-            'edit.type_expenses'   => 'Editar tipos de gastos',
-            'delete.type_expenses' => 'Eliminar tipos de gastos',
-
-            /*
-             * Branches
-             */
-            'view.branches'   => 'Ver sucursales',
-            'create.branches' => 'Agregar sucursales',
-            'edit.branches'   => 'Editar sucursales',
-            'delete.branches' => 'Eliminar sucursales',
-
-            /*
-             * Studies
-             */
-            'view.studies'   => 'Ver estudios',
-            'create.studies' => 'Agregar estudios',
-            'edit.studies'   => 'Editar estudios',
-            'delete.studies' => 'Eliminar estudios',
 
             /*
              * Users

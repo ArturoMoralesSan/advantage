@@ -33,8 +33,9 @@ class RoleTableSeeder extends Seeder
     private function getData()
     {
         return [
-            'superadmin'      => 'Super Administrador',
-            'branch'         => 'Encargado de sucursal',
+            'superadmin'  => 'Super Administrador',
+            'customer'    => 'Cliente',
+            'employee'    => 'Empleado',
         ];
     }
 }

@@ -113,108 +113,93 @@ class DashboardTablesSeeder extends Seeder
                 ]
             ],
             [
-                'name' => 'Servicios',
-                'tile' => 'servicios.svg',
+                'name' => 'Productos',
+                'tile' => 'productos.svg',
                 'submenus' => [
+                    
                     [
-                        'name' => 'Servicios',
-                        'icon' => 'servicios.svg',
+                        'name' => 'Categorías',
+                        'icon' => 'categorias.svg',
                         'links' => [
                             [
-                                'name'       => 'Agregar servicios',
-                                'route'      => 'agregar-servicio',
-                                'permission' => 'create.services'
+                                'name'       => 'Agregar categorias',
+                                'route'      => 'agregar-categorias',
+                                'permission' => 'create.categories'
                             ],
                             [
-                                'name'       => 'Lista de servicios',
-                                'route'      => 'servicios',
-                                'permission' => 'view.services'
+                                'name'       => 'Lista de categorias',
+                                'route'      => 'categorias',
+                                'permission' => 'view.categories'
                             ],
                         ]
                     ],
                     [
-                        'name' => 'Sucursales',
-                        'icon' => 'sucursales.svg',
+                        'name' => 'Productos',
+                        'icon' => 'productos.svg',
                         'links' => [
                             [
-                                'name'       => 'Agregar sucursales',
-                                'route'      => 'agregar-sucursales',
-                                'permission' => 'create.branches'
+                                'name'       => 'Agregar productos',
+                                'route'      => 'agregar-productos',
+                                'permission' => 'create.products'
                             ],
                             [
-                                'name'       => 'Lista de sucursales',
-                                'route'      => 'sucursales',
-                                'permission' => 'view.branches'
-                            ],
-                        ]
-                    ],
-                    [
-                        'name' => 'estudios',
-                        'icon' => 'estudios.svg',
-                        'links' => [
-                            [
-                                'name'       => 'Agregar estudios',
-                                'route'      => 'agregar-estudios',
-                                'permission' => 'create.studies'
-                            ],
-                            [
-                                'name'       => 'Lista de estudios',
-                                'route'      => 'estudios',
-                                'permission' => 'view.studies'
-                            ],
-                        ]
-                    ],
-                    [
-                        'name' => 'Tipos de pago',
-                        'icon' => 'pagos.svg',
-                        'links' => [
-                            [
-                                'name'       => 'Agregar tipos de pago',
-                                'route'      => 'agregar-pagos',
-                                'permission' => 'create.payments'
-                            ],
-                            [
-                                'name'       => 'Lista de tipos de pagos',
-                                'route'      => 'pagos',
-                                'permission' => 'view.payments'
+                                'name'       => 'Lista de productos',
+                                'route'      => 'productos',
+                                'permission' => 'view.products'
                             ],
                         ]
                     ],
                 ]
             ],
             [
-                'name' => 'Gastos',
-                'tile' => 'gastos.svg',
+                'name' => 'Ventas',
+                'tile' => 'orders.svg',
                 'submenus' => [
                     [
-                        'name' => 'Gastos',
-                        'icon' => 'gastos.svg',
+                        'name' => 'Ordenes',
+                        'icon' => 'orders.svg',
                         'links' => [
                             [
-                                'name'       => 'Agregar gasto',
-                                'route'      => 'agregar-gastos',
-                                'permission' => 'create.expenses'
+                                'name'       => 'Agregar orden',
+                                'route'      => 'agregar-orden',
+                                'permission' => 'create.orders'
                             ],
                             [
-                                'name'       => 'Lista de gastos',
-                                'route'      => 'gastos',
-                                'permission' => 'view.expenses'
+                                'name'       => 'Lista de ordenes',
+                                'route'      => 'ordenes',
+                                'permission' => 'view.orders'
                             ],
                         ]
                     ],
                     [
-                        'name' => 'Tipo de gastos',
-                        'icon' => 'tipo-gastos.svg',
+                        'name' => 'cotizaciones',
+                        'icon' => 'cotizaciones.svg',
                         'links' => [
                             [
-                                'name'       => 'Agregar tipo de gasto',
-                                'route'      => 'agregar-tipos-gastos',
-                                'permission' => 'create.type_expenses'
+                                'name'       => 'Agregar cotización',
+                                'route'      => 'agregar-cotizacion',
+                                'permission' => 'create.quotations'
                             ],
                             [
-                                'name'       => 'Lista de tipo de gastos',
-                                'route'      => 'tipos-gastos',
-                                'permission' => 'view.type_expenses'
+                                'name'       => 'Lista de cotizaciones',
+                                'route'      => 'cotizaciones',
+                                'permission' => 'view.quotations'
+                            ],
+                        ]
+                    ],
+                    [
+                        'name' => 'Tipo de pago',
+                        'icon' => 'payments.svg',
+                        'links' => [
+                            [
+                                'name'       => 'Agregar tipo de pago',
+                                'route'      => 'agregar-tipo-pago',
+                                'permission' => 'create.payments'
+                            ],
+                            [
+                                'name'       => 'Lista de tipos de pago',
+                                'route'      => 'tipos-pagos',
+                                'permission' => 'view.payments'
                             ],
                         ]
                     ],
