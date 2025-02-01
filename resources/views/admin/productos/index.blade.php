@@ -36,6 +36,11 @@
                             <tr class="table-resource__headings">
                                 <th>Nombre</th>
                                 <th>Descripción</th>
+                                <th>Costo por vinil m^2</th>
+                                <th>Costo de impresión m <sup>2</th>
+                                <th>Costo indirecto</th>
+                                <th>Costo total</th>
+                                <th>Costo de venta</th>
                                 <th class="pr-4">Acciones</th>
                             </tr>
                         </thead>
@@ -45,9 +50,25 @@
                                 <td data-label="Nombre:">
                                     @{{ productItem.name }}
                                 </td>
-                                <td data-label="descripción:">
+                                <td data-label="Descripción:">
                                     @{{ productItem.description }}
                                 </td>
+                                <td data-label="Costo por vinil :">
+                                    $@{{ productItem.vinil_cost }}
+                                </td>
+                                <td data-label="Costo de impresión:">
+                                    $@{{ productItem.impresion_cost }}
+                                </td>
+                                <td data-label="Costo indirecto:">
+                                    $@{{ productItem.indirect_cost }}
+                                </td>
+                                <td data-label="Costo total:">
+                                    $@{{ productItem.costo_total }}
+                                </td>
+                                <td data-label="Costo de venta:">
+                                    $@{{ productItem.costo_venta }}
+                                </td>
+
 
                                 <td class="table-resource__actions" data-label="Acciones:">
                                     <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/productos/' + productItem.id + '/editar' ">

@@ -1,9 +1,9 @@
 @extends('layout.dashboard-master')
 
 {{-- Metadata --}}
-@section('title', 'Agregar carrera')
-@section('tab_title', 'Agregar carrera | ' . config('app.name'))
-@section('description', 'Agregar carrera.')
+@section('title', 'Agregar tipo de impresión')
+@section('tab_title', 'Agregar tipo de impresión | ' . config('app.name'))
+@section('description', 'Agregar tipo de impresión')
 @section('css_classes', 'dashboard')
 
 @section('content')
@@ -11,7 +11,7 @@
 <section class="mb-16">
     <div class="dashboard-heading">
         <h1 class="dashboard-heading__title">
-            Agregar carrera
+            Agregar tipo de impresion
         </h1>
     </div>
 
@@ -19,10 +19,10 @@
         <p class="mb-12">
             @include('components.alert')
             <span class="color-link">«</span>
-            <a href="{{ url('admin/carreras/') }}">Ver todas las carreras</a>
+            <a href="{{ url('admin/tipos/') }}">Ver todos los tipos de impresión</a>
         </p>
 
-            <base-form action="{{ url('admin/carreras/crear') }}"
+            <base-form action="{{ url('admin/tipos/crear') }}"
                 enctype="multipart/form-data"
                 inline-template
                 v-cloak
@@ -30,7 +30,7 @@
                 <form>
                     <section class="db-panel">
                         <h3 class="db-panel__title">
-                            Datos de la carrera
+                            Datos del tipo de impresión
                         </h3>
 
                         <div class="md:row">

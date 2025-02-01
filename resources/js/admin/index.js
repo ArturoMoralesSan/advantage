@@ -20,6 +20,7 @@ import TruncatedText from '../main/components/TruncatedText.vue';
 import CallForm from './components/forms/call-form/CallForm.vue';
 import ResearcherReviewForm from './components/forms/ResearcherReviewForm.vue';
 import NewsForm from './components/forms/NewsForm.vue';
+import ProductForm from './components/ProductForm.vue';
 
 import FormSearch from './components/FormSearch.vue';
 import FormDateSearch from './components/FormDateSearch.vue';
@@ -63,6 +64,7 @@ import LinkPdf from './components/LinkPdf.vue';
     Vue.component('select-filter', SelectFilter);
     Vue.component('service-registration-form', ServiceRegistrationForm);
     Vue.component('link-pdf', LinkPdf);
+    Vue.component('product-form', ProductForm);
 
 
     const vm = new Vue({

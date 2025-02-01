@@ -30,7 +30,7 @@ class PaymentController extends Controller
         alert('Se ha agregado un tipo de pago.');
 
         return response('', 204, [
-            'Redirect-To' => url('admin/pagos/')
+            'Redirect-To' => url('admin/tipos-pagos/')
         ]);
     }
 
@@ -54,7 +54,7 @@ class PaymentController extends Controller
         alert('Se ha actualizado un tipo de pago.');
 
         return response('', 204, [
-            'Redirect-To' => url('admin/pagos/')
+            'Redirect-To' => url('admin/tipos-pagos/')
         ]);
     }
 

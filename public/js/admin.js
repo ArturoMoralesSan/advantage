@@ -1152,6 +1152,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/ProductForm.vue?vue&type=script&lang=js":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/ProductForm.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************************************************************************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _main_components_forms_base_BaseForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../main/components/forms/base/BaseForm.vue */ "./resources/js/main/components/forms/base/BaseForm.vue");
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  "extends": _main_components_forms_base_BaseForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  data: function data() {
+    return {
+      fields: {
+        vinil_cost: "0",
+        impresion_cost: "0",
+        indirect_cost: "0",
+        costo_total: "0",
+        costo_venta: "0"
+      }
+    };
+  },
+  watch: {
+    // Observa los cambios en los costos y recalcula `costo_total`
+    fields: {
+      deep: true,
+      handler: function handler() {
+        var vinil = parseFloat(this.fields.vinil_cost) || 0;
+        var impresion = parseFloat(this.fields.impresion_cost) || 0;
+        var indirecto = parseFloat(this.fields.indirect_cost) || 0;
+        this.fields.costo_total = (vinil + impresion + indirecto).toFixed(2);
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/ResourceTable.vue?vue&type=script&lang=js":
 /*!*************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/ResourceTable.vue?vue&type=script&lang=js ***!
@@ -6653,11 +6692,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_forms_call_form_CallForm_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/forms/call-form/CallForm.vue */ "./resources/js/admin/components/forms/call-form/CallForm.vue");
 /* harmony import */ var _components_forms_ResearcherReviewForm_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/forms/ResearcherReviewForm.vue */ "./resources/js/admin/components/forms/ResearcherReviewForm.vue");
 /* harmony import */ var _components_forms_NewsForm_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/forms/NewsForm.vue */ "./resources/js/admin/components/forms/NewsForm.vue");
-/* harmony import */ var _components_FormSearch_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/FormSearch.vue */ "./resources/js/admin/components/FormSearch.vue");
-/* harmony import */ var _components_FormDateSearch_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/FormDateSearch.vue */ "./resources/js/admin/components/FormDateSearch.vue");
-/* harmony import */ var _components_FormBetweenDateSearch_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/FormBetweenDateSearch.vue */ "./resources/js/admin/components/FormBetweenDateSearch.vue");
-/* harmony import */ var _components_SelectFilter_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/SelectFilter.vue */ "./resources/js/admin/components/SelectFilter.vue");
-/* harmony import */ var _components_LinkPdf_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/LinkPdf.vue */ "./resources/js/admin/components/LinkPdf.vue");
+/* harmony import */ var _components_ProductForm_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/ProductForm.vue */ "./resources/js/admin/components/ProductForm.vue");
+/* harmony import */ var _components_FormSearch_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/FormSearch.vue */ "./resources/js/admin/components/FormSearch.vue");
+/* harmony import */ var _components_FormDateSearch_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/FormDateSearch.vue */ "./resources/js/admin/components/FormDateSearch.vue");
+/* harmony import */ var _components_FormBetweenDateSearch_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/FormBetweenDateSearch.vue */ "./resources/js/admin/components/FormBetweenDateSearch.vue");
+/* harmony import */ var _components_SelectFilter_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/SelectFilter.vue */ "./resources/js/admin/components/SelectFilter.vue");
+/* harmony import */ var _components_LinkPdf_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/LinkPdf.vue */ "./resources/js/admin/components/LinkPdf.vue");
+
 
 
 
@@ -6712,12 +6753,13 @@ __webpack_require__.r(__webpack_exports__);
   Vue.component('call-form', _components_forms_call_form_CallForm_vue__WEBPACK_IMPORTED_MODULE_19__["default"]);
   Vue.component('researcherreview-form', _components_forms_ResearcherReviewForm_vue__WEBPACK_IMPORTED_MODULE_20__["default"]);
   Vue.component('news-form', _components_forms_NewsForm_vue__WEBPACK_IMPORTED_MODULE_21__["default"]);
-  Vue.component('form-search', _components_FormSearch_vue__WEBPACK_IMPORTED_MODULE_22__["default"]);
-  Vue.component('form-date-search', _components_FormDateSearch_vue__WEBPACK_IMPORTED_MODULE_23__["default"]);
-  Vue.component('form-between-date-search', _components_FormBetweenDateSearch_vue__WEBPACK_IMPORTED_MODULE_24__["default"]);
-  Vue.component('select-filter', _components_SelectFilter_vue__WEBPACK_IMPORTED_MODULE_25__["default"]);
+  Vue.component('form-search', _components_FormSearch_vue__WEBPACK_IMPORTED_MODULE_23__["default"]);
+  Vue.component('form-date-search', _components_FormDateSearch_vue__WEBPACK_IMPORTED_MODULE_24__["default"]);
+  Vue.component('form-between-date-search', _components_FormBetweenDateSearch_vue__WEBPACK_IMPORTED_MODULE_25__["default"]);
+  Vue.component('select-filter', _components_SelectFilter_vue__WEBPACK_IMPORTED_MODULE_26__["default"]);
   Vue.component('service-registration-form', _main_components_forms_service_registration_form_ServiceRegistrationForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  Vue.component('link-pdf', _components_LinkPdf_vue__WEBPACK_IMPORTED_MODULE_26__["default"]);
+  Vue.component('link-pdf', _components_LinkPdf_vue__WEBPACK_IMPORTED_MODULE_27__["default"]);
+  Vue.component('product-form', _components_ProductForm_vue__WEBPACK_IMPORTED_MODULE_22__["default"]);
   var vm = new Vue({
     el: '#dashboard',
     components: {
@@ -10657,6 +10699,41 @@ component.options.__file = "resources/js/admin/components/LinkPdf.vue"
 
 /***/ }),
 
+/***/ "./resources/js/admin/components/ProductForm.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/admin/components/ProductForm.vue ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ProductForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProductForm.vue?vue&type=script&lang=js */ "./resources/js/admin/components/ProductForm.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+;
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  _ProductForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"],
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/admin/components/ProductForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/admin/components/ResourceTable.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/admin/components/ResourceTable.vue ***!
@@ -12000,6 +12077,19 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LinkPdf_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LinkPdf.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/LinkPdf.vue?vue&type=script&lang=js");
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LinkPdf_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/admin/components/ProductForm.vue?vue&type=script&lang=js":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/admin/components/ProductForm.vue?vue&type=script&lang=js ***!
+  \*******************************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ProductForm.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/admin/components/ProductForm.vue?vue&type=script&lang=js");
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductForm_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

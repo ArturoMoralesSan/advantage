@@ -16,7 +16,13 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('vinil_cost');
+            $table->string('impresion_cost');
+            $table->string('indirect_cost');
+            $table->string('costo_total');
+            $table->string('costo_venta');
             $table->text('description')->nullable();
+            $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
         });

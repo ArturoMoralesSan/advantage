@@ -48,11 +48,11 @@
                                 
 
                                 <td class="table-resource__actions" data-label="Acciones:">
-                                    <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/pagos/' + paymentsItem.id + '/editar' ">
+                                    <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/tipos-pagos/' + paymentsItem.id + '/editar' ">
                                         <img class="svg-icon" src="{{ url('img/svg/edit.svg')}}">
                                         Editar
                                     </a>
-                                    <delete-button class="btn--danger table-resource__button" :url="$root.path + '/admin/pagos/eliminar/' + paymentsItem.id"
+                                    <delete-button class="btn--danger table-resource__button" :url="$root.path + '/admin/tipos-pagos/eliminar/' + paymentsItem.id"
                                         :resource-id="paymentsItem.id"
                                         :options="{ onDelete: onResourceDelete }"
                                     >

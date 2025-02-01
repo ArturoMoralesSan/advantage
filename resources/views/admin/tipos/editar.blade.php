@@ -1,9 +1,9 @@
 @extends('layout.dashboard-master')
 
 {{-- Metadata --}}
-@section('title', 'Editar carrera')
-@section('tab_title', 'Editar carrera | ' . config('app.name'))
-@section('description', 'Editar carrera.')
+@section('title', 'Editar tipos')
+@section('tab_title', 'Editar tipos | ' . config('app.name'))
+@section('description', 'Editar tipos.')
 @section('css_classes', 'dashboard')
 
 @section('content')
@@ -11,7 +11,7 @@
 <section class="mb-16">
     <div class="dashboard-heading">
         <h1 class="dashboard-heading__title">
-            Editar carrera
+            Editar tipo
         </h1>
     </div>
 
@@ -19,10 +19,10 @@
         <p class="mb-12">
             @include('components.alert')
             <span class="color-link">«</span>
-            <a href="{{ url('admin/carreras/') }}">Ver todos los carreras</a>
+            <a href="{{ url('admin/tipos/') }}">Ver todos los tipos</a>
         </p>
 
-            <base-form action="{{ url('admin/carreras/'. $race->id .'/actualizar') }}"
+            <base-form action="{{ url('admin/tipos/'. $type->id .'/actualizar') }}"
                 method="put"
                 enctype="multipart/form-data"
                 inline-template
@@ -31,14 +31,14 @@
                 <form>
                     <section class="db-panel">
                         <h3 class="db-panel__title">
-                            Datos de la carrera
+                            Datos del tipo
                         </h3>
 
                         <div class="md:row">
                             <div class="md:col-2/3">
                                 <div class="form-control">
                                     <label for="name">Nombre</label>
-                                    <text-field name="name" v-model="fields.name" maxlength="100" initial="{{ $race->name }}"></text-field>
+                                    <text-field name="name" v-model="fields.name" maxlength="100" initial="{{ $type->name }}"></text-field>
                                     <field-errors name="name"></field-errors>
                                 </div>
                             </div>

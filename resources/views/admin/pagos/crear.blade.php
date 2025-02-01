@@ -19,10 +19,10 @@
         <p class="mb-12">
             @include('components.alert')
             <span class="color-link">«</span>
-            <a href="{{ url('admin/pagos/') }}">Ver todos los tipos de pago</a>
+            <a href="{{ url('admin/tipos-pagos/') }}">Ver todos los tipos de pago</a>
         </p>
 
-            <base-form action="{{ url('admin/pagos/crear') }}"
+            <base-form action="{{ url('admin/tipos-pagos/crear') }}"
                 enctype="multipart/form-data"
                 inline-template
                 v-cloak

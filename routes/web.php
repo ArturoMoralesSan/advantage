@@ -7,10 +7,10 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\QuoteController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\PaymentController;
-use App\Http\Controllers\Admin\TypeExpenseController;
+use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\StudyController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -86,21 +86,30 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::put('roles/{id}/actualizar', [RoleController::class, 'update']);
     Route::delete('roles/eliminar/{id}', [RoleController::class, 'delete']);
 
+    //Tipo de pago
+    Route::get('tipos', [TypeController::class, 'index']);
+    Route::view('agregar-tipo', 'admin.tipos.crear');
+    Route::post('tipos/crear', [TypeController::class, 'save']);
+    Route::get('tipos/{id}/editar', [TypeController::class, 'edit']);
+    Route::put('tipos/{id}/actualizar', [TypeController::class, 'update']);
+    Route::delete('tipos/eliminar/{id}', [TypeController::class, 'delete']);
+
     //Productos
     Route::get('productos', [ProductController::class, 'index']);
-    Route::view('agregar-productos', 'admin.productos.crear');
+    Route::get('agregar-productos', [ProductController::class, 'create']);
+   // Route::view('agregar-productos', 'admin.productos.crear');
     Route::post('productos/crear', [ProductController::class, 'save']);
     Route::get('productos/{id}/editar', [ProductController::class, 'edit']);
     Route::put('productos/{id}/actualizar', [ProductController::class, 'update']);
     Route::delete('productos/eliminar/{id}', [ProductController::class, 'delete']);
 
     //Servicios
-    Route::get('servicios', [ServiceController::class, 'index']);
-    Route::get('agregar-servicio', [ServiceController::class, 'create']);
-    Route::post('servicios/crear', [ServiceController::class, 'save']);
-    Route::get('servicios/{id}/editar', [ServiceController::class, 'edit']);
-    Route::put('servicios/{id}/actualizar', [ServiceController::class, 'update']);
-    Route::delete('servicios/eliminar/{id}', [ServiceController::class, 'delete']);
+    Route::get('cotizaciones', [QuoteController::class, 'index']);
+    Route::get('agregar-cotizacion', [QuoteController::class, 'create']);
+    Route::post('cotizaciones/crear', [QuoteController::class, 'save']);
+    Route::get('cotizaciones/{id}/editar', [QuoteController::class, 'edit']);
+    Route::put('cotizaciones/{id}/actualizar', [QuoteController::class, 'update']);
+    Route::delete('cotizaciones/eliminar/{id}', [QuoteController::class, 'delete']);
 
     //Tipo de pago
     Route::get('gastos', [ExpenseController::class, 'index']);
@@ -111,12 +120,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::delete('gastos/eliminar/{id}', [ExpenseController::class, 'delete']);
 
     //Tipo de pago
-    Route::get('pagos', [PaymentController::class, 'index']);
-    Route::view('agregar-pagos', 'admin.pagos.crear');
-    Route::post('pagos/crear', [PaymentController::class, 'save']);
-    Route::get('pagos/{id}/editar', [PaymentController::class, 'edit']);
-    Route::put('pagos/{id}/actualizar', [PaymentController::class, 'update']);
-    Route::delete('pagos/eliminar/{id}', [PaymentController::class, 'delete']);
+    Route::get('tipos-pagos', [PaymentController::class, 'index']);
+    Route::view('agregar-tipo-pago', 'admin.pagos.crear');
+    Route::post('tipos-pagos/crear', [PaymentController::class, 'save']);
+    Route::get('tipos-pagos/{id}/editar', [PaymentController::class, 'edit']);
+    Route::put('tipos-pagos/{id}/actualizar', [PaymentController::class, 'update']);
+    Route::delete('tipos-pagos/eliminar/{id}', [PaymentController::class, 'delete']);
 
     //Tipo de gastos
     Route::get('tipos-gastos', [TypeExpenseController::class, 'index']);
