@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Quote extends Model
+class Sale extends Model
 {
     use HasFactory;
-
+    
     protected $appends = ['formated_date', 'hour'];
 
 
@@ -60,5 +60,15 @@ class Quote extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the section that owns the cuts.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cut()
+    {
+        return $this->belongsTo(Cut::class);
     }
 }

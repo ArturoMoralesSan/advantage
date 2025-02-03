@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->string('product');
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
@@ -25,6 +25,8 @@ class CreateOrdersTable extends Migration
             $table->decimal('profit_percentage', 5, 2);
             $table->decimal('sale_price', 10, 2)->storedAs('base_price + (base_price * profit_percentage / 100)');
             $table->boolean('is_paid')->default(false);
+            $table->enum('status', ['quoted', 'ordered', 'accepted', 'paid'])->default('quoted');
+            $table->foreignId('cut_id')->constrained('cuts')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -36,6 +38,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('sales');
     }
 }

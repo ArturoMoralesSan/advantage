@@ -34,11 +34,22 @@
                         </h3>
 
                         <div class="md:row">
-                            <div class="md:col">
+                            <div class="md:col-1/2">
+                                {{-- nombres --}}
                                 <div class="form-control">
                                     <label for="name">Nombre</label>
-                                    <text-field name="name" v-model="fields.name" maxlength="100" initial="{{ $product->name }}"></text-field>
+                                    <text-field name="name" v-model="fields.name" maxlength="80" initial="{{ $product->name }}"></text-field>
                                     <field-errors name="name"></field-errors>
+                                </div>
+                            </div>
+                            <div class="md:col-1/2">
+                                {{-- nombres --}}
+                                <div class="form-control">
+                                    <label for="type">Tipo</label>
+                                    <select-field class="form-select" name="type_id" v-model="fields.type_id"
+                                        :options="{{ $types }}" initial="{{ $product->type_id }}">
+                                    </select-field>                                    
+                                    <field-errors name="type"></field-errors>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +57,7 @@
                             <div class="md:col">
                                 <div class="form-control">
                                     <label for="description">Descripción</label>
-                                    <text-field name="description" v-model="fields.description" maxlength="100" initial="{{ $product->name }}"></text-field>
+                                    <text-field name="description" v-model="fields.description" maxlength="100" initial="{{ $product->description }}"></text-field>
                                     <field-errors name="description"></field-errors>
                                 </div>
                             </div>
@@ -60,7 +71,7 @@
                         <div class="md:row">
                             <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="vinil_cost">Costo de m2 por Vinil</label>
+                                    <label for="vinil_cost">Costo de m<sup>2</sup> por Vinil</label>
                                     <text-field name="vinil_cost" v-model="fields.vinil_cost" maxlength="80" type="number" initial="{{ $product->vinil_cost }}"></text-field>
                                     <field-errors name="vinil_cost"></field-errors>
                                 </div>
@@ -68,7 +79,7 @@
 
                             <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="impresion_cost">Costo de m2 por impresión</label>
+                                    <label for="impresion_cost">Costo de m<sup>2</sup> por impresión</label>
                                     <text-field name="impresion_cost" v-model="fields.impresion_cost" maxlength="80" type="number" initial="{{ $product->impresion_cost }}"></text-field>
                                     <field-errors name="impresion_cost"></field-errors>
                                 </div>

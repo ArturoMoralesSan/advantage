@@ -310,3 +310,81 @@ $table-padding-y: 0.6em;
     line-height: 1.15;
     margin: 0;
 }
+
+
+
+/* Bloque principal */
+.order-table {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: none;
+}
+
+/* Encabezado de la tabla */
+.order-table__header {
+    margin-bottom: 16px;
+}
+
+.order-table__title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Cuerpo de la tabla */
+.order-table__body {
+    margin-top: 16px;
+}
+
+/* Estilos de la tabla */
+.order-table__details {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table__row {
+    border-bottom: 1px solid #eee;
+}
+
+.order-table__cell {
+    padding: 12px;
+    color: #666;
+}
+
+.order-table__cell--heading {
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+}
+
+.order-table__row:hover {
+    background-color: #f9f9f9;
+}
+
+/* Detalles adicionales como lista */
+.order-table__details-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.order-table__details-list li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.order-table__details-list li strong {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .order-table__details {
+        font-size: 13px;
+    }
+    .order-table__cell {
+        padding: 10px;
+    }
+}

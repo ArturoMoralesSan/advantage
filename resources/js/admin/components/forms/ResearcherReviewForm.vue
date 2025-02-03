@@ -16,7 +16,7 @@
                         >
                         Buscar
                     </button>
-                        <span :ref="'nombre_matricula'"class="field-researcher__name"></span>
+                        <span :ref="'nombre_matricula'" class="field-researcher__name"></span>
                         <div class="alert alert--warning alert--tiny" style="display:none;" :ref="'error_matricula'"></div>
                         <field-errors name="matricula"></field-errors>
                     </div>

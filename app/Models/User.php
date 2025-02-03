@@ -116,9 +116,9 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function quotes()
+    public function sales()
     {
-        return $this->hasMany(Quote::class);
+        return $this->hasMany(Sale::class);
     }
 
 

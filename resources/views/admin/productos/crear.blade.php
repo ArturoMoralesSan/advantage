@@ -32,7 +32,7 @@
                             Datos del producto
                         </h3>
 
-                        <div class="md:row">
+                        <div class="md:row mb-2">
                             <div class="md:col-1/2">
                                 {{-- nombres --}}
                                 <div class="form-control">
@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="md:row">
+                        <div class="md:row mb-2">
                             <div class="md:col">
                             {{-- nombres --}}
                                 <div class="form-control">
@@ -68,10 +68,10 @@
                             Costos del producto
                         </h3>
 
-                        <div class="md:row">
+                        <div class="md:row mb-2">
                             <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="vinil_cost">Costo de m2 por Vinil</label>
+                                    <label for="vinil_cost">Costo de m<sup>2</sup> por Vinil</label>
                                     <text-field name="vinil_cost" v-model="fields.vinil_cost" maxlength="80" type="number"></text-field>
                                     <field-errors name="vinil_cost"></field-errors>
                                 </div>
@@ -79,7 +79,7 @@
 
                             <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="impresion_cost">Costo de m2 por impresión</label>
+                                    <label for="impresion_cost">Costo de m<sup>2</sup> por impresión</label>
                                     <text-field name="impresion_cost" v-model="fields.impresion_cost" maxlength="80" type="number"></text-field>
                                     <field-errors name="impresion_cost"></field-errors>
                                 </div>
@@ -94,7 +94,7 @@
                             </div>
                         </div>
 
-                        <div class="md:row">
+                        <div class="md:row mb-2">
                             <div class="md:col-1/2">
                                 <div class="form-control">
                                     <label for="costo_total">Costo total</label>

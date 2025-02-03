@@ -52,7 +52,8 @@ class ProductController extends Controller
     {
         abort_unless(Gate::allows('view.products') || Gate::allows('edit.products'), 403);
         $product = Product::find($id);
-        return view('admin.productos.editar', compact('product'));
+        $types = Type::pluck('name','id');
+        return view('admin.productos.editar', compact('product', 'types'));
     }
 
 

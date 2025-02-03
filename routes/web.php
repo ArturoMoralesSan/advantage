@@ -7,8 +7,8 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\QuoteController;
-use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\SaleController;
+use App\Http\Controllers\Admin\CutController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\StudyController;
@@ -104,20 +104,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::delete('productos/eliminar/{id}', [ProductController::class, 'delete']);
 
     //Servicios
-    Route::get('cotizaciones', [QuoteController::class, 'index']);
-    Route::get('agregar-cotizacion', [QuoteController::class, 'create']);
-    Route::post('cotizaciones/crear', [QuoteController::class, 'save']);
-    Route::get('cotizaciones/{id}/editar', [QuoteController::class, 'edit']);
-    Route::put('cotizaciones/{id}/actualizar', [QuoteController::class, 'update']);
-    Route::delete('cotizaciones/eliminar/{id}', [QuoteController::class, 'delete']);
+    Route::get('ventas', [SaleController::class, 'index']);
+    Route::get('ventas/orden/{id}', [SaleController::class, 'order']);
+    Route::put('ventas/orden/{id}/actualizar', [SaleController::class, 'orderupdate']);
+    Route::get('agregar-venta', [SaleController::class, 'create']);
+    Route::post('ventas/crear', [SaleController::class, 'save']);
+    Route::get('ventas/{id}/editar', [SaleController::class, 'edit']);
+    Route::put('ventas/{id}/actualizar', [SaleController::class, 'update']);
+    Route::delete('ventas/eliminar/{id}', [SaleController::class, 'delete']);
 
-    //Tipo de pago
-    Route::get('gastos', [ExpenseController::class, 'index']);
-    Route::get('agregar-gastos', [ExpenseController::class, 'create']);
-    Route::post('gastos/crear', [ExpenseController::class, 'save']);
-    Route::get('gastos/{id}/editar', [ExpenseController::class, 'edit']);
-    Route::put('gastos/{id}/actualizar', [ExpenseController::class, 'update']);
-    Route::delete('gastos/eliminar/{id}', [ExpenseController::class, 'delete']);
+    //Tipo de cortes
+    Route::get('cortes', [CutController::class, 'index']);
+    Route::view('agregar-corte', 'admin.cortes.crear');
+    Route::post('cortes/crear', [CutController::class, 'save']);
+    Route::get('cortes/{id}/editar', [CutController::class, 'edit']);
+    Route::put('cortes/{id}/actualizar', [CutController::class, 'update']);
+    Route::delete('cortes/eliminar/{id}', [CutController::class, 'delete']);
 
     //Tipo de pago
     Route::get('tipos-pagos', [PaymentController::class, 'index']);

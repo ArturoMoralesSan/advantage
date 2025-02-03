@@ -36,8 +36,8 @@
                             <tr class="table-resource__headings">
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>Costo por vinil m^2</th>
-                                <th>Costo de impresión m <sup>2</th>
+                                <th>Costo por vinil m<sup>2</sup></th>
+                                <th>Costo de impresión m<sup>2</sup></th>
                                 <th>Costo indirecto</th>
                                 <th>Costo total</th>
                                 <th>Costo de venta</th>

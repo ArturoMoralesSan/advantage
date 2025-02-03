@@ -29,6 +29,7 @@ import FormBetweenDateSearch from './components/FormBetweenDateSearch.vue';
 import SelectFilter from './components/SelectFilter.vue';
 
 import LinkPdf from './components/LinkPdf.vue';
+import SaleForm from './components/SaleForm.vue';
 
 
 (function() {
@@ -65,6 +66,8 @@ import LinkPdf from './components/LinkPdf.vue';
     Vue.component('service-registration-form', ServiceRegistrationForm);
     Vue.component('link-pdf', LinkPdf);
     Vue.component('product-form', ProductForm);
+    Vue.component('sale-form', SaleForm);
+
 
 
     const vm = new Vue({

@@ -33,8 +33,8 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function quotes()
+    public function sales()
     {
-        return $this->hasMany(Quotes::class);
+        return $this->hasMany(Sales::class);
     }
 }
