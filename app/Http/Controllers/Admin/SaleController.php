@@ -64,7 +64,7 @@ class SaleController extends Controller
                 ->whereYear('created_at', $year)
                 ->orderBy('created_at', 'DESC');
 
-            if (!Auth::user()->isSuperAdmin()) {
+            if (Auth::user()->isCustomer()) {
                 $query->where('user_id', Auth::user()->id);
             }
             if ($search) {
@@ -83,12 +83,19 @@ class SaleController extends Controller
    public function order($id) 
     {
         abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
+        
         $sale = Sale::with('product.type')->find($id);
+
+        if (Auth::user()->isCustomer()) 
+        {
+            return redirect('admin/ventas/');
+        }
+
         $status = collect([
-            'quoted'   => 'Cotización',
-            'ordered'  => 'Orden',
-            'accepted' => 'Aceptar',
-            'paid'     => 'Pagar', 
+            'quoted'   => 'Cotizada',
+            'ordered'  => 'Ordenada',
+            'accepted' => 'Aceptada',
+            'paid'     => 'Pagada', 
         ]);
 
         $paid = collect([
@@ -130,7 +137,7 @@ class SaleController extends Controller
             '0' => 'No pagado', 
         ]);
 
-        if (!Auth::user()->isSuperAdmin()) {
+        if (Auth::user()->isCustomer()) {
             $users = User::where('id', Auth::user()->id)
             ->selectRaw("CONCAT(name, ' ', last_name) as full_name, id")
             ->pluck('full_name', 'id');
@@ -171,6 +178,12 @@ class SaleController extends Controller
     {
         abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
         $sale = Sale::with('product.type')->find($id);
+
+        if ($sale->status != 'quoted' || (Auth::user()->isCustomer() && $sale->user_id != Auth::user()->id)) 
+        {
+            return redirect('admin/ventas/');
+        }
+        
         $status = collect([
             'quoted'   => 'Cotización',
             'ordered'  => 'Orden',

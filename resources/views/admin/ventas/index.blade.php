@@ -81,7 +81,9 @@
                                         <th>Costo</th>
                                         <th>Utilidad</th>
                                         <th>Precio de venta</th>
+                                        @if(auth()->user()->isSuperAdmin() || auth()->user()->isEmployee())
                                         <th>Trabajo</th>
+                                        @endif
                                         <th>Nota</th>
                                         <th class="pr-2">Acciones</th>
                                     </tr>
@@ -119,21 +121,25 @@
                                         <td data-label="Precio de venta:">
                                             $ @{{ salesItem.sale_price }}
                                         </td>
+                                        @if(auth()->user()->isSuperAdmin() || auth()->user()->isEmployee())
                                         <td data-label="Orden de trabajo:">
                                             <a class="btn btn--xs btn--primary table-resource__button ml-2" :href="$root.path + '/admin/ventas/orden/' + salesItem.id">
                                                 Orden de trabajo
                                             </a>
                                         </td>
+                                        @endif
                                         <td data-label="Nota:">
                                             <a class="btn btn-nowrap btn--sm btn--primary table-resource__button mr-2" :href="$root.path + '/notas/' + salesItem.id">
                                                 PDF
                                             </a>
                                         </td>
                                         <td class="table-resource__actions" data-label="Acciones:">
-                                            <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/ventas/' + salesItem.id + '/editar' ">
-                                                <img class="svg-icon" src="{{ url('img/svg/edit.svg')}}">
-                                                Editar
-                                            </a>
+                                            @if($status == 'quoted')
+                                                <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/ventas/' + salesItem.id + '/editar' ">
+                                                    <img class="svg-icon" src="{{ url('img/svg/edit.svg')}}">
+                                                    Editar
+                                                </a>
+                                            
                                             <delete-button class="btn--danger table-resource__button" :url="$root.path + '/admin/ventas/eliminar/' + salesItem.id"
                                                 :resource-id="salesItem.id"
                                                 :options="{ onDelete: onResourceDelete }"
@@ -141,7 +147,7 @@
                                                 <img class="svg-icon" src="{{ url('img/svg/trash.svg')}}">
                                                 Eliminar
                                             </delete-button>
-                                            
+                                            @endif
                                         </td>
                                         
                                     </tr>

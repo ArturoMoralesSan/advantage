@@ -92,6 +92,14 @@ class User extends Authenticatable
         return $this->hasRole('superadmin');
     }
 
+    public function isCustomer() {
+        return $this->hasRole('customer');
+    }
+
+    public function isEmployee() {
+        return $this->hasRole('employee');
+    }
+
 
     
 
