@@ -1,17 +1,17 @@
-<mj-section>
-    <mj-column>
-        <mj-text
-            align="center"
-            font-size="13px"
-            line-height="20px"
-            padding-bottom="30px"
-            padding-top="0"
-        >
-            <strong>Instituto Municipal Del Arte Y Cultura.</strong><br>
-            Av 20 de Noviembre 407, Zona Centro, 34000 Durango, Dgo. <br>
-            (618) 827 1277 página web <a class="link" href="https://imac.gob.mx">imac.gob.mx</a>
-            <br>
-            Correo electrónico: <a class="link" href="mailto:imac@durangocapital.gob.mx">imac@durangocapital.gob.mx</a>
-        </mj-text>
-    </mj-column>
-</mj-section>
+
+    <mj-section>
+        <mj-column>
+            <mj-text
+                align="center"
+                font-size="9px"
+                line-height="20px"
+                padding-top="0"
+            >
+                <strong>Atvantage</strong><br>
+                página web: <a  css-class="footer-link" href="https://atvantag3.com">atvantag3.com</a>
+                <br>
+                Correo electrónico: <a css-class="footer-link" href="mailto:contacto@atvantag3.com">contacto@atvantag3.com</a>
+            </mj-text>
+        </mj-column>
+    </mj-section>    
+
