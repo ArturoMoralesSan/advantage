@@ -80,6 +80,7 @@ $db-tile-size: 40px;
     height: $db-tile-size;
     margin: 10px auto 0;
     width: $db-tile-size;
+    filter: invert(1);
 }
 
 
@@ -132,6 +133,7 @@ $db-tile-size: 40px;
     margin-right: 0.75em;
     vertical-align: top;
     width: $db-icon-size;
+    filter: invert(1);
 }
 
 .dashboard-menu__links-title {

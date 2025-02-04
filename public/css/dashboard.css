@@ -12019,7 +12019,7 @@ Dashboard menu
 }
 
 .dashboard-menu__section:hover, .dashboard-menu__section--active {
-  background-color: #409dcd;
+  background-color: #436eb3;
   opacity: 1;
 }
 
@@ -12028,6 +12028,7 @@ Dashboard menu
   height: 40px;
   margin: 10px auto 0;
   width: 40px;
+  filter: invert(1);
 }
 
 /* Submenus
@@ -12080,6 +12081,7 @@ Dashboard menu
   margin-right: 0.75em;
   vertical-align: top;
   width: 18px;
+  filter: invert(1);
 }
 
 .dashboard-menu__links-title {
@@ -12103,7 +12105,7 @@ Dashboard menu
 }
 
 .dashboard-menu__links-title--current, .dashboard-menu__links-title--current:active, .dashboard-menu__links-title--current:focus, .dashboard-menu__links-title--current:hover {
-  background-color: #409dcd;
+  background-color: #436eb3;
   color: #fff;
   opacity: 1;
 }
