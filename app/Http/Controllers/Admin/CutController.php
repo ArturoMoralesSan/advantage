@@ -39,7 +39,7 @@ class CutController extends Controller
         abort_unless(Gate::allows('view.roles') || Gate::allows('edit.roles'), 403);
         $cut = Cut::find($id);
 
-        return view('admin.cortes.editar', compact('role'));
+        return view('admin.cortes.editar', compact('cut'));
     }
 
 

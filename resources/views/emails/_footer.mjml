@@ -6,6 +6,7 @@
                 font-size="9px"
                 line-height="20px"
                 padding-top="0"
+                background-color="trasparent"
             >
                 <strong>Atvantage</strong><br>
                 página web: <a  css-class="footer-link" href="https://atvantag3.com">atvantag3.com</a>

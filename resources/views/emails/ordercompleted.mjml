@@ -10,7 +10,8 @@
         <mj-column>
             <mj-text font-size="12px">
               
-                La orden de trabajo #[Número de orden] ha sido aceptada.<br>
+                Estimado/a {{ $user->name }} {{ $user->last_name}} <br>
+                Nos complace informarte que la orden de trabajo #[Número de orden] ha sido completada con éxito. Nuestro equipo ha finalizado todas las tareas solicitadas y la orden ha sido cerrada. <br>
               
             </mj-text>
         </mj-column>
@@ -28,8 +29,8 @@
                                 <td style="padding-bottom: 10px;">#{{ $order->id }}</td>
                             </tr>
                             <tr style="border:1px solid #ecedee;text-align:left;padding:15px 0;">
-                                <th style="text-align:left; padding-right: 20px; padding-bottom: 10px;">Fecha de solicitud:</th>
-                                <td style="padding-bottom: 10px;">{{ $order->created_at->format('d/m/Y') }}</td>
+                                <th style="text-align:left; padding-right: 20px; padding-bottom: 10px;">Fecha de Finalización:</th>
+                                <td style="padding-bottom: 10px;">{{ $order->updated_at->format('d/m/Y') }}</td>
                             </tr >
                             <tr style="border:1px solid #ecedee;text-align:left;padding:15px 0;">
                                 <th style="text-align:left; padding-right: 20px; padding-bottom: 10px;">Descripción de la order realizada:</th>
@@ -45,11 +46,18 @@
                             </tr>
                 </mj-table>
                 
+            <mj-divider border-color="#DFE3E8" border-width="1px"></mj-divider>
 
         </mj-column>
       </mj-section>
       <mj-section background-color="#ffffff" padding-left="15px" padding-right="15px">
-        
+        <mj-column width="100%">
+         <mj-text font-size="12px"> 
+            Si tienes alguna pregunta, necesitas más información o algún ajuste adicional, no dudes en contactarnos.<br>
+
+            Agradecemos la confianza depositada en nuestros servicios.
+         </mj-text>
+        </mj-column>
 
         <mj-column width="100%">
             <mj-divider border-color="#DFE3E8" border-width="1px"></mj-divider>

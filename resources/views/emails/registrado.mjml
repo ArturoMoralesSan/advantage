@@ -37,7 +37,9 @@
                 <strong>El equipo de Atvantag3</strong> <br>
          </mj-text>
         </mj-column>
-         <mj-divider border-color="#DFE3E8" border-width="1px"></mj-divider>
+          <mj-column width="100%">
+            <mj-divider border-color="#DFE3E8" border-width="1px"></mj-divider>
+        </mj-column>
 
         <mj-include path="./_footer.mjml" />
       </mj-section>

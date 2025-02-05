@@ -63,7 +63,7 @@ class ProductController extends Controller
 
         $product = Product::find($id);
         $product->name           = $request->name;
-        $product->type           = $request->type;
+        $product->type_id        = $request->type_id;
         $product->description    = $request->description;
         $product->vinil_cost     = $request->vinil_cost;
         $product->impresion_cost = $request->impresion_cost;

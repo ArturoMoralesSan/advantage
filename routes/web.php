@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\CutController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\StudyController;
 use App\Http\Controllers\Admin\StatisticsController;
@@ -102,6 +103,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::get('productos/{id}/editar', [ProductController::class, 'edit']);
     Route::put('productos/{id}/actualizar', [ProductController::class, 'update']);
     Route::delete('productos/eliminar/{id}', [ProductController::class, 'delete']);
+
+    //inventario
+    Route::get('inventario', [InventoryController::class, 'index']);
+    Route::get('agregar-inventario', [InventoryController::class, 'create']);
+   // Route::view('agregar-inventario', 'admin.inventario.crear');
+    Route::post('inventario/crear', [InventoryController::class, 'save']);
+    Route::get('inventario/{id}/editar', [InventoryController::class, 'edit']);
+    Route::put('inventario/{id}/actualizar', [InventoryController::class, 'update']);
+    Route::delete('inventario/eliminar/{id}', [InventoryController::class, 'delete']);
 
     //Servicios
     Route::get('ventas', [SaleController::class, 'index']);

@@ -37,4 +37,14 @@ class Product extends Model
     {
         return $this->hasMany(Sales::class);
     }
+
+    /**
+     * Get the links that belong to the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function inventories()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }
