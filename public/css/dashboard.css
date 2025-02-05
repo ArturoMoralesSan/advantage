@@ -12099,7 +12099,7 @@ Dashboard menu
 }
 
 .dashboard-menu__links-title:active, .dashboard-menu__links-title:focus, .dashboard-menu__links-title:hover, .dashboard-menu__links-title--active {
-  background-color: #2179a6;
+  background-color: #436eb3;
   color: #fff;
   opacity: 1;
 }
