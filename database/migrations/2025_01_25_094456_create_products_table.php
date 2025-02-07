@@ -23,6 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('costo_venta');
             $table->text('description')->nullable();
             $table->foreignId('type_id')->constrained('types')->onDelete('cascade');
+            $table->foreignId('measures_id')->constrained('measures')->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
         });

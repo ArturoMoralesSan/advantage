@@ -20,6 +20,13 @@ class ProductRequest extends FormRequest
         return [
             'name' => ['required', new NotUppercase, new NotLowercase, 'max:100'],
             'description' => ['required', new NotUppercase, new NotLowercase, 'max:100'],
+            'type_id' => ['required', 'max:20'],
+            'measure_id' => ['required', 'max:20'],
+            'vinil_cost' => ['required', 'max:5'],
+            'impresion_cost' => ['required', 'max:5'],
+            'indirect_cost' => ['required', 'max:5'],
+            'costo_venta' => ['required', 'max:5'],
+
         ];
     }
 }

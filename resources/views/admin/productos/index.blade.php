@@ -36,8 +36,9 @@
                             <tr class="table-resource__headings">
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>Costo por vinil m<sup>2</sup></th>
-                                <th>Costo de impresión m<sup>2</sup></th>
+                                <th>Tipo de impresión</th>
+                                <th>Costo por vinil</th>
+                                <th>Costo de impresión</th>
                                 <th>Costo indirecto</th>
                                 <th>Costo total</th>
                                 <th>Costo de venta</th>
@@ -53,11 +54,14 @@
                                 <td data-label="Descripción:">
                                     @{{ productItem.description }}
                                 </td>
+                                <td data-label="Tipo de impresión :">
+                                    @{{ productItem.type.name }}
+                                </td>
                                 <td data-label="Costo por vinil :">
-                                    $@{{ productItem.vinil_cost }}
+                                    $@{{ productItem.vinil_cost }} / @{{ productItem.measure.name }}
                                 </td>
                                 <td data-label="Costo de impresión:">
-                                    $@{{ productItem.impresion_cost }}
+                                    $@{{ productItem.impresion_cost }} / @{{ productItem.measure.name }}
                                 </td>
                                 <td data-label="Costo indirecto:">
                                     $@{{ productItem.indirect_cost }}

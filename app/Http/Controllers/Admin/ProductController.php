@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Type;
+use App\Models\Measure;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Str;
@@ -15,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         abort_unless(Gate::allows('view.products') || Gate::allows('create.products'), 403);
-        $products = Product::all()->each->setAppends([]);
+        $products = Product::with('type', 'measure')->get()->each->setAppends([]);
         return view('admin.productos.index', compact('products'));   
     }
 
@@ -23,7 +24,9 @@ class ProductController extends Controller
     {
         abort_unless(Gate::allows('view.products') || Gate::allows('create.products'), 403);
         $types = Type::pluck('name','id');
-        return view('admin.productos.crear', compact('types'));   
+        $measures = Measure::pluck('name','id');
+
+        return view('admin.productos.crear', compact('types', 'measures'));   
     }
 
     public function save(ProductRequest $request)
@@ -33,6 +36,7 @@ class ProductController extends Controller
         $product = new Product;
         $product->name           = $request->name;
         $product->type_id        = $request->type_id;
+        $product->measure_id        = $request->measure_id;
         $product->description    = $request->description;
         $product->vinil_cost     = $request->vinil_cost;
         $product->impresion_cost = $request->impresion_cost;
@@ -53,7 +57,8 @@ class ProductController extends Controller
         abort_unless(Gate::allows('view.products') || Gate::allows('edit.products'), 403);
         $product = Product::find($id);
         $types = Type::pluck('name','id');
-        return view('admin.productos.editar', compact('product', 'types'));
+        $measures = Measure::pluck('name','id');
+        return view('admin.productos.editar', compact('product', 'types', 'measures'));
     }
 
 
@@ -64,6 +69,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->name           = $request->name;
         $product->type_id        = $request->type_id;
+        $product->measure_id        = $request->measure_id;
         $product->description    = $request->description;
         $product->vinil_cost     = $request->vinil_cost;
         $product->impresion_cost = $request->impresion_cost;

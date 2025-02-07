@@ -29,6 +29,16 @@ class Product extends Model
     }
 
     /**
+     * Get the section that owns the measure.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function measure()
+    {
+        return $this->belongsTo(Measure::class);
+    }
+
+    /**
      * Get the links that belong to the product.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
