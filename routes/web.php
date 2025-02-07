@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\CutController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\TypeController;
-use App\Http\Controllers\Admin\StudyController;
+use App\Http\Controllers\Admin\MeasureController;
 use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\PasswordController;
@@ -94,6 +94,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::get('tipos/{id}/editar', [TypeController::class, 'edit']);
     Route::put('tipos/{id}/actualizar', [TypeController::class, 'update']);
     Route::delete('tipos/eliminar/{id}', [TypeController::class, 'delete']);
+
+    //Medidas
+    Route::get('medidas', [MeasureController::class, 'index']);
+    Route::view('agregar-medidas', 'admin.medidas.crear');
+    Route::post('medidas/crear', [MeasureController::class, 'save']);
+    Route::get('medidas/{id}/editar', [MeasureController::class, 'edit']);
+    Route::put('medidas/{id}/actualizar', [MeasureController::class, 'update']);
+    Route::delete('medidas/eliminar/{id}', [MeasureController::class, 'delete']);
 
     //Productos
     Route::get('productos', [ProductController::class, 'index']);

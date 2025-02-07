@@ -1,9 +1,9 @@
 @extends('layout.dashboard-master')
 
 {{-- Metadata --}}
-@section('title', 'Editar estudios')
-@section('tab_title', 'Editar estudios | ' . config('app.name'))
-@section('description', 'Editar estudios.')
+@section('title', 'Agregar medida')
+@section('tab_title', 'Agregar medida | ' . config('app.name'))
+@section('description', 'Agregar medida.')
 @section('css_classes', 'dashboard')
 
 @section('content')
@@ -11,7 +11,7 @@
 <section class="mb-16">
     <div class="dashboard-heading">
         <h1 class="dashboard-heading__title">
-            Editar estudio
+            Agregar medida
         </h1>
     </div>
 
@@ -19,11 +19,10 @@
         <p class="mb-12">
             @include('components.alert')
             <span class="color-link">«</span>
-            <a href="{{ url('admin/estudios/') }}">Ver todas las estudios</a>
+            <a href="{{ url('admin/medidas/') }}">Ver todas las medidas</a>
         </p>
 
-            <base-form action="{{ url('admin/estudios/'. $study->id .'/actualizar') }}"
-                method="put"
+            <base-form action="{{ url('admin/medidas/crear') }}"
                 enctype="multipart/form-data"
                 inline-template
                 v-cloak
@@ -31,27 +30,28 @@
                 <form>
                     <section class="db-panel">
                         <h3 class="db-panel__title">
-                            Datos del estudio
+                            Datos de la medida
                         </h3>
 
                         <div class="md:row">
                             <div class="md:col-2/3">
+                                {{-- nombres --}}
                                 <div class="form-control">
                                     <label for="name">Nombre</label>
-                                    <text-field name="name" v-model="fields.name" maxlength="100" initial="{{ $study->name }}"></text-field>
+                                    <text-field name="name" v-model="fields.name" maxlength="80" initial=""></text-field>
                                     <field-errors name="name"></field-errors>
                                 </div>
                             </div>
+
                         </div>
                     </section>
-
                     <div class="text-center">
-                        <form-button class="btn--blue--dashboard btn--wide">
-                            Actualizar
+                        <form-button class="btn--success btn--wide">
+                            Crear
                         </form-button>
                     </div>
                 </form>
-            </user-form>
+            </base-form>
     </div>
 </section>
 
