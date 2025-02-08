@@ -18,7 +18,7 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => ['required', new NotUppercase, new NotLowercase],
+            'quantity_material' => ['required'],
             'status' => ['required'],
         ];
     }

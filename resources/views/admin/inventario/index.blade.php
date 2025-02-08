@@ -36,6 +36,7 @@
                             <tr class="table-resource__headings">
                                 <th>Producto</th>
                                 <th>Cantidad</th>
+                                <th>Total</th>
                                 <th class="pr-4">Acciones</th>
                             </tr>
                         </thead>
@@ -46,6 +47,9 @@
                                 </td>
                                 <td data-label="Cantidad:">
                                     @{{ inventoryItem.quantity }}
+                                </td>
+                                <td data-label="Total:">
+                                    $@{{ inventoryItem.total }}
                                 </td>
                         
                                 <td class="table-resource__actions" data-label="Acciones:">

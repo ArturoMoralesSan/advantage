@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Type;
 use App\Models\Cut;
 use App\Models\Product;
+use App\Models\Inventory;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -110,8 +111,20 @@ class SaleController extends Controller
         abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
 
         $sale = Sale::find($id);
+        $inventory = Inventory::with('product')->where('product_id', $sale->product_id)->first();
+
+        if ($sale->quantity_material != $request->quantity_material) {
+            $oldQuantity = $sale->quantity_material ?? 0;
+
+            $inventory->quantity = $inventory->quantity - ($request->quantity_material - $oldQuantity);
+            $inventory->total = $inventory->product->costo_venta * $inventory->quantity;
+
+            $inventory->save();
+        }
+
         $sale->status = $request->status;
-        $sale->comment= $request->comment;
+        $sale->comment = $request->comment;
+        $sale->quantity_material = $request->quantity_material;
         $sale->save();
 
         alert('Se ha actualizado una orden.');

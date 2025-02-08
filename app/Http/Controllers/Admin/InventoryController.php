@@ -33,10 +33,12 @@ class InventoryController extends Controller
     public function save(InventoryRequest $request)
     {
         abort_unless(Gate::allows('view.inventories') || Gate::allows('edit.inventories'), 403);
-        
+        $product = Product::find($request->product_id);
+        $total = $product->costo_venta * $request->quantity;
         $inventory = new Inventory;
         $inventory->product_id = $request->product_id;
         $inventory->quantity   = $request->quantity;
+        $inventory->total      = $total;
         $inventory->save();
 
         alert('Se ha agregado un elemento al inventario.');
@@ -58,10 +60,12 @@ class InventoryController extends Controller
     public function update(InventoryRequest $request, $id)
     {
         abort_unless(Gate::allows('view.inventories') || Gate::allows('edit.inventories'), 403);
-
+        $product = Product::find($request->product_id);
+        $total = $product->costo_venta * $request->quantity;
         $inventory = Inventory::find($id);
         $inventory->product_id = $request->product_id;
         $inventory->quantity   = $request->quantity;
+        $inventory->total      = $total;
         $inventory->save();
 
         alert('Se ha actualizado un elemento en el inventario.');

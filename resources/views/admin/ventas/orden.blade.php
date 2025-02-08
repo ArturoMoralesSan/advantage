@@ -97,7 +97,7 @@
                     </h3>
 
                     <div class="md:row mb-2">
-                        <div class="md:col">
+                        <div class="md:col-1/2">
                             {{-- nombres --}}
                             <div class="form-control">
                                 <label for="status">Estado</label>
@@ -108,8 +108,19 @@
                                     :options="{{ $status }}"
                                 >
                                 </select-field>                                
-                                <field-errors name="name"></field-errors>
+                                <field-errors name="status"></field-errors>
 
+                            </div>
+                        </div>
+                        <div class="md:col-1/2">
+                            {{-- nombres --}}
+                            <div class="form-control">
+                                <div class="form-control">
+                                <label for="quantity_material">Cantidad de material a utilizar</label>
+                                    <text-field name="quantity_material" v-model="fields.quantity_material" maxlength="80" initial="{{ $sale->quantity_material }}"></text-field>
+                                    <field-errors name="quantity_material"></field-errors>
+
+                                </div>                                
                             </div>
                         </div>
                     </div>
