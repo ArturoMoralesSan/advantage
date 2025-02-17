@@ -15,18 +15,22 @@ class SaleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
 
-            'product_name' => ['required', new NotUppercase, new NotLowercase, 'max:100'],
-            'user_id'     => 'required|max:20',
-            'type_id'     => 'required|max:20',
-            'product_id'  => 'required|max:20',
-            'cut_id'      => 'required|max:20',
-            'width'       => 'required|max:6',
-            'height'      => 'required|max:6',
-            'base_price'  => 'required|max:10',
-            'profit_percentage' => 'required|max:5',
-            
+        $rules = [
+            'user_id' => 'required|max:20',
         ];
+
+        for($i = 1; $i <= $this->products_count; $i++) {
+            $rules['product' . $i . '_type_id']      = 'required';
+            $rules['product' . $i . '_product_id']   = 'required';
+            $rules['product' . $i . '_cut_id']       = 'required';
+            $rules['product' . $i . '_width']        = 'required';
+            $rules['product' . $i . '_height']       = 'required';
+            $rules['product' . $i . '_quantity_product'] = 'required';
+            $rules['product' . $i . '_base_price']   = 'required';
+            $rules['product' . $i . '_profit_percentage'] = 'required';
+        }
+
+        return $rules;
     }
 }

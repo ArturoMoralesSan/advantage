@@ -41,6 +41,9 @@ class InventoryController extends Controller
         $inventory->total      = $total;
         $inventory->save();
 
+        Inventory::checkStock($inventory);
+
+
         alert('Se ha agregado un elemento al inventario.');
 
         return response('', 204, [
@@ -67,6 +70,9 @@ class InventoryController extends Controller
         $inventory->quantity   = $request->quantity;
         $inventory->total      = $total;
         $inventory->save();
+
+        Inventory::checkStock($inventory);
+
 
         alert('Se ha actualizado un elemento en el inventario.');
 

@@ -16,6 +16,32 @@
                 </div>
             </div>
 
+            
+            <!-- <div class="md:row mb-2">
+                <div class="md:col-1/2">
+                    <div class="form-control">
+                        <label for="status">Estado</label>
+                        <select-field name="status" v-model="fields.status" :options="status" :initial="sale.status || '' ">
+                        </select-field>
+                        <field-errors name="status"></field-errors>
+                    </div>
+                </div>
+                <div class="md:col-1/2">
+                    <div class="form-control">
+                        <label for="is_paid">Pagado</label>
+                        <select-field name="is_paid" v-model="fields.is_paid" :options="paid" :initial="sale.is_paid || '' ">
+                        </select-field>
+                        <field-errors name="is_paid"></field-errors>
+                    </div>
+                </div>
+            </div> -->
+        </section>
+
+        <!-- Sección de Costo -->
+        <section class="db-panel mb-16">
+            <h3 class="db-panel__title">
+                Costo
+            </h3>
             <div class="md:row mb-2">
                 <div class="col">
                     <div class="form-control">
@@ -72,36 +98,11 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="md:row mb-2">
-                <div class="md:col-1/2">
-                    <div class="form-control">
-                        <label for="status">Estado</label>
-                        <select-field name="status" v-model="fields.status" :options="status" :initial="sale.status || '' ">
-                        </select-field>
-                        <field-errors name="status"></field-errors>
-                    </div>
-                </div>
-                <div class="md:col-1/2">
-                    <div class="form-control">
-                        <label for="is_paid">Pagado</label>
-                        <select-field name="is_paid" v-model="fields.is_paid" :options="paid" :initial="sale.is_paid || '' ">
-                        </select-field>
-                        <field-errors name="is_paid"></field-errors>
-                    </div>
-                </div>
-            </div> -->
-        </section>
-
-        <!-- Sección de Costo -->
-        <section class="db-panel mb-16">
-            <h3 class="db-panel__title">
-                Costo
-            </h3>
             <div class="md:row mb-2">
                 <div class="md:col-1/2">
                     <div class="form-control">
                         <label for="base_price">Costo por unidad</label>
-                        <text-field name="base_price" v-model="fields.base_price" maxlength="80" :initial="sale.base_price || '' ">
+                        <text-field disabled name="base_price" v-model="fields.base_price" maxlength="80" :initial="sale.base_price || '' ">
                         </text-field>
                         <field-errors name="base_price"></field-errors>
                     </div>
@@ -183,6 +184,16 @@ export default {
         this.formatProducts();
     },
 
+    watch: {
+        'fields.product_id'(newProductId) {
+            const selectedProduct = this.products.find(product => product.id == newProductId);
+            if (selectedProduct) {
+                this.fields.base_price = selectedProduct.costo_venta || 0;
+            }
+        }
+    },
+
+
     computed: {
         filteredProducts() {
             if (!this.fields.type_id) return this.formattedProducts;
@@ -196,7 +207,6 @@ export default {
             return filtered;
         },
 
-        // Computed para calcular el sale_price dinámicamente
         salePrice() {
             const basePrice = parseFloat(this.fields.base_price) || 0;
             const profitPercentage = parseFloat(this.fields.profit_percentage) || 0;

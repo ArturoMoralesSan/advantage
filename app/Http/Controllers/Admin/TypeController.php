@@ -15,7 +15,7 @@ class TypeController extends Controller
     {
         abort_unless(Gate::allows('view.categories') || Gate::allows('create.categories'), 403);
         $types = Type::all();
-        return view('admin.tipos.index', compact('types'));   
+        return view('admin.categorias.index', compact('types'));   
     }
 
     public function save(TypeRequest $request)
@@ -27,10 +27,10 @@ class TypeController extends Controller
         $type->key_name = Str::slug($request->name);
         $type->save();
 
-        alert('Se ha agregado un tipo de impresión.');
+        alert('Se ha agregado una categoría.');
 
         return response('', 204, [
-            'Redirect-To' => url('admin/tipos/')
+            'Redirect-To' => url('admin/categorias/')
         ]);
     }
 
@@ -39,7 +39,7 @@ class TypeController extends Controller
         abort_unless(Gate::allows('view.categories') || Gate::allows('edit.categories'), 403);
         $type = Type::find($id);
 
-        return view('admin.tipos.editar', compact('type'));
+        return view('admin.categorias.editar', compact('type'));
     }
 
 
@@ -47,15 +47,15 @@ class TypeController extends Controller
     {
         abort_unless(Gate::allows('view.categories') || Gate::allows('edit.categories'), 403);
 
-        $types = Types::find($id);
+        $types = Type::find($id);
         $types->name = $request->name;
         $types->key_name = Str::slug($request->name);
         $types->save();
 
-        alert('Se ha actualizado un tipo de impresión.');
+        alert('Se ha actualizado una categoría.');
 
         return response('', 204, [
-            'Redirect-To' => url('admin/tipos/')
+            'Redirect-To' => url('admin/categorias/')
         ]);
     }
 

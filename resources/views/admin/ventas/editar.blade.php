@@ -21,20 +21,19 @@
             <span class="color-link">«</span>
             <a href="{{ url('admin/ventas/') }}">Ver todas las ventas</a>
         </p>
-        
-        <sale-form 
-            action="{{ url('admin/ventas/'. $sale->id .'/actualizar') }}"
-            method="PUT"
-            :sale="{{ $sale}}"
+        <product-registration-form
+            action="{{ url('admin/ventas/crear') }}"
+            :sale="{{ $sale }}"
             :users="{{ $users }}"
             :cuts="{{ $cuts }}"
-            :status="{{ $status }}"
-            :paid="{{ $paid }}"
             :types="{{ $types }}"
+            :product="4"
+            :min-product="1"
             :products="{{ $products }}"
+            :assigned-products="{{ $assigned_products}}"
+            :product-data="[]"
         >
-        </sale-form>
-    
+        </product-registration-form>
     </div>
 </section>
 

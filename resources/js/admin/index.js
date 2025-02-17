@@ -1,7 +1,7 @@
 import '../boot.js';
-import ServiceRegistrationForm from '../main/components/forms/service-registration-form/ServiceRegistrationForm.vue';
+import ProductRegistrationForm from '../main/components/forms/product-registration-form/ProductRegistrationForm.vue';
 import AddFileButton from './components/AddFileButton.vue';
-import AddItemButton from './components/AddUpdateButton.vue';
+import CloneButton from './components/CloneButton.vue';
 import AddReviewButton from './components/ReviewButton.vue';
 import AssignReviewerForm from './components/forms/AssignReviewerForm.vue';
 import BaseForm from '../main/components/forms/base/BaseForm.vue';
@@ -31,6 +31,10 @@ import SelectFilter from './components/SelectFilter.vue';
 import LinkPdf from './components/LinkPdf.vue';
 import SaleForm from './components/SaleForm.vue';
 
+import OrderStatusForm from '../main/components/forms/order-status-form/OrderStatusForm.vue';
+
+import Notifications from './components/Notifications.vue';
+
 
 (function() {
     /* Base components
@@ -44,7 +48,7 @@ import SaleForm from './components/SaleForm.vue';
     Vue.component('assign-reviewer-form', AssignReviewerForm);
     Vue.component('delete-button', DeleteButton);
     Vue.component('delete-filebutton', DeleteFileButton);
-    Vue.component('additem-button', AddItemButton);
+    Vue.component('clone-button', CloneButton);
     Vue.component('review-button', AddReviewButton);
     Vue.component('addfile-button', AddFileButton);
     Vue.component('resource-table', ResourceTable);
@@ -63,10 +67,12 @@ import SaleForm from './components/SaleForm.vue';
     Vue.component('form-date-search', FormDateSearch);
     Vue.component('form-between-date-search', FormBetweenDateSearch);
     Vue.component('select-filter', SelectFilter);
-    Vue.component('service-registration-form', ServiceRegistrationForm);
+    Vue.component('product-registration-form', ProductRegistrationForm);
     Vue.component('link-pdf', LinkPdf);
     Vue.component('product-form', ProductForm);
     Vue.component('sale-form', SaleForm);
+    Vue.component('order-status-form', OrderStatusForm);
+    Vue.component('notifications', Notifications);
 
 
 

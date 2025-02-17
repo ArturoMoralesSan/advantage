@@ -15,7 +15,7 @@ class CutController extends Controller
     {
         abort_unless(Gate::allows('view.roles') || Gate::allows('create.roles'), 403);
         $cuts = Cut::all();
-        return view('admin.cortes.index', compact('cuts'));   
+        return view('admin.acabados.index', compact('cuts'));   
     }
 
     public function save(CutRequest $request)
@@ -25,12 +25,13 @@ class CutController extends Controller
         $cut = new Cut;
         $cut->name = $request->name;
         $cut->key_name = Str::slug($request->name);
+        $cut->cost = $request->cost;
         $cut->save();
 
-        alert('Se ha agregado un corte o acabado.');
+        alert('Se ha agregado un acabado.');
 
         return response('', 204, [
-            'Redirect-To' => url('admin/cortes/')
+            'Redirect-To' => url('admin/acabados/')
         ]);
     }
 
@@ -39,7 +40,7 @@ class CutController extends Controller
         abort_unless(Gate::allows('view.roles') || Gate::allows('edit.roles'), 403);
         $cut = Cut::find($id);
 
-        return view('admin.cortes.editar', compact('cut'));
+        return view('admin.acabados.editar', compact('cut'));
     }
 
 
@@ -49,12 +50,13 @@ class CutController extends Controller
 
         $cut = Cut::find($id);
         $cut->name = $request->name;
+        $cut->cost = $request->cost;
         $cut->save();
 
-        alert('Se ha actualizado un corte o acabado.');
+        alert('Se ha actualizado un acabado.');
 
         return response('', 204, [
-            'Redirect-To' => url('admin/cortes/')
+            'Redirect-To' => url('admin/acabados/')
         ]);
     }
 

@@ -9,6 +9,12 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $appends = ['cut_name'];
+
+    public function getCutNameAttribute()
+    {
+        return isset($this->pivot->cut_id) ? Cut::where('id', $this->pivot->cut_id)->value('name') : null;
+    }
 
 
 
@@ -17,6 +23,7 @@ class Product extends Model
     | Relationships
     |--------------------------------------------------------------------------
     */
+
 
     /**
      * Get the section that owns the types.
@@ -38,15 +45,14 @@ class Product extends Model
         return $this->belongsTo(Measure::class);
     }
 
-    /**
-     * Get the links that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
     public function sales()
     {
-        return $this->hasMany(Sales::class);
+        return $this->belongsToMany(Sale::class, 'sale_products')
+            ->withPivot(['cut_id', 'width', 'height', 'base_price', 'profit_percentage', 'sale_price','quantity_product'])
+            ->withTimestamps();
     }
+    
+
 
     /**
      * Get the links that belong to the product.

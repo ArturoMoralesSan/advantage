@@ -19,6 +19,7 @@ class CutRequest extends FormRequest
     {
         return [
             'name' => ['required', new NotUppercase, new NotLowercase, 'max:100'],
+            'cost' => ['required','max:10'],
         ];
     }
 }

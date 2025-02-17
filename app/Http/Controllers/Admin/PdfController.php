@@ -5,18 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PDF;
-use App\Models\Service;
-use App\Models\Expense;
 use Carbon\Carbon;
 use Auth;
-use App\Models\RaceRegistration;
+use App\Models\Sale;
 
 use Luecano\NumeroALetras\NumeroALetras;
 
 class PdfController extends Controller
 {
     
-    public function pdf($id)
+    /* public function pdf($id)
     {
         $dateNow    = Carbon::now();
         $dateFormat = $dateNow->format('Y-m-d');
@@ -73,19 +71,6 @@ class PdfController extends Controller
         //return $pdf->download('reporte-ingresos-sucursal.pdf');   
     }
 
-    public function pdfRace($id)
-    {
-        if (!Auth::user()->isSuperAdmin()) { 
-            $id = Auth::user()->branch_id;
-        }
-        $registers = RaceRegistration::where('branch_id', $id)
-        ->get();
-        
-        $pdf = PDF::loadView('admin.pdf.race', compact('registers'));
-        $pdf->setPaper('letter', 'portrait'); 
-        return $pdf->stream('reporte-carrera-sucursal.pdf',['Attachment' => false]);
-        //return $pdf->download('reporte-ingresos-sucursal.pdf');   
-    }
 
     public function pdfEgreso($id)
     {
@@ -142,20 +127,32 @@ class PdfController extends Controller
         $pdf = PDF::loadView('admin.pdf.indexGastos', compact('expenses', 'start_date', 'end_date','groupedExpenses'));
         $pdf->setPaper('letter', 'portrait'); 
         return $pdf->stream('repote-gastos-recurrentes', ['Attachment' => false]); 
-    }
+    } */
 
-    public function pdfnote($id)
+    /* public function pdfSale($id)
     {
         $dateNow    = Carbon::now();
         $dateFormat = $dateNow->format('Y-m-d');
-        $service    = Service::find($id);
+        $service    = Product::find($id);
         
         $formatter = new NumeroALetras();
         $formatter->conector = 'Y';
         $service->letter = $formatter->toMoney($service->cost, 2, 'pesos', 'centavos');
         
         $service->day = Carbon::createFromFormat('Y-m-d', $service->date)->format('d');
-        $pdf = PDF::loadView('admin.pdf.note', compact('service'));
+        $pdf = PDF::loadView('admin.pdf.notesale', compact('service'));
+        $pdf->setPaper('letter', 'portrait'); 
+        return $pdf->stream();
+        //return $pdf->download('report.pdf');   
+    } */
+
+    public function pdfSale($id)
+    {
+        
+        $sale = Sale::find($id);
+        $sale->load('products', 'user');
+        
+        $pdf = PDF::loadView('admin.pdf.notesale', compact('sale'));
         $pdf->setPaper('letter', 'portrait'); 
         return $pdf->stream();
         //return $pdf->download('report.pdf');   

@@ -22,11 +22,14 @@ class ProductRequest extends FormRequest
             'description' => ['required', new NotUppercase, new NotLowercase, 'max:100'],
             'type_id' => ['required', 'max:20'],
             'measure_id' => ['required', 'max:20'],
-            'vinil_cost' => ['required', 'max:5'],
-            'impresion_cost' => ['required', 'max:5'],
-            'indirect_cost' => ['required', 'max:5'],
-            'costo_venta' => ['required', 'max:5'],
-
+            'vinil_cost' => 'required_unless:type_id,3,|max:10',
+            'impresion_cost' => 'required_unless:type_id,3,|max:10',
+            'indirect_cost' => 'required|max:10',
+            'subtotal' => 'required|max:10',
+            'iva' => 'required|max:10',
+            'utility' => 'required|max:10',
+            'costo_total' => 'required|max:10',
+            'costo_venta' => 'required|max:10',
         ];
     }
 }

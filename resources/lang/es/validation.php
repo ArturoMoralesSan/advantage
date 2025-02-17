@@ -98,7 +98,7 @@ return [
     'regex'                => 'El formato del campo es inválido.',
     'required'             => 'El campo es obligatorio.',
     'required_if'          => 'El campo es obligatorio cuando el campo :other es :value.',
-    'required_unless'      => 'El campo es requerido a menos que :other se encuentre en :values.',
+    'required_unless'      => 'El campo es requerido',
     'required_with'        => 'El campo es obligatorio cuando :values está presente.',
     'required_with_all'    => 'El campo es obligatorio cuando :values están presentes.',
     'required_without'     => 'El campo es obligatorio cuando :values no está presente.',

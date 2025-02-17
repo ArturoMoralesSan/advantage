@@ -36,16 +36,19 @@ class ProductController extends Controller
         $product = new Product;
         $product->name           = $request->name;
         $product->type_id        = $request->type_id;
-        $product->measure_id        = $request->measure_id;
+        $product->measure_id     = $request->measure_id;
         $product->description    = $request->description;
         $product->vinil_cost     = $request->vinil_cost;
         $product->impresion_cost = $request->impresion_cost;
         $product->indirect_cost  = $request->indirect_cost;
+        $product->subtotal       = $request->subtotal;
+        $product->iva            = $request->iva;
         $product->costo_total    = $request->costo_total;
+        $product->utility        = $request->utility;
         $product->costo_venta    = $request->costo_venta;
         $product->save();
 
-        alert('Se ha agregado un nuevo producto.');
+        alert('Se ha agregado un producto.');
 
         return response('', 204, [
             'Redirect-To' => url('admin/productos/')
@@ -69,12 +72,15 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->name           = $request->name;
         $product->type_id        = $request->type_id;
-        $product->measure_id        = $request->measure_id;
+        $product->measure_id     = $request->measure_id;
         $product->description    = $request->description;
         $product->vinil_cost     = $request->vinil_cost;
         $product->impresion_cost = $request->impresion_cost;
         $product->indirect_cost  = $request->indirect_cost;
+        $product->subtotal       = $request->subtotal;
+        $product->iva            = $request->iva;
         $product->costo_total    = $request->costo_total;
+        $product->utility        = $request->utility;
         $product->costo_venta    = $request->costo_venta;
         $product->save();
 

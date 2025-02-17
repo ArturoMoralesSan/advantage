@@ -41,16 +41,13 @@
                    </strong> 
                 </div>
                 <div class="column-statistics">
-                    <strong>${{ $ingreso }}</strong> <br>
+                    <strong>${{ $ingresoNow }}</strong> <br>
                     Ingresos
                 </div>
+                
                 <div class="column-statistics mb-0">
-                    <strong>${{ $gasto }}</strong> <br>
-                    Gastos
-                </div>
-                <div class="column-statistics mb-0">
-                    <strong>{{ $servicesCount }}</strong> <br>
-                    Órdenes
+                    <strong>{{ $salesNowCount }}</strong> <br>
+                    Ventas
                 </div>
             </div>
         </section>
@@ -63,140 +60,38 @@
         <section class="db-panel">
             <div class="row">
                 <div class="column-statistics-1-3 ">
-                    <strong>${{ number_format($CostbyServices, 2, '.') }}</strong> <br>
+                    <strong>${{ $ingreso}}</strong> <br>
                     Ingresos
                 </div>
-                <div class="column-statistics-1-3 ">
-                    <strong>${{ number_format($expensesCount, 2, ".") }}</strong> <br>
-                    Gastos
-                </div>
                 <div class="column-statistics-1-3 mb-0">
-                    <strong> {{ $ordersAll }}</strong> <br>
-                    Órdenes
+                    <strong> {{ $salesCount }}</strong> <br>
+                    Ventas
                 </div>
             </div>
         </section>
         <div class="md:row">
-            <div class="md:col-1/3">
-                <section class="db-panel">
-                    <h3 class="db-panel__title">
-                        Metodos de pago
-                    </h3>
-                    <canvas id="canvaspayments" class="graph-statistics-pay"></canvas>
-                </section>
-            </div>
-            <div class="md:col-1/3">
-                <section class="db-panel">
-                    <h3 class="db-panel__title">
-                        Ingresos por sucursal
-                    </h3>
-                    <resource-table :breakpoint="800" :model="{{ $branches }}" inline-template>
-
-                        <table class="table size-caption mx-auto md:table--responsive">
-                            <thead>
-                                <tr class="table-resource__headings">
-                                    <th>Sucursal</th>
-                                    <th>cantidad</th>
-                                    <th>Monto</th>
-                                    <th>Reporte</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr v-for="branchItem in resourceList" class="table-resource__row" :key="branchItem.id">
-                                    <td data-label="Estudio:">
-                                        @{{ branchItem.name }}
-                                    </td>
-                                    <td data-label="Cantidad:">
-                                        @{{ branchItem.count_services }}
-                                    </td>
-                                    <td data-label="Monto:">
-                                        $@{{ branchItem.amount_services }}
-                                    </td>
-                                    <td data-label="Reporte:">
-                                        <link-pdf 
-                                            :branchid="branchItem.id" 
-                                            url="/admin/pdf/"
-                                            startdate="{{ app('request')->input('start_date') }}"
-                                            enddate="{{ app('request')->input('end_date') }}">
-                                        </link-pdf>                                   
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </resource-table>
-                </section>
-                
-            </div>
-            <div class="md:col-1/3">
-            <section class="db-panel">
-                    <h3 class="db-panel__title">
-                        Egresos por sucursal
-                    </h3>
-                    <resource-table :breakpoint="800" :model="{{ $branchesExpenses }}" inline-template>
-
-                        <table class="table size-caption mx-auto md:table--responsive">
-                            <thead>
-                                <tr class="table-resource__headings">
-                                    <th>Sucursal</th>
-                                    <th>Gasto</th>
-                                    <th>Reporte</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr v-for="branchItem in resourceList" class="table-resource__row" :key="branchItem.id">
-                                    <td data-label="Estudio:">
-                                        @{{ branchItem.name }}
-                                    </td>
-                                    <td data-label="Monto:">
-                                        $@{{ branchItem.amount_expenses }}
-                                    </td>
-                                    <td data-label="Reporte:">
-                                        <link-pdf 
-                                            :branchid="branchItem.id" 
-                                            url="/admin/pdf-egreso/"
-                                            startdate="{{ app('request')->input('start_date') }}"
-                                            enddate="{{ app('request')->input('end_date') }}">
-                                        </link-pdf>                                    
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>TOTAL</strong></td>
-                                    <td><strong>${{ number_format($branchesExpenses->sum('amount_expenses_raw'), 2, ".") }}</strong></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </resource-table>
-                </section>
-            </div>
-        </div>
-        <div class="md:row">
             <div class="md:col-1/2">
                 <section class="db-panel">
                     <h3 class="db-panel__title">
-                        Estudios más populares
+                        Productos más populares
                     </h3>
-                    <resource-table :breakpoint="800" :model="{{ $studiesCount }}" inline-template>
+                    <resource-table :breakpoint="800" :model="{{ $productsCount }}" inline-template>
 
                         <table class="table size-caption mx-auto md:table--responsive">
                             <thead>
                                 <tr class="table-resource__headings">
-                                    <th>Estudio</th>
-                                    <th>cantidad</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr v-for="studyItem in resourceList" class="table-resource__row" :key="studyItem.id">
+                                <tr v-for="productItem in resourceList" class="table-resource__row" :key="productItem.id">
                                     <td data-label="Estudio:">
-                                        @{{ studyItem.name }}
+                                        @{{ productItem.name }}
                                     </td>
                                     <td data-label="Cantidad:">
-                                        @{{ studyItem.services_count }}
+                                        @{{ productItem.sales_count }}
                                     </td>
                                     
                                 </tr>
@@ -209,32 +104,36 @@
             <div class="md:col-1/2">
                 <section class="db-panel">
                     <h3 class="db-panel__title">
-                        Gastos más populares
+                        Mejores clientes
                     </h3>
-                    <resource-table :breakpoint="800" :model="{{ $expensesByType }}" inline-template>
+                    <resource-table :breakpoint="800" :model="{{ $customerCount }}" inline-template>
 
                         <table class="table size-caption mx-auto md:table--responsive">
                             <thead>
                                 <tr class="table-resource__headings">
-                                    <th>Gasto</th>
+                                    <th>Nombre</th>
+                                    <th>Cantidad de compras</th>
                                     <th>Monto</th>
-                                    <th>Reporte</th>
+                                    <th>PDF</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr v-for="expenseItem in resourceList" class="table-resource__row" :key="expenseItem.id">
+                                <tr v-for="customerItem in resourceList" class="table-resource__row" :key="customerItem.id">
                                     <td data-label="Gasto:">
                                         
-                                        @{{ expenseItem.name }}
+                                        @{{ customerItem.name }}
                                     </td>
                                     <td data-label="Cantidad:">
-                                        $ @{{ expenseItem.expenses_sum_amount }}
+                                        @{{ customerItem.sales_count }}
+                                    </td>
+                                    <td data-label="Cantidad:">
+                                        $ @{{ customerItem.total_sale_price }}
                                     </td>
                                     <td data-label="Reporte:">
                                     <link-pdf 
-                                            :branchid="expenseItem.id" 
-                                            url="/admin/pdf-gasto/"
+                                            :branchid="customerItem.id" 
+                                            url="/admin/pdf-cliente/"
                                             startdate="{{ app('request')->input('start_date') }}"
                                             enddate="{{ app('request')->input('end_date') }}">
                                         </link-pdf>
@@ -248,12 +147,12 @@
                 </section>
             </div>
         </div>
+        
     </div>
 
     <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.js"></script>
     <script type="application/javascript">
         var amountPerDay = <?php echo $days; ?>;
-        var amountPerpayment = <?php echo $servicesPerPayments; ?>;
 
         var lineChartData = {
             labels: Object.keys(amountPerDay),
@@ -266,16 +165,6 @@
             }]
         };
 
-        var barChartDataPayment = {
-            labels: Object.keys(amountPerpayment),
-            datasets: [{
-                label: 'Total',
-                backgroundColor: ['#9BD0F5'],
-                borderColor: '#36A2EB',
-                data: Object.values(amountPerpayment)
-            }]
-        };
-
         window.onload = function() {
             var ctx = document.getElementById("canvas").getContext("2d");
             window.myLine = new Chart(ctx, {
@@ -283,19 +172,6 @@
                 data: lineChartData,
                 options: {
                     responsive: true,                    title: {
-                        display: true,
-                        text: 'Total de Ingresos'
-                    }
-                }
-            });
-            var ctxb = document.getElementById("canvaspayments").getContext("2d");
-            window.myLineb = new Chart(ctxb, {
-                type: 'bar',
-                data: barChartDataPayment,
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    title: {
                         display: true,
                         text: 'Total de Ingresos'
                     }

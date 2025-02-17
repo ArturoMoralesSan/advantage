@@ -24,13 +24,11 @@
 
         <section class="db-panel">
             <h3 class="db-panel__title">
-                Detalles de la orden de trabajo
+                Datos de la orden
             </h3>
 
-            
-            <div class="order-table">
-
-                <div class="order-table__body">
+            <div class="md:row mb-2">
+                <div class="md:col">
                     <table class="order-table__details">
                         <tbody>
                             <tr class="order-table__row">
@@ -40,15 +38,6 @@
                             <tr class="order-table__row">
                                 <th class="order-table__cell--heading">Cliente:</th>
                                 <td class="order-table__cell">{{ $sale->user->name }} {{ $sale->user->last_name }}</td>
-                            </tr>
-                            <tr class="order-table__row">
-                                <th class="order-table__cell--heading">Producto:</th>
-                                <td class="order-table__cell">{{ $sale->product_name }}</td>
-                            </tr>
-                            <tr class="order-table__row">
-                                <th class="order-table__cell--heading">Tipo de Producto:</th>
-                                <td class="order-table__cell">{{ $sale->product->type->name }}</td>
-                            </tr>
                             <tr class="order-table__row">
                                 <th class="order-table__cell--heading">Fecha de Creación:</th>
                                 <td class="order-table__cell">{{ $sale->created_at->format('d/m/Y') }}</td>
@@ -62,88 +51,96 @@
                                 </td>
                             </tr>
                             <tr class="order-table__row">
-                                <th class="order-table__cell--heading">Precio de Venta:</th>
-                                <td class="order-table__cell">$ {{ number_format($sale->sale_price, 2) }}</td>
+                                <th class="order-table__cell--heading">Subtotal:</th>
+                                <td class="order-table__cell">$ {{ number_format($sale->total_sale_price, 2) }}</td>
                             </tr>
                             <tr class="order-table__row">
-                                <th class="order-table__cell--heading">Detalles:</th>
-                                <td class="order-table__cell">
-                                    <ul class="order-table__details-list">
-                                        <li><strong>Ancho:</strong> {{ $sale->width }} cm</li>
-                                        <li><strong>Largo:</strong> {{ $sale->height }} cm</li>
-                                        <li><strong>Material:</strong> {{ $sale->product->name }}</li>
-                                        <li><strong>Acabado/Corte:</strong> {{ $sale->cut->name }}</li>
-                                    </ul>
-                                </td>
+                                <th class="order-table__cell--heading">IVA:</th>
+                                <td class="order-table__cell">$ {{ number_format($sale->iva, 2) }}</td>
+                            </tr>
+                            <tr class="order-table__row">
+                                <th class="order-table__cell--heading">Total:</th>
+                                <td class="order-table__cell">$ {{ number_format($sale->total_with_iva, 2) }}</td>
                             </tr>
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
-
         </section>
 
+        
+        <div class="md:row mb-2">
+            @foreach($sale->products as $product)
+                <div class="md:col-auto">
+                    <section class="db-panel">
+                        <h3 class="db-panel__title">
+                            Producto {{$product->name }}
+                        </h3>
 
-        <base-form action="{{ url('admin/ventas/orden/'. $sale->id .'/actualizar') }}"
-            method="PUT"
-            enctype="multipart/form-data"
-            inline-template
-            v-cloak
-        >
-            <form>
-                <section class="db-panel">
-                    <h3 class="db-panel__title">
-                        Ajustes adicionales
-                    </h3>
-
-                    <div class="md:row mb-2">
-                        <div class="md:col-1/2">
-                            {{-- nombres --}}
-                            <div class="form-control">
-                                <label for="status">Estado</label>
-                                <select-field
-                                    name="status"
-                                    v-model="fields.status"
-                                    initial="{{ $sale->status }}"
-                                    :options="{{ $status }}"
-                                >
-                                </select-field>                                
-                                <field-errors name="status"></field-errors>
-
+                        <div class="order-table">
+                            <div class="order-table__body">
+                                <table class="order-table__details">
+                                    <tbody>
+                                        <tr class="order-table__row">
+                                            <th class="order-table__cell--heading">Categoría:</th>
+                                            <td class="order-table__cell">
+                                                {{ $product->type->name }}
+                                            </td>
+                                        </tr>
+                                        <tr class="order-table__row">
+                                            <th class="order-table__cell--heading">Acabado:</th>
+                                            <td class="order-table__cell">
+                                                {{ $product->cut_name }}
+                                            </td>
+                                        </tr>
+                                        <tr class="order-table__row">
+                                            <th class="order-table__cell--heading">Ancho:</th>
+                                            <td class="order-table__cell">
+                                                {{ $product->pivot->width }} cm
+                                                
+                                            </td>
+                                        </tr>
+                                        <tr class="order-table__row">
+                                            <th class="order-table__cell--heading">Largo:</th>
+                                            <td class="order-table__cell">
+                                                {{ $product->pivot->height }} cm
+                                                
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr class="order-table__row">
+                                            <th class="order-table__cell--heading">Precio total:</th>
+                                            <td class="order-table__cell">
+                                                $ {{ number_format($product->pivot->sale_price, 2) }}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="md:col-1/2">
-                            {{-- nombres --}}
-                            <div class="form-control">
-                                <div class="form-control">
-                                <label for="quantity_material">Cantidad de material a utilizar</label>
-                                    <text-field name="quantity_material" v-model="fields.quantity_material" maxlength="80" initial="{{ $sale->quantity_material }}"></text-field>
-                                    <field-errors name="quantity_material"></field-errors>
-
-                                </div>                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md:row">
-                        <div class="md:col">
-                                {{-- nombres --}}
-                            <div class="form-control">
-                                <label for="comment">Comentarios adicionales</label>
-                                <text-area name="comment" rows="10" cols="50" v-model="fields.comment" maxlength="2000">{{ $sale->comment }}</text-area>
-                                <field-errors name="comment"></field-errors>
-
-                            </div>
-                        </div>
-                    
-                    </div>
-                </section>
-                <div class="text-center">
-                    <form-button class="btn--blue--dashboard btn--wide">
-                        Actualizar
-                    </form-button>
+                    </section>
                 </div>
-            </form>
-        </base-form>
+
+            @endforeach
+            
+            
+            
+        </div>
+
+        @if($sale->status != 'paid')
+            <order-status-form 
+                action="{{ url('admin/ventas/orden/'. $sale->id .'/actualizar') }}"
+                method="PUT"
+                :status="{{ $status }}"
+                :sale-data="{{ $sale }}"
+                :payment="3"
+                :min-payment="0"
+                :payments-data="{{ $payments }}"
+                :assigned-payments="{{ $assigned_payments }}"
+            >
+            </order-status-form>
+        @endif
     </div>
 </section>
 

@@ -4,10 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Notification;
 
 class Inventory extends Model
 {
     use HasFactory;
+
+    public static function checkStock($inventory)
+    {   
+        if ($inventory->quantity < 10) { 
+            Notification::create([
+                'message' => "Stock bajo: {$inventory->product->name} tiene solo {$inventory->quantity} unidades",
+                'read' => false
+            ]);
+        }
+    }
 
     /**
      * Get the section that owns the product.

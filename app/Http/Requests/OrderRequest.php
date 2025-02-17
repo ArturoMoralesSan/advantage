@@ -17,9 +17,14 @@ class OrderRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'quantity_material' => ['required'],
-            'status' => ['required'],
+        $rules = [
+            'status' => 'required|max:20',
         ];
+
+        for($i = 1; $i <= $this->payments_count; $i++) {
+            $rules['payment' . $i . '_pago'] = 'required';
+            $rules['payment' . $i . '_cost'] = 'required';
+        }
+        return $rules;
     }
 }

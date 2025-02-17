@@ -43,16 +43,6 @@ class Sale extends Model
     */
 
     /**
-     * Get the section that owns the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
-
-    /**
      * Get the section that owns the types.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -67,8 +57,19 @@ class Sale extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function cut()
+
+    public function products()
     {
-        return $this->belongsTo(Cut::class);
+        return $this->belongsToMany(Product::class, 'sale_products')
+            ->withPivot(['cut_id', 'width', 'height', 'base_price', 'profit_percentage', 'sale_price','quantity_product'])
+            ->withTimestamps();
     }
+
+    public function payments()
+    {
+        return $this->belongsToMany(Payment::class, 'payment_sale')
+        ->withPivot('cost')
+        ->withTimestamps();
+    }
+    
 }

@@ -38,6 +38,10 @@
         <!-- CSS -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i&display=swap" rel="stylesheet">
         <link href="{{ version('css/main.css') }}" rel="stylesheet">
+
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
+        <meta name="theme-color" content="#436eb3">
     </head>
     <body class="@yield('class')" data-root="{{ url('/') }}">
         <div id="app">
@@ -65,5 +69,12 @@
         <script src="{{ version('js/main.js') }}"></script>
 
         @yield('scripts')
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                .then((reg) => console.log('Service Worker registrado:', reg))
+                .catch((err) => console.error('Error al registrar Service Worker:', err));
+            }
+            </script>
     </body>
 </html>

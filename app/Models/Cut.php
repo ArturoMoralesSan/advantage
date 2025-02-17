@@ -9,13 +9,4 @@ class Cut extends Model
 {
     use HasFactory;
 
-    /**
-     * Get the links that belong to the product.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function sales()
-    {
-        return $this->hasMany(Sales::class);
-    }
 }

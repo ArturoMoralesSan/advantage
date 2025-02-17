@@ -14,8 +14,10 @@ class Payment extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function services()
+    public function sales()
     {
-        return $this->belongsToMany(Service::class)->withPivot('cost');
+        return $this->belongsToMany(Sale::class, 'payment_sale')
+        ->withPivot('cost')
+        ->withTimestamps();
     }
 }

@@ -75,14 +75,11 @@
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Cliente</th>
-                                        <th>Producto</th>
-                                        <th>Tipo</th>
-                                        <th>Características</th>
-                                        <th>Costo</th>
-                                        <th>Utilidad</th>
-                                        <th>Precio de venta</th>
+                                        <th>Subtotal</th>
+                                        <th>Iva</th>
+                                        <th>Total</th>
                                         @if(auth()->user()->isSuperAdmin() || auth()->user()->isEmployee())
-                                        <th>Trabajo</th>
+                                        <th>Orden</th>
                                         @endif
                                         <th>Nota</th>
                                         <th class="pr-2">Acciones</th>
@@ -98,39 +95,28 @@
                                             @{{ salesItem.hour }}
                                         </td>
                                         <td data-label="Cliente:">
-                                            @{{ salesItem.user.name }}
+                                            @{{ salesItem.user.name }} @{{ salesItem.user.last_name }}
                                         </td>
-                                        <td data-label="Producto:">
-                                            @{{ salesItem.product_name }}
+                                        <td data-label="Subtotal:">
+                                            $@{{ salesItem.total_sale_price }}
                                         </td>
-                                        <td data-label="tipo:">
-                                            @{{ salesItem.product.type.name }}
+                                        <td data-label="iva:">
+                                            $@{{ salesItem.iva }}
                                         </td>
-                                        <td data-label="Características:">
-                                            Ancho: @{{ salesItem.width }} cm <br>
-                                            Largo: @{{ salesItem.height }} cm <br>
-                                            Material: @{{ salesItem.product.name }} <br>
-                                            Acabado/Corte: @{{ salesItem.cut.name }} <br>
+                                        <td data-label="Total:">
+                                            $@{{ salesItem.total_with_iva }}
                                         </td>
-                                        <td data-label="Costo:">
-                                            $@{{ salesItem.base_price }}
-                                        </td>
-                                        <td data-label="Porcentaje de utilidad:">
-                                            @{{ salesItem.profit_percentage }} %
-                                        </td>
-                                        <td data-label="Precio de venta:">
-                                            $ @{{ salesItem.sale_price }}
-                                        </td>
+                                                           
                                         @if(auth()->user()->isSuperAdmin() || auth()->user()->isEmployee())
-                                        <td data-label="Orden de trabajo:">
-                                            <a class="btn btn--xs btn--primary table-resource__button ml-2" :href="$root.path + '/admin/ventas/orden/' + salesItem.id">
-                                                Orden de trabajo
-                                            </a>
-                                        </td>
+                                            <td data-label="Orden de trabajo:">
+                                                <a class="btn btn-nowrap btn--sm btn--blue table-resource__button" :href="$root.path + '/admin/ventas/orden/' + salesItem.id">
+                                                    <img class="svg-icon-only" src="{{ url('img/svg/order.svg')}}">
+                                                </a>
+                                            </td>
                                         @endif
                                         <td data-label="Nota:">
-                                            <a class="btn btn-nowrap btn--sm btn--primary table-resource__button mr-2" :href="$root.path + '/notas/' + salesItem.id">
-                                                PDF
+                                            <a class="btn btn-nowrap btn--sm btn--blue table-resource__button" :href="$root.path + '/notas/' + salesItem.id">
+                                                <img class="svg-icon-only" src="{{ url('img/svg/pdf.svg')}}">
                                             </a>
                                         </td>
                                         <td class="table-resource__actions" data-label="Acciones:">
@@ -139,32 +125,41 @@
                                                     <img class="svg-icon" src="{{ url('img/svg/edit.svg')}}">
                                                     Editar
                                                 </a>
-                                            
-                                            <delete-button class="btn--danger table-resource__button" :url="$root.path + '/admin/ventas/eliminar/' + salesItem.id"
-                                                :resource-id="salesItem.id"
-                                                :options="{ onDelete: onResourceDelete }"
-                                            >
-                                                <img class="svg-icon" src="{{ url('img/svg/trash.svg')}}">
-                                                Eliminar
-                                            </delete-button>
+                                                
+                                                <clone-button 
+                                                    class="btn btn-nowrap btn--sm btn--success table-resource__button mr-2" 
+                                                    :item="salesItem" 
+                                                    :url="$root.path + '/admin/ventas/clonar/' + salesItem.id" 
+                                                    @clone="cloneResource"
+                                                >
+                                                    <img class="svg-icon" src="{{ url('img/svg/clone.svg')}}">
+                                                    Clonar
+                                                </clone-button>
+                                                <delete-button class="btn--danger table-resource__button" :url="$root.path + '/admin/ventas/eliminar/' + salesItem.id"
+                                                    :resource-id="salesItem.id"
+                                                    :options="{ onDelete: onResourceDelete }"
+                                                >
+                                                    <img class="svg-icon" src="{{ url('img/svg/trash.svg')}}">
+                                                    Eliminar
+                                                </delete-button>
                                             @endif
                                         </td>
                                         
                                     </tr>
                                 </tbody>
 
-                                </table>
+                            </table>
 
-                            </resource-table>
+                        </resource-table>
 
-                            {!! $salesByStatus[$status]['links'] !!}
+                        {!! $salesByStatus[$status]['links'] !!}
                             
 
-                        @endif
+                    @endif
 
-                    </section>
-                </template>
-            @endforeach
-        </tabs-component> 
-    </div>
+                </section>
+            </template>
+        @endforeach
+    </tabs-component> 
+</div>
 @endsection

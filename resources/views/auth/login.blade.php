@@ -28,7 +28,18 @@
 
                 <div class="form-control mb-2">
                     <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-                    <input id="password" type="password" class="form-field @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input id="password" type="password" class="form-field @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" style="padding-right: 40px;">
+
+                        <button type="button" id="togglePassword" style="position: absolute; right: 10px; background: none; border: none; cursor: pointer;">
+                            <img id="eyeClosedIcon" src="{{ asset('img/svg/eye-closed.svg') }}" width="24" height="24" alt="Cerrar ojo">
+                            <img id="eyeOpenIcon" src="{{ asset('img/svg/eye-open.svg') }}" width="24" height="24" alt="Abrir ojo" style="display: none;">
+                        </button>
+                    </div>
+
+
+
+
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -77,4 +88,27 @@
           
     </div>
 </section>
+@endsection
+@section('scripts')
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            let passwordField = document.getElementById('password');
+            let eyeClosed = document.getElementById('eyeClosedIcon');
+            let eyeOpen = document.getElementById('eyeOpenIcon');
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeClosed.style.display = "none";
+                eyeOpen.style.display = "block";
+            } else {
+                passwordField.type = "password";
+                eyeClosed.style.display = "block";
+                eyeOpen.style.display = "none";
+            }
+        });
+    </script>
+
+
+
+
 @endsection

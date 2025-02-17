@@ -5,12 +5,11 @@ import LoginForm from './components/forms/LoginForm.vue';
 import Header from './components/Header.vue';
 import Introduction from './components/introduction.vue';
 import Menu from './components/Menu.vue';
-import Filters from './components/filter/Filters.vue';
 import SiteOverlay from './components/SiteOverlay.vue';
 import GalleryCard from './components/GalleryCard.vue';
 import GalleryLink from './components/GalleryLink.vue';
 import UserBar from '../admin/components/UserBar.vue';
-import ServiceRegistrationForm from './components/forms/service-registration-form/ServiceRegistrationForm.vue';
+import ProductRegistrationForm from './components/forms/product-registration-form/ProductRegistrationForm.vue';
 import StatusProjectForm from './components/forms/status-project-form/StatusProjectForm.vue';
 import ButtonSearch from './components/ButtonSearch.vue';
 import TruncatedText from './components/TruncatedText.vue';
@@ -23,7 +22,7 @@ import Tabs from './components/tabs/Tabs.vue';
     Vue.component('base-form', BaseForm);
     Vue.component('contact-form', ContactForm);
     Vue.component('login-form', LoginForm);
-    Vue.component('service-registration-form', ServiceRegistrationForm);
+    Vue.component('product-registration-form',ProductRegistrationForm);
     Vue.component('status-project-form', StatusProjectForm);
 
 
@@ -37,7 +36,6 @@ import Tabs from './components/tabs/Tabs.vue';
     Vue.component('gallery-link', GalleryLink);
 
     Vue.component('button-search', ButtonSearch);
-    Vue.component('filter-component', Filters);
     Vue.component('truncated-text', TruncatedText);
 
     Vue.component('tabs-component', Tabs);

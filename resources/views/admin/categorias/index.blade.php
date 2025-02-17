@@ -1,19 +1,19 @@
 @extends('layout.dashboard-master')
 
 {{-- Metadata --}}
-@section('title', 'Cortes')
-@section('tab_title', 'Cortes | ' . config('app.name'))
-@section('description', 'Lista de cortes.')
+@section('title', 'Categorías')
+@section('tab_title', 'Categorías | ' . config('app.name'))
+@section('description', 'Lista de categorías')
 @section('css_classes', 'dashboard')
 
 @section('content')
     <div class="dashboard-heading">
         <h1 class="dashboard-heading__title">
-            Cortes
+            categorías
         </h1>
 
         <p class="dashboard-heading__caption">
-            Hay {{ $cuts->count() }} cortes registrados.
+            Hay {{ $types->count() }} categorías registradas.
         </p>
     </div>
 
@@ -21,16 +21,16 @@
         @include('components.alert')
         <section class="db-panel">
             <h3 class="db-panel__title">
-                Lista de cortes
+                Lista de categorias
             </h3>
 
-            @if (! $cuts->count())
+            @if (! $types->count())
                 <p class="text-center py-1">
-                    Por el momento no hay cortes registrados.
+                    Por el momento no hay categorías registradas.
                 </p>
             @else
 
-                <resource-table :breakpoint="800" :model="{{ $cuts }}" inline-template>
+                <resource-table :breakpoint="800" :model="{{ $types }}" inline-template>
                     <table class="table size-caption mx-auto mb-16 md:table--responsive">
                         <thead>
                             <tr class="table-resource__headings">
@@ -40,19 +40,19 @@
                         </thead>
 
                         <tbody>
-                            <tr v-for="cutItem in resourceList" class="table-resource__row" :key="cutItem.id">
+                            <tr v-for="typeItem in resourceList" class="table-resource__row" :key="typeItem.id">
                                 <td data-label="Nombre:">
-                                    @{{ cutItem.name }}
+                                    @{{ typeItem.name }}
                                 </td>
                                 
 
                                 <td class="table-resource__actions" data-label="Acciones:">
-                                    <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/cortes/' + cutItem.id + '/editar' ">
+                                    <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/categorias/' + typeItem.id + '/editar' ">
                                         <img class="svg-icon" src="{{ url('img/svg/edit.svg')}}">
                                         Editar
                                     </a>
-                                    <delete-button class="btn--danger table-resource__button" :url="$root.path + '/admin/cortes/eliminar/' + cutItem.id"
-                                        :resource-id="cutItem.id"
+                                    <delete-button class="btn--danger table-resource__button" :url="$root.path + '/admin/categorias/eliminar/' + typeItem.id"
+                                        :resource-id="typeItem.id"
                                         :options="{ onDelete: onResourceDelete }"
                                     >
                                         <img class="svg-icon" src="{{ url('img/svg/trash.svg')}}">

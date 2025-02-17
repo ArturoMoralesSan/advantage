@@ -42,7 +42,7 @@ Route::get('{provider}/callback', [LoginController::class,'handleProviderCallbac
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('notas/{id}', [PdfController::class, 'pdfnote']);
+Route::get('notas/{id}', [PdfController::class, 'pdfSale']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], function() {
     Route::get('/', [DashboardController::class, 'index']);
@@ -87,13 +87,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::put('roles/{id}/actualizar', [RoleController::class, 'update']);
     Route::delete('roles/eliminar/{id}', [RoleController::class, 'delete']);
 
-    //Tipo de pago
-    Route::get('tipos', [TypeController::class, 'index']);
-    Route::view('agregar-tipo', 'admin.tipos.crear');
-    Route::post('tipos/crear', [TypeController::class, 'save']);
-    Route::get('tipos/{id}/editar', [TypeController::class, 'edit']);
-    Route::put('tipos/{id}/actualizar', [TypeController::class, 'update']);
-    Route::delete('tipos/eliminar/{id}', [TypeController::class, 'delete']);
+    //Categorias
+    Route::get('categorias', [TypeController::class, 'index']);
+    Route::view('agregar-categoria', 'admin.categorias.crear');
+    Route::post('categorias/crear', [TypeController::class, 'save']);
+    Route::get('categorias/{id}/editar', [TypeController::class, 'edit']);
+    Route::put('categorias/{id}/actualizar', [TypeController::class, 'update']);
+    Route::delete('categorias/eliminar/{id}', [TypeController::class, 'delete']);
 
     //Medidas
     Route::get('medidas', [MeasureController::class, 'index']);
@@ -121,23 +121,25 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::put('inventario/{id}/actualizar', [InventoryController::class, 'update']);
     Route::delete('inventario/eliminar/{id}', [InventoryController::class, 'delete']);
 
-    //Servicios
+    //Ventas
     Route::get('ventas', [SaleController::class, 'index']);
     Route::get('ventas/orden/{id}', [SaleController::class, 'order']);
     Route::put('ventas/orden/{id}/actualizar', [SaleController::class, 'orderupdate']);
+    Route::post('ventas/clonar/{id}', [SaleController::class, 'cloneSale']);
+
     Route::get('agregar-venta', [SaleController::class, 'create']);
     Route::post('ventas/crear', [SaleController::class, 'save']);
     Route::get('ventas/{id}/editar', [SaleController::class, 'edit']);
     Route::put('ventas/{id}/actualizar', [SaleController::class, 'update']);
     Route::delete('ventas/eliminar/{id}', [SaleController::class, 'delete']);
 
-    //Tipo de cortes
-    Route::get('cortes', [CutController::class, 'index']);
-    Route::view('agregar-corte', 'admin.cortes.crear');
-    Route::post('cortes/crear', [CutController::class, 'save']);
-    Route::get('cortes/{id}/editar', [CutController::class, 'edit']);
-    Route::put('cortes/{id}/actualizar', [CutController::class, 'update']);
-    Route::delete('cortes/eliminar/{id}', [CutController::class, 'delete']);
+    //Acabados
+    Route::get('acabados', [CutController::class, 'index']);
+    Route::view('agregar-acabado', 'admin.acabados.crear');
+    Route::post('acabados/crear', [CutController::class, 'save']);
+    Route::get('acabados/{id}/editar', [CutController::class, 'edit']);
+    Route::put('acabados/{id}/actualizar', [CutController::class, 'update']);
+    Route::delete('acabados/eliminar/{id}', [CutController::class, 'delete']);
 
     //Tipo de pago
     Route::get('tipos-pagos', [PaymentController::class, 'index']);

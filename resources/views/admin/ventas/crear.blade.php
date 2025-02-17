@@ -21,18 +21,20 @@
             <span class="color-link">«</span>
             <a href="{{ url('admin/ventas/') }}">Ver todas las ventas</a>
         </p>
-        
-        <sale-form 
+
+        <product-registration-form
             action="{{ url('admin/ventas/crear') }}"
             :sale="{{ json_encode((object)[]) }}"
             :users="{{ $users }}"
             :cuts="{{ $cuts }}"
-            :status="{{ $status }}"
-            :paid="{{ $paid }}"
             :types="{{ $types }}"
+            :product="4"
+            :min-product="1"
             :products="{{ $products }}"
+            :assigned-products="[]"
+            :product-data="[]"
         >
-        </sale-form>
+        </product-registration-form>
     
     </div>
 </section>

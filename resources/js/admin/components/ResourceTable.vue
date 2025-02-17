@@ -7,10 +7,6 @@
             model: {
                 default: () => []
             },
-            uploadEvent: {
-                type: String,
-                default: 'fileUploaded'
-            }
         },
 
         data() {
@@ -23,7 +19,6 @@
         watch: {
             resourceList: function() {
                 this.updateRootCount();
-                this.updateFile();
             }
         },
 
@@ -41,57 +36,10 @@
 
         methods: {
 
-            /**
-             * update item to resource list.
-             *
-             * @param {object} item
-             */
-            addItem(item) {
-                this.resourceList.push(item);
-
-            },
-
-            /**
-             * Add item to resource list.
-             *
-             * @param {object} item
-             */
-            updatefileList(item) {
-                this.resourceList.forEach(function(element) {
-
-                    if (element.id == item.id) {
-                        element.link_name = item.link_name;
-                        element.icon      = item.icon;
-                        element.file      = item.file;
-                    }
-                });
-            },
-
-            /**
-             * Add item to resource list.
-             *
-             * @param {object} item
-             */
-            updateSpeakerList(item) {
-                this.resourceList.forEach(function(element) {
-                    if (element.id == item.id) {
-                        element.name = item.name;
-                    }
-                });
-            },
-
-            /**
-             * Add item to resource list.
-             *
-             * @param {object} item
-             */
-            updateReviewList(item) {
-                this.resourceList.forEach(function(element) {
-                    if (element.id == item.id) {
-                        element.name = item.name;
-                        element.review = item.review;
-                    }
-                });
+           
+            cloneResource(newSale) {
+                this.resourceList.unshift(newSale); 
+                this.updateRootCount();
             },
 
             /**
@@ -124,16 +72,7 @@
             updateRootCount() {
                 this.$root.resourceCount = this.resourceList.length;
             },
-            updateFile() {
-                var list=[];
-
-                this.resourceList.forEach(function(element) {
-                      list.push(element.id);
-                });
-
-                this.$emit('updatefile', 'files', list);
-                this.$emit('updateprovider', 'review', list);
-            }
+            
         }
     };
 </script>

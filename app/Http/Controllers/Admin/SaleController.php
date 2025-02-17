@@ -11,11 +11,15 @@ use App\Models\User;
 use App\Models\Type;
 use App\Models\Cut;
 use App\Models\Product;
+use App\Models\Payment;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Auth;
+use PDF;
+use App\Mail\SaleMail;
+use Illuminate\Support\Facades\Mail;
 
 class SaleController extends Controller
 {
@@ -59,7 +63,7 @@ class SaleController extends Controller
 
         $salesByStatus = collect([]);
         foreach ($statusLabels as $status => $label) {
-            $query = Sale::with('product.type', 'user', 'cut')
+            $query = Sale::with('products', 'user')
                 ->where('status', $status)
                 ->whereMonth('created_at', $month)
                 ->whereYear('created_at', $year)
@@ -85,12 +89,12 @@ class SaleController extends Controller
     {
         abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
         
-        $sale = Sale::with('product.type')->find($id);
-
+        $sale = Sale::with(['products.type', 'user'])->find($id);
         if (Auth::user()->isCustomer()) 
         {
             return redirect('admin/ventas/');
         }
+
 
         $status = collect([
             'quoted'   => 'Cotizada',
@@ -102,30 +106,51 @@ class SaleController extends Controller
         $paid = collect([
             '1' => 'Pagado',
             '0' => 'No pagado', 
-        ]);       
+        ]); 
+        $assigned_payments = $sale->payments()->get();
+        $payments = Payment::pluck('name','id');      
 
-        return view('admin.ventas.orden', compact('sale','status', 'paid'));
+        return view('admin.ventas.orden', compact('sale','status', 'paid', 'payments','assigned_payments'));
     }
     public function orderupdate(OrderRequest $request, $id)
     {
         abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
 
         $sale = Sale::find($id);
-        $inventory = Inventory::with('product')->where('product_id', $sale->product_id)->first();
 
-        if ($sale->quantity_material != $request->quantity_material) {
-            $oldQuantity = $sale->quantity_material ?? 0;
 
-            $inventory->quantity = $inventory->quantity - ($request->quantity_material - $oldQuantity);
-            $inventory->total = $inventory->product->costo_venta * $inventory->quantity;
+        if($request->status == 'ordered' && $sale->status == 'quoted')
+        { 
+            foreach($sale->products as $product)
+            {
+                $inventory = Inventory::with('product')->where('product_id', $product->id)->first();
+                $inventory->quantity = $product->quantity_material;
+                $inventory->total = $inventory->product->costo_venta * $inventory->quantity;
+                $inventory->save();
+                Inventory::checkStock($inventory);
+            }
+            
+            $sale->status = $request->status;
+            $sale->comment = $request->comment;
 
-            $inventory->save();
+            $sale->load('products', 'user');
+            $this->sendSaleMail($sale);
         }
+        
+        if($request->status == 'paid')
+        {
+            $dateNow     = Carbon::now();
+            $dateFormat  = $dateNow->format('Y-m-d');
 
-        $sale->status = $request->status;
-        $sale->comment = $request->comment;
-        $sale->quantity_material = $request->quantity_material;
+            $sale->is_paid = true;
+            $sale->finish_date = $dateFormat;
+
+        }
         $sale->save();
+        $sale->payments()->detach();
+        for($i = 1; $i <= $request->payments_count; $i++){
+            $sale->payments()->attach($request['payment'.$i.'_pago'], ['cost'=> $request['payment'.$i.'_cost']]);
+        }
 
         alert('Se ha actualizado una orden.');
 
@@ -135,20 +160,38 @@ class SaleController extends Controller
     }
 
 
+    public function cloneSale($id)
+    {
+        $originalSale = Sale::find($id);
+        
+
+        $newSale = $originalSale->replicate();
+        $newSale->save();
+
+        foreach ($originalSale->products as $product) {
+            $newSale->products()->attach($product->id, [
+                'cut_id'            => $product->pivot->cut_id, 
+                'width'             => $product->pivot->width, 
+                'height'            => $product->pivot->height, 
+                'quantity_product'  => $product->pivot->quantity_product, 
+                'base_price'        => $product->pivot->base_price,  
+                'profit_percentage' => $product->pivot->profit_percentage
+            ]);
+        }
+
+        // Obtener la nueva venta con los productos ya clonados para enviarlos al frontend
+        $newSale->load('products', 'user');
+
+        return response()->json([
+            'success' => true,
+            'newItem' => $newSale
+        ]);
+    }
+
+
     public function create()
     {
         abort_unless(Gate::allows('view.quotations') || Gate::allows('create.quotations'), 403);
-        $status = collect([
-            'quoted'   => 'Cotización',
-            'ordered'  => 'Orden',
-            'accepted' => 'Aceptar',
-            'paid'     => 'Pagar', 
-        ]);
-
-        $paid = collect([
-            '1' => 'Pagado',
-            '0' => 'No pagado', 
-        ]);
 
         if (Auth::user()->isCustomer()) {
             $users = User::where('id', Auth::user()->id)
@@ -160,12 +203,61 @@ class SaleController extends Controller
         }        
         $products = Product::all();
         $types = Type::pluck('name','id');
-        $cuts = Cut::pluck('name','id');
+        $cuts = Cut::all();
 
-        return view('admin.ventas.crear', compact('users', 'products', 'types', 'cuts', 'status', 'paid'));   
+        return view('admin.ventas.crear', compact('users', 'products', 'types', 'cuts'));   
     }
 
     public function save(SaleRequest $request)
+    {
+        abort_unless(Gate::allows('view.services') || Gate::allows('create.services'), 403);
+        
+        if ($request->sale_id == null) {
+            $sale = New Sale;
+
+        } else {
+            $sale = Sale::find($request->sale_id);
+        }
+
+        $sale->user_id = $request->user_id;
+        $sale->save();
+
+        $sale->products()->detach();
+        for($i = 1; $i <= $request->products_count; $i++){
+            $sale->products()->attach([
+                $request['product'.$i.'_product_id'] => [
+                    'cut_id'            => $request['product'.$i.'_cut_id'], 
+                    'width'             => $request['product'.$i.'_width'], 
+                    'height'            => $request['product'.$i.'_height'], 
+                    'quantity_product'  => $request['product'.$i.'_quantity_product'], 
+                    'base_price'        => $request['product'.$i.'_base_price'],  
+                    'profit_percentage' => $request['product'.$i.'_profit_percentage']
+                ]
+            ]);
+        }
+        $totalSalePrice = $sale->products()->sum('sale_price');
+        $iva = $totalSalePrice * 0.16;
+        $totalWithIVA = $totalSalePrice + $iva;
+
+        $sale->total_sale_price = $totalSalePrice;
+        $sale->iva = $iva;
+        $sale->total_with_iva = $totalWithIVA;
+        $sale->save(); 
+
+        
+        if ($request->sale_id == null) {
+            alert('Se ha agregado un elemento.');
+        } else {
+            alert('Se ha editado un elemento.');
+        }
+        
+
+        return response('', 204, [
+            'Redirect-To' => url('admin/ventas/')
+        ]);  
+    }
+
+    /* public function save(SaleRequest $request)
     {
         abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
         
@@ -185,30 +277,18 @@ class SaleController extends Controller
         return response('', 204, [
             'Redirect-To' => url('admin/ventas/')
         ]);
-    }
+    } */
 
     public function edit($id)
     {
         abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
-        $sale = Sale::with('product.type')->find($id);
+        $sale = Sale::with('products.type')->find($id);
 
         if ($sale->status != 'quoted' || (Auth::user()->isCustomer() && $sale->user_id != Auth::user()->id)) 
         {
             return redirect('admin/ventas/');
         }
         
-        $status = collect([
-            'quoted'   => 'Cotización',
-            'ordered'  => 'Orden',
-            'accepted' => 'Aceptar',
-            'paid'     => 'Pagar', 
-        ]);
-
-        $paid = collect([
-            '1' => 'Pagado',
-            '0' => 'No pagado', 
-        ]);
-
         if (!Auth::user()->isSuperAdmin()) {
             $users = User::where('id', Auth::user()->id)
             ->selectRaw("CONCAT(name, ' ', last_name) as full_name, id")
@@ -219,33 +299,11 @@ class SaleController extends Controller
         }        
         $products = Product::all();
         $types = Type::pluck('name','id');
-        $cuts = Cut::pluck('name','id');
+        $cuts = Cut::all();
 
+        $assigned_products = $sale->products()->get();
 
-        return view('admin.ventas.editar', compact('sale','users', 'products', 'types', 'cuts', 'status', 'paid'));
-    }
-
-
-    public function update(SaleRequest $request, $id)
-    {
-        abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
-
-        $sale = Sale::find($id);
-        $sale->user_id = $request->user_id;
-        $sale->product_name = $request->product_name;
-        $sale->product_id = $request->product_id;
-        $sale->cut_id = $request->cut_id;
-        $sale->width = $request->width;
-        $sale->height = $request->height;
-        $sale->base_price = $request->base_price;
-        $sale->profit_percentage = $request->profit_percentage;
-        $sale->save();
-
-        alert('Se ha actualizado una cotización.');
-
-        return response('', 204, [
-            'Redirect-To' => url('admin/ventas/')
-        ]);
+        return view('admin.ventas.editar', compact('sale','users', 'products', 'types', 'cuts', 'assigned_products'));
     }
 
     public function delete($id)
@@ -257,5 +315,17 @@ class SaleController extends Controller
         
         return response('', 204);
 
+    }
+
+    public function sendSaleMail($sale)
+    {
+
+        $pdf = Pdf::loadView('admin.pdf.notesale', compact('sale'));
+        $pdfPath = storage_path("app/public/cotizacion_{$sale->id}.pdf");
+        $pdf->save($pdfPath);
+
+        Mail::to($sale->user->email)->send(new SaleMail($sale, $pdfPath));
+
+        return back()->with('success', 'Correo enviado con éxito.');
     }
 }

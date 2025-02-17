@@ -14,20 +14,20 @@
         <div class="row mb-4">
             <div class="md:col-1/2 sm:col">
                 <div class="form-control">
-                    <label :for="'payment' + index + '-estudio'">Pago</label>
+                    <label :for="'payment' + index + '-pago'">Pago</label>
                     <select-field
-                    :name="'payment' + index + '_estudio'"
-                    v-model="fields['payment' + index + '_estudio']"
+                    :name="'payment' + index + '_pago'"
+                    v-model="fields['payment' + index + '_pago']"
                     :options="PaymentsData"
                     :initial="((typeof assignedPayments[index-1] !== 'undefined') ? assignedPayments[index-1].id.toString() : '')"
                     >
                     </select-field>
-                    <field-errors :name="'payment' + index + '_estudio'"></field-errors>
+                    <field-errors :name="'payment' + index + '_pago'"></field-errors>
                 </div>
             </div>
             <div class="md:col-1/2 sm:col">
                 <div class="form-control">
-                    <label for="cost">Costo</label>
+                    <label for="cost">Monto</label>
                     <text-field 
                         class="field-get-researcher" 
                         :name="'payment' + index + '_cost'" 
@@ -36,6 +36,8 @@
                         :initial="((typeof assignedPayments[index-1] !== 'undefined') ? assignedPayments[index-1].pivot.cost.toString(): '')"
                     ></text-field>
                     <field-errors name="cost"></field-errors>
+                    <field-errors :name="'payment' + index + '_cost'"></field-errors>
+
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@
                         <div class="md:row mb-4">
                             <div class="md:col">
                                 <div class="form-control">
-                                    <label for="product">Sucursal</label>
+                                    <label for="product">Producto</label>
                                     <select-field class="form-select" name="product_id" v-model="fields.product_id"
                                         :options="{{ $products }}"
                                         initial="{{ $inventory->product_id }}"

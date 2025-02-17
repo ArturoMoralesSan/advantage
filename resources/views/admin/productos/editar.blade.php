@@ -45,7 +45,7 @@
                             <div class="md:col-1/2">
                                 {{-- nombres --}}
                                 <div class="form-control">
-                                    <label for="type">Tipo</label>
+                                    <label for="type">Categoría</label>
                                     <select-field class="form-select" name="type_id" v-model="fields.type_id"
                                         :options="{{ $types }}" initial="{{ $product->type_id }}">
                                     </select-field>                                    
@@ -104,22 +104,47 @@
                             </div>
                         </div>
 
-                        <div class="md:row">
-                            <div class="md:col-1/2">
+                        <div class="md:row mb-2">
+                            <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="costo_total">Costo total</label>
-                                    <text-field disabled name="costo_total" v-model="fields.costo_total" maxlength="80" initial="{{ $product->costo_total }}"></text-field>
-                                    <field-errors name="costo_total"></field-errors>
+                                    <label for="subtotal">Subtotal</label>
+                                    <text-field disabled name="subtotal" v-model="fields.subtotal" maxlength="80" type="number" initial="{{ $product->subtotal }}"></text-field>
+                                    <field-errors name="subtotal"></field-errors>
                                 </div>
                             </div>
 
+                            <div class="md:col-1/3">
+                                <div class="form-control">
+                                    <label for="iva">IVA</label>
+                                    <text-field disabled name="iva" v-model="fields.iva" maxlength="80" type="number" initial="{{ $product->iva }}"></text-field>
+                                    <field-errors name="iva"></field-errors>
+                                </div>
+                            </div>
+                            <div class="md:col-1/3">
+                                <div class="form-control">
+                                    <label for="costo_total">Total</label>
+                                    <text-field disabled name="costo_total" v-model="fields.costo_total" maxlength="80" type="number" initial="{{ $product->costo_total }}"></text-field>
+                                    <field-errors name="costo_total"></field-errors>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:row mb-2">
                             <div class="md:col-1/2">
                                 <div class="form-control">
-                                    <label for="costo_venta">Costo venta</label>
-                                    <text-field name="costo_venta" v-model="fields.costo_venta" maxlength="80" type="number" initial="{{ $product->costo_venta }}"></text-field>
+                                    <label for="utility">Utilidad</label>
+                                    <text-field name="utility" v-model="fields.utility" maxlength="80" type="number" initial="{{ $product->utility }}"></text-field>
+                                    <field-errors name="utility"></field-errors>
+                                </div>
+                            </div>
+                            <div class="md:col-1/2">
+                                <div class="form-control">
+                                    <label for="costo_venta">Costo de venta</label>
+                                    <text-field disabled name="costo_venta" v-model="fields.costo_venta" maxlength="80" type="number" initial="{{ $product->costo_venta }}"></text-field>
                                     <field-errors name="costo_venta"></field-errors>
                                 </div>
                             </div>
+
+                            
                         </div>
                     </section>
 
