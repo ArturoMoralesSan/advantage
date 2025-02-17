@@ -35,7 +35,8 @@
                         <thead>
                             <tr class="table-resource__headings">
                                 <th>Producto</th>
-                                <th>Cantidad</th>
+                                <th>Cantidad mínima</th>
+                                <th>Cantidad en existencia</th>
                                 <th>Total</th>
                                 <th class="pr-4">Acciones</th>
                             </tr>
@@ -45,7 +46,10 @@
                                 <td data-label="Producto:">
                                     @{{ inventoryItem.product.name }}
                                 </td>
-                                <td data-label="Cantidad:">
+                                <td data-label="Cantidad mínima:">
+                                    @{{ inventoryItem.quantity_min }}
+                                </td>
+                                <td data-label="Cantidad en existencia:">
                                     @{{ inventoryItem.quantity }}
                                 </td>
                                 <td data-label="Total:">

@@ -41,9 +41,16 @@
                             </div>
                         </div>
                         <div class="md:row mb-4">
-                            <div class="md:col">
+                            <div class="md:col-1/2">
                                 <div class="form-control">
-                                    <label for="quantity">Cantidad</label>
+                                    <label for="quantity_min">Cantidad mínima</label>
+                                    <text-field name="quantity_min" v-model="fields.quantity_min"></text-field>
+                                    <field-errors name="quantity_min"></field-errors>
+                                </div>
+                            </div>
+                            <div class="md:col-1/2">
+                                <div class="form-control">
+                                    <label for="quantity">Cantidad en existencia</label>
                                     <text-field name="quantity" v-model="fields.quantity"></text-field>
                                     <field-errors name="quantity"></field-errors>
                                 </div>

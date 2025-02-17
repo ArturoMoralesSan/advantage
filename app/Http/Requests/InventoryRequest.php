@@ -17,6 +17,7 @@ class InventoryRequest extends FormRequest
         return [
             'product_id' => 'required|max:20',
             'quantity' => 'required',
+            'quantity_min' => 'required',
         ];
     }
 }

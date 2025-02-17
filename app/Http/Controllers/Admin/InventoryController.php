@@ -36,9 +36,10 @@ class InventoryController extends Controller
         $product = Product::find($request->product_id);
         $total = $product->costo_venta * $request->quantity;
         $inventory = new Inventory;
-        $inventory->product_id = $request->product_id;
-        $inventory->quantity   = $request->quantity;
-        $inventory->total      = $total;
+        $inventory->product_id   = $request->product_id;
+        $inventory->quantity_min = $request->quantity_min;
+        $inventory->quantity     = $request->quantity;
+        $inventory->total        = $total;
         $inventory->save();
 
         Inventory::checkStock($inventory);
@@ -66,9 +67,10 @@ class InventoryController extends Controller
         $product = Product::find($request->product_id);
         $total = $product->costo_venta * $request->quantity;
         $inventory = Inventory::find($id);
-        $inventory->product_id = $request->product_id;
-        $inventory->quantity   = $request->quantity;
-        $inventory->total      = $total;
+        $inventory->product_id   = $request->product_id;
+        $inventory->quantity_min = $request->quantity_min;
+        $inventory->quantity     = $request->quantity;
+        $inventory->total        = $total;
         $inventory->save();
 
         Inventory::checkStock($inventory);

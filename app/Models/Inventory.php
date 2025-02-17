@@ -12,7 +12,7 @@ class Inventory extends Model
 
     public static function checkStock($inventory)
     {   
-        if ($inventory->quantity < 10) { 
+        if ($inventory->quantity == $inventory->quantity_min) { 
             Notification::create([
                 'message' => "Stock bajo: {$inventory->product->name} tiene solo {$inventory->quantity} unidades",
                 'read' => false
