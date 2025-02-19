@@ -129,6 +129,9 @@ class User extends Authenticatable
         return $this->hasMany(Sale::class);
     }
 
-
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
 
 }
