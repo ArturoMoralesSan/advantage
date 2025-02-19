@@ -20,7 +20,7 @@ class UserController extends Controller
     {
        abort_unless(Gate::allows('view.users') || Gate::allows('create.users'), 403);
 
-        $users = User::with('role')->get();
+        $users = User::with('role')->where('role_id','<>', '2')->get();
 
         return view('admin.usuarios.index', compact('users'));
     }

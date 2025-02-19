@@ -8,6 +8,7 @@ use App\Http\Requests\SaleRequest;
 use App\Http\Requests\OrderRequest;
 use App\Models\Sale;
 use App\Models\User;
+use App\Models\Customer;
 use App\Models\Type;
 use App\Models\Cut;
 use App\Models\Product;
@@ -194,12 +195,12 @@ class SaleController extends Controller
         abort_unless(Gate::allows('view.quotations') || Gate::allows('create.quotations'), 403);
 
         if (Auth::user()->isCustomer()) {
-            $users = User::where('id', Auth::user()->id)
-            ->selectRaw("CONCAT(name, ' ', last_name) as full_name, id")
-            ->pluck('full_name', 'id');
+            $users = Customer::where('user_id', Auth::user()->id)
+            ->selectRaw("CONCAT(trade_name, ' (',business_name,')') as full_name, user_id")
+            ->pluck('full_name', 'user_id');
         } else {
-            $users = User::selectRaw("CONCAT(name, ' ', last_name) as full_name, id")
-            ->pluck('full_name', 'id');        
+            $users = Customer::selectRaw("CONCAT(trade_name, ' (', business_name,')') as full_name, user_id")
+            ->pluck('full_name', 'user_id');       
         }        
         $products = Product::all();
         $types = Type::pluck('name','id');
@@ -223,7 +224,7 @@ class SaleController extends Controller
         $sale->save();
 
         $sale->products()->detach();
-        for($i = 1; $i <= $request->products_count; $i++){
+        for($i = 1; $i <= $request->products_count; $i++) {
             $sale->products()->attach([
                 $request['product'.$i.'_product_id'] => [
                     'cut_id'            => $request['product'.$i.'_cut_id'], 
@@ -234,14 +235,14 @@ class SaleController extends Controller
                     'profit_percentage' => $request['product'.$i.'_profit_percentage']
                 ]
             ]);
+            
         }
         $totalSalePrice = $sale->products()->sum('sale_price');
-        $iva = $totalSalePrice * 0.16;
-        $totalWithIVA = $totalSalePrice + $iva;
-
-        $sale->total_sale_price = $totalSalePrice;
-        $sale->iva = $iva;
-        $sale->total_with_iva = $totalWithIVA;
+        $totaliva = $sale->products()->sum('iva');
+        $subtotal = $totalSalePrice;
+        $sale->total_sale_price = $subtotal;
+        $sale->iva = $totaliva;
+        $sale->total_with_iva = $totalSalePrice;
         $sale->save(); 
 
         
