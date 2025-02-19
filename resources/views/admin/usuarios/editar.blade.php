@@ -50,21 +50,6 @@
                         </div>
                     </div>
                     <div class="md:row mb-4">
-                        <div class="md:col">
-                            <div class="form-control">
-                                <label for="role">Rol</label>
-                                <select-field 
-                                        name="role_id" 
-                                        v-model="fields.role_id" 
-                                        :options="{{ $roles }}"
-                                        initial="{{ $user->role_id }}"
-                                    >
-                                    </select-field>
-                                <field-errors name="roles"></field-errors>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="md:row mb-4">
                         <div class="md:col-1/2">
                             <div class="form-control">
                                 <label for="username">Nombre de usuario</label>
@@ -79,6 +64,21 @@
                                 <text-field type="email" name="email" v-model="fields.email" initial="{{ $user->email }}"></text-field>
                                 <field-errors name="email"></field-errors>
                             </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:row mb-4">
+                        <div class="md:col">
+                            <div class="form-control">
+                                <label for="role">Rol</label>
+                                <select-field 
+                                        name="role_id" 
+                                        v-model="fields.role_id" 
+                                        :options="{{ $roles }}"
+                                        initial="{{ $user->role_id }}"
+                                    >
+                                    </select-field>
+                                <field-errors name="roles"></field-errors>
                             </div>
                         </div>
                     </div>

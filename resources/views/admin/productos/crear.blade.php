@@ -138,7 +138,7 @@
                             </div>
                             <div class="md:col-1/2">
                                 <div class="form-control">
-                                    <label for="costo_venta">Costo de venta</label>
+                                    <label for="costo_venta">Costo total de venta</label>
                                     <text-field disabled name="costo_venta" v-model="fields.costo_venta" maxlength="80" type="number"></text-field>
                                     <field-errors name="costo_venta"></field-errors>
                                 </div>

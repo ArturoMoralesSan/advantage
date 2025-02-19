@@ -81,7 +81,7 @@
                             </div>
                             <div class="md:col-1/4">
                                 <div class="form-control">
-                                    <label for="vinil_cost">Costo por Vinil</label>
+                                    <label for="vinil_cost">Costo</label>
                                     <text-field name="vinil_cost" v-model="fields.vinil_cost" maxlength="80" type="number" initial="{{ $product->vinil_cost }}"></text-field>
                                     <field-errors name="vinil_cost"></field-errors>
                                 </div>
@@ -138,7 +138,7 @@
                             </div>
                             <div class="md:col-1/2">
                                 <div class="form-control">
-                                    <label for="costo_venta">Costo de venta</label>
+                                    <label for="costo_venta">Costo total de venta</label>
                                     <text-field disabled name="costo_venta" v-model="fields.costo_venta" maxlength="80" type="number" initial="{{ $product->costo_venta }}"></text-field>
                                     <field-errors name="costo_venta"></field-errors>
                                 </div>

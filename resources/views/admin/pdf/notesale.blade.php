@@ -157,14 +157,7 @@
         <!-- Tabla de Totales (A la derecha) -->
         <div class="totals-container">
             <table class="totals">
-                <tr>
-                    <th>Subtotal</th>
-                    <td>${{ number_format($sale->total_sale_price, 2) }}</td>
-                </tr>
-                <tr>
-                    <th>IVA</th>
-                    <td>${{ number_format($sale->iva, 2) }}</td>
-                </tr>
+                
                 <tr>
                     <th>Total</th>
                     <td><strong>${{ number_format($sale->total_with_iva, 2) }}</strong></td>

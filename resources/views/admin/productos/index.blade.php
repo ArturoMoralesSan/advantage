@@ -37,11 +37,14 @@
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Tipo de impresión</th>
-                                <th>Costo por vinil</th>
+                                <th>Costo</th>
                                 <th>Costo de impresión</th>
                                 <th>Costo indirecto</th>
-                                <th>Costo total</th>
-                                <th>Costo de venta</th>
+                                <th>Subtotal</th>
+                                <th>IVA</th>
+                                <th>Total</th>
+                                <th>Utilidad</th>
+                                <th>Costo total de venta</th>
                                 <th class="pr-4">Acciones</th>
                             </tr>
                         </thead>
@@ -57,7 +60,7 @@
                                 <td data-label="Tipo de impresión :">
                                     @{{ productItem.type.name }}
                                 </td>
-                                <td data-label="Costo por vinil :">
+                                <td data-label="Costo:">
                                     $@{{ productItem.vinil_cost }} / @{{ productItem.measure.name }}
                                 </td>
                                 <td data-label="Costo de impresión:">
@@ -66,10 +69,19 @@
                                 <td data-label="Costo indirecto:">
                                     $@{{ productItem.indirect_cost }}
                                 </td>
-                                <td data-label="Costo total:">
+                                <td data-label="Subtotal:">
+                                    $@{{ productItem.subtotal }}
+                                </td>
+                                <td data-label="IVA:">
+                                    $@{{ productItem.iva }}
+                                </td>
+                                <td data-label="Total:">
                                     $@{{ productItem.costo_total }}
                                 </td>
-                                <td data-label="Costo de venta:">
+                                <td data-label="Utilidad:">
+                                    $@{{ productItem.utility }}%
+                                </td>
+                                <td data-label="Costo total de venta:">
                                     $@{{ productItem.costo_venta }}
                                 </td>
 

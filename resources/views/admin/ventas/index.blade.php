@@ -75,8 +75,6 @@
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Cliente</th>
-                                        <th>Subtotal</th>
-                                        <th>Iva</th>
                                         <th>Total</th>
                                         @if(auth()->user()->isSuperAdmin() || auth()->user()->isEmployee())
                                         <th>Orden</th>
@@ -96,12 +94,6 @@
                                         </td>
                                         <td data-label="Cliente:">
                                             @{{ salesItem.user.name }} @{{ salesItem.user.last_name }}
-                                        </td>
-                                        <td data-label="Subtotal:">
-                                            $@{{ salesItem.total_sale_price }}
-                                        </td>
-                                        <td data-label="iva:">
-                                            $@{{ salesItem.iva }}
                                         </td>
                                         <td data-label="Total:">
                                             $@{{ salesItem.total_with_iva }}

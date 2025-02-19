@@ -37,22 +37,11 @@
                                     <field-errors name="name"></field-errors>
                                 </div>
                             </div>
-                            <div class="md:col">
+                            <div class="md:col-1/2">
                                 <div class="form-control">
                                     <label for="last_name">Apellidos</label>
                                     <text-field name="last_name" v-model="fields.last_name"></text-field>
                                     <field-errors name="last_name"></field-errors>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:row mb-4">
-                            <div class="md:col-1/2">
-                                <div class="form-control">
-                                    <label for="role">Rol</label>
-                                    <select-field class="form-select" name="role" v-model="fields.role_id"
-                                        :options="{{ $roles }}">
-                                    </select-field>
-                                    <field-errors name="roles"></field-errors>
                                 </div>
                             </div>
                         </div>
@@ -64,6 +53,7 @@
                                     <field-errors name="username"></field-errors>
                                 </div>
                             </div>
+                            
                             <div class="md:col-1/2">
                                 <div class="form-control">
                                     <div class="form-control">
@@ -71,6 +61,17 @@
                                     <text-field type="email" name="email" v-model="fields.email"></text-field>
                                     <field-errors name="email"></field-errors>
                                 </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:row mb-4">
+                            <div class="md:col">
+                                <div class="form-control">
+                                    <label for="role">Rol</label>
+                                    <select-field class="form-select" name="role" v-model="fields.role_id"
+                                        :options="{{ $roles }}">
+                                    </select-field>
+                                    <field-errors name="roles"></field-errors>
                                 </div>
                             </div>
                         </div>
