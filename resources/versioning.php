@@ -2,13 +2,13 @@
 return [
 
     'css' => [
-        'dashboard' => 2,
-        'main'      => 2
+        'dashboard' => 5,
+        'main'      => 5
     ],
 
     'js' => [
-        'admin'  => 2,
-        'main'   => 2,
-        'vendor' => 2,
+        'admin'  => 5,
+        'main'   => 5,
+        'vendor' => 5,
     ]
 ];

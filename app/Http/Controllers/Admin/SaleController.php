@@ -71,10 +71,10 @@ class SaleController extends Controller
                 ->orderBy('created_at', 'DESC');
 
             if (Auth::user()->isCustomer()) {
-                $query->where('user_id', Auth::user()->id);
+                $query->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc');
             }
             if ($search) {
-                $query->where('product_name', 'LIKE', '%' . $search . '%');
+                $query->where('product_name', 'LIKE', '%' . $search . '%')->orderBy('created_at', 'desc');
             }
             $paginatedSales = $query->paginate(10);
             $salesByStatus[$status] = [
@@ -125,8 +125,9 @@ class SaleController extends Controller
             foreach($sale->products as $product)
             {
                 $inventory = Inventory::with('product')->where('product_id', $product->id)->first();
-                $inventory->quantity = $product->quantity_material;
-                $inventory->total = $inventory->product->costo_venta * $inventory->quantity;
+                $updateQuantity = $inventory->quantity - $product->pivot->quantity_product;
+                $inventory->quantity = $updateQuantity;
+                $inventory->total = $inventory->product->costo_venta * $updateQuantity;
                 $inventory->save();
                 Inventory::checkStock($inventory);
             }
@@ -135,6 +136,7 @@ class SaleController extends Controller
             $sale->comment = $request->comment;
 
             $sale->load('products', 'user');
+
             $this->sendSaleMail($sale);
         }
         
@@ -325,7 +327,16 @@ class SaleController extends Controller
         $pdfPath = storage_path("app/public/cotizacion_{$sale->id}.pdf");
         $pdf->save($pdfPath);
 
-        Mail::to($sale->user->email)->send(new SaleMail($sale, $pdfPath));
+        $admins = User::where('role_id', '1')->pluck('email')->toArray();
+
+        if (!empty($sale->user->email)) {
+            Mail::to($sale->user->email)
+                ->bcc($admins)
+                ->send(new SaleMail($sale, $pdfPath));
+        } else {
+            Mail::bcc($admins)
+                ->send(new SaleMail($sale, $pdfPath));
+        }
 
         return back()->with('success', 'Correo enviado con éxito.');
     }

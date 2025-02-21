@@ -13,14 +13,14 @@ class MeasureController extends Controller
 {
     public function index()
     {
-        abort_unless(Gate::allows('view.products') || Gate::allows('create.products'), 403);
+        abort_unless(Gate::allows('view.measures') || Gate::allows('create.mesures'), 403);
         $measures = Measure::all();
         return view('admin.medidas.index', compact('measures'));   
     }
 
     public function save(MeasureRequest $request)
     {
-        abort_unless(Gate::allows('view.products') || Gate::allows('edit.products'), 403);
+        abort_unless(Gate::allows('view.measures') || Gate::allows('create.measures'), 403);
         
         $measure = new Measure;
         $measure->name = $request->name;
@@ -36,7 +36,7 @@ class MeasureController extends Controller
 
     public function edit($id)
     {
-        abort_unless(Gate::allows('view.products') || Gate::allows('edit.products'), 403);
+        abort_unless(Gate::allows('view.measures') || Gate::allows('create.measures'), 403);
         $measure = Measure::find($id);
 
         return view('admin.medidas.editar', compact('measure'));
@@ -45,7 +45,7 @@ class MeasureController extends Controller
 
     public function update(MeasureRequest $request, $id)
     {
-        abort_unless(Gate::allows('view.roles') || Gate::allows('edit.Role'), 403);
+        abort_unless(Gate::allows('views.measures') || Gate::allows('create.measures'), 403);
 
         $measure = Measure::find($id);
         $measure->name = $request->name;
@@ -60,7 +60,7 @@ class MeasureController extends Controller
 
     public function delete($id)
     {
-        abort_unless(Gate::allows('view.products') || Gate::allows('create.products'), 403);
+        abort_unless(Gate::allows('view.measures') || Gate::allows('create.mesures'), 403);
 
         $measure = Measure::find($id);
         $measure->delete();

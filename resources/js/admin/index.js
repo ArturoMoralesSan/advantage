@@ -29,7 +29,8 @@ import FormBetweenDateSearch from './components/FormBetweenDateSearch.vue';
 import SelectFilter from './components/SelectFilter.vue';
 
 import LinkPdf from './components/LinkPdf.vue';
-import SaleForm from './components/SaleForm.vue';
+import CustomerForm from './components/CustomerForm.vue';
+import RoleForm from './components/RoleForm.vue';
 
 import OrderStatusForm from '../main/components/forms/order-status-form/OrderStatusForm.vue';
 
@@ -70,7 +71,8 @@ import Notifications from './components/Notifications.vue';
     Vue.component('product-registration-form', ProductRegistrationForm);
     Vue.component('link-pdf', LinkPdf);
     Vue.component('product-form', ProductForm);
-    Vue.component('sale-form', SaleForm);
+    Vue.component('role-form', RoleForm);
+    Vue.component('customer-form', CustomerForm);
     Vue.component('order-status-form', OrderStatusForm);
     Vue.component('notifications', Notifications);
 

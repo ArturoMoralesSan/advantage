@@ -82,7 +82,7 @@
                             <div class="md:col-1/4">
                                 <div class="form-control">
                                     <label for="vinil_cost">Costo</label>
-                                    <text-field name="vinil_cost" v-model="fields.vinil_cost" maxlength="80" type="number"></text-field>
+                                    <text-field name="vinil_cost" v-model="fields.vinil_cost" maxlength="80"></text-field>
                                     <field-errors name="vinil_cost"></field-errors>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                             <div class="md:col-1/4">
                                 <div class="form-control">
                                     <label for="impresion_cost">Costo por impresión</label>
-                                    <text-field name="impresion_cost" v-model="fields.impresion_cost" maxlength="80" type="number"></text-field>
+                                    <text-field name="impresion_cost" v-model="fields.impresion_cost" maxlength="80" ></text-field>
                                     <field-errors name="impresion_cost"></field-errors>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                             <div class="md:col-1/4">
                                 <div class="form-control">
                                     <label for="indirect_cost">Costo indirecto</label>
-                                    <text-field name="indirect_cost" v-model="fields.indirect_cost" maxlength="80" type="number"></text-field>
+                                    <text-field name="indirect_cost" v-model="fields.indirect_cost" maxlength="80" ></text-field>
                                     <field-errors name="indirect_cost"></field-errors>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                             <div class="md:col-1/2">
                                 <div class="form-control">
                                     <label for="costo_venta">Costo total de venta</label>
-                                    <text-field disabled name="costo_venta" v-model="fields.costo_venta" maxlength="80" type="number"></text-field>
+                                    <text-field disabled name="costo_venta" v-model="fields.costo_venta" maxlength="80"></text-field>
                                     <field-errors name="costo_venta"></field-errors>
                                 </div>
                             </div>

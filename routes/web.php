@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\CutController;
@@ -66,11 +67,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
 
     // usuarios
     Route::get('usuarios', [UserController::class, 'index']);
-    Route::get('usuarios/crear', [UserController::class, 'create']);
+    Route::get('agregar-usuario', [UserController::class, 'create']);
     Route::post('usuarios/crear', [UserController::class, 'save']);
     Route::get('usuarios/{id}/editar',[UserController::class, 'edit']);
     Route::put('usuarios/{id}/actualizar',[UserController::class, 'update']);
     Route::delete('usuarios/eliminar/{id}',[UserController::class, 'destroy']);
+
+
+    // clientes
+    Route::get('clientes', [CustomerController::class, 'index']);
+    Route::get('agregar-cliente', [CustomerController::class, 'create']);
+    Route::post('clientes/crear', [CustomerController::class, 'save']);
+    Route::get('clientes/{id}/editar',[CustomerController::class, 'edit']);
+    Route::put('clientes/{id}/actualizar',[CustomerController::class, 'update']);
+    Route::delete('clientes/eliminar/{id}',[CustomerController::class, 'destroy']);
+
+
     //permisos
     Route::get('permisos', [PermissionController::class, 'index']);
     Route::view('agregar-permisos', 'admin.permisos.crear');
@@ -81,7 +93,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
 
     //roles
     Route::get('roles', [RoleController::class, 'index']);
-    Route::view('agregar-roles', 'admin.roles.crear');
+    Route::get('agregar-roles', [RoleController::class, 'create']);
     Route::post('roles/crear', [RoleController::class, 'save']);
     Route::get('roles/{id}/editar', [RoleController::class, 'edit']);
     Route::put('roles/{id}/actualizar', [RoleController::class, 'update']);
@@ -106,7 +118,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     //Productos
     Route::get('productos', [ProductController::class, 'index']);
     Route::get('agregar-productos', [ProductController::class, 'create']);
-   // Route::view('agregar-productos', 'admin.productos.crear');
+    Route::post('productos/clonar/{id}', [ProductController::class, 'cloneProduct']);
     Route::post('productos/crear', [ProductController::class, 'save']);
     Route::get('productos/{id}/editar', [ProductController::class, 'edit']);
     Route::put('productos/{id}/actualizar', [ProductController::class, 'update']);

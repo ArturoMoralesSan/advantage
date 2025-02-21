@@ -22,7 +22,7 @@
             <a href="{{ url('admin/roles/') }}">Ver todos los roles</a>
         </p>
 
-            <base-form action="{{ url('admin/roles/'. $role->id .'/actualizar') }}"
+            <role-form action="{{ url('admin/roles/'. $role->id .'/actualizar') }}"
                 method="put"
                 enctype="multipart/form-data"
                 inline-template
@@ -44,6 +44,30 @@
                             </div>
                         </div>
                     </section>
+                    <section class="db-panel">
+                        <h3 class="db-panel__title">
+                            Permisos
+                        </h3>
+
+                        <div class="md:row">
+                            <div class="md:col">
+                                <div class="permissions-container">
+                                    @foreach ($permissions as $permission)
+                                        <label class="permission-item">
+                                            <checkbox-field 
+                                                :initial="{{ $role->key_name === 'superadmin' ? 'true' : ($role->hasPermission($permission->name) ? 'true' : 'false') }}"                                                v-model="fields.permissions_{{ $permission->id }}" 
+                                                name="permissions_{{ $permission->id }}" 
+                                            >
+                                            </checkbox-field>
+                                            {{ $permission->name }}
+                                        </label>
+                                    @endforeach
+    
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
                     <div class="text-center">
                         <form-button class="btn--blue--dashboard btn--wide">
@@ -51,7 +75,7 @@
                         </form-button>
                     </div>
                 </form>
-            </user-form>
+            </role-form>
     </div>
 </section>
 

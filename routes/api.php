@@ -23,3 +23,26 @@ Route::post('/notifications/read', [NotificationController::class, 'markAsRead']
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/postal-code', function () {
+    $postalCode = request('cp');
+
+    if (!$postalCode) {
+        return response()->json(['error' => 'Código postal requerido'], 400);
+    }
+
+    $apiKey = env('DIPOMEX_API_KEY'); // API Key desde .env
+    $url = "https://api.tau.com.mx/dipomex/v1/codigo_postal";
+
+    $response = Http::withHeaders([
+        'APIKEY' => $apiKey
+    ])->get($url, [
+        'cp' => $postalCode
+    ]);
+
+    if ($response->successful()) {
+        return response()->json($response->json());
+    }
+
+    return response()->json(['error' => 'No se pudo obtener la información'], 500);
+});

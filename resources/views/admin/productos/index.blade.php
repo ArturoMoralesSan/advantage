@@ -17,7 +17,18 @@
         </p>
     </div>
 
+    
     <div class="fluid-container mb-16">
+
+        <form-search 
+            selected="{{ app('request')->input('search') }}"
+        >
+        <template slot="svg-search">
+            <img class="search-form_icon" src="{{ url('img/svg/search.svg') }}" alt="">
+        </template>
+        </form-search>
+
+
         @include('components.alert')
         <section class="db-panel">
             <h3 class="db-panel__title">
@@ -87,6 +98,15 @@
 
 
                                 <td class="table-resource__actions" data-label="Acciones:">
+                                    <clone-button 
+                                        class="btn btn-nowrap btn--sm btn--success table-resource__button mr-2" 
+                                        :item="productItem" 
+                                        :url="$root.path + '/admin/productos/clonar/' + productItem.id" 
+                                        @clone="cloneResource"
+                                    >
+                                        <img class="svg-icon" src="{{ url('img/svg/clone.svg')}}">
+                                        Clonar
+                                    </clone-button>
                                     <a class="btn btn-nowrap btn--sm btn--blue table-resource__button mr-2" :href="$root.path + '/admin/productos/' + productItem.id + '/editar' ">
                                         <img class="svg-icon" src="{{ url('img/svg/edit.svg')}}">
                                         Editar

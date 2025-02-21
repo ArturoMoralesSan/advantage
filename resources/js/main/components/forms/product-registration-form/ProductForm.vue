@@ -3,7 +3,7 @@
         <h3>
             Producto {{ index }}
         </h3>
-        <div v-if="index > minProduct" class="form-control clone-select-wrapper"">
+        <div v-if="index > minProduct" class="form-control clone-select-wrapper">
             <label>Clonar de:</label>
             <select v-model="selectedCloneIndex" @change="handleClone">
                 <option value="" disabled>Selecciona un producto</option>
