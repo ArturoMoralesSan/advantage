@@ -15,9 +15,20 @@ class ProductController extends Controller
 {
     public function index()
     {
+        
         abort_unless(Gate::allows('view.products') || Gate::allows('create.products'), 403);
-        $products = Product::with('type', 'measure')->get()->each->setAppends([]);
-        return view('admin.productos.index', compact('products'));   
+        $search = \Request('search');
+
+        $query = Product::with('type', 'measure')->orderBy('created_at', 'desc');
+        if ($search) {
+            $query->where('name', 'LIKE', '%' . $search . '%')->orderBy('created_at', 'desc');
+        }
+        $query->get()->each->setAppends([]);
+        $paginatedProducts = $query->paginate(10);
+        $ProductsItems = Collect($paginatedProducts->items());
+        $links = $paginatedProducts->links('layout.pagination');
+
+        return view('admin.productos.index', compact('ProductsItems', 'links'));   
     }
 
     public function create()
@@ -52,6 +63,24 @@ class ProductController extends Controller
 
         return response('', 204, [
             'Redirect-To' => url('admin/productos/')
+        ]);
+    }
+
+    public function cloneProduct($id)
+    {
+        $originalProduct = Product::find($id);
+        
+
+        $newProduct = $originalProduct->replicate();
+        $newProduct->save();
+
+
+        // Obtener la nueva venta con los productos ya clonados para enviarlos al frontend
+        $newProduct->load('type', 'measure');
+
+        return response()->json([
+            'success' => true,
+            'newItem' => $newProduct
         ]);
     }
 

@@ -15,11 +15,17 @@ class InventoryController extends Controller
     public function index()
     {
         abort_unless(Gate::allows('view.inventories') || Gate::allows('create.inventories'), 403);
-
-        $inventories = Inventory::with('product')->paginate(10);
-
-        $inventoriesItems = collect($inventories->items());
-        return view('admin.inventario.index', compact('inventories', 'inventoriesItems'));   
+        $search = \Request('search');
+        $query = Inventory::with('product')->orderBy('created_at', 'desc');
+        if ($search) {
+            $query->whereHas('product', function ($q) use ($search) {
+                $q->where('name', 'LIKE', '%' . $search . '%');
+            })->orderBy('created_at', 'desc');
+        }
+        $paginatedInventory = $query->paginate(10);
+        $inventoriesItems = Collect($paginatedInventory->items());
+        $links = $paginatedInventory->links('layout.pagination');
+        return view('admin.inventario.index', compact('inventoriesItems', 'links'));   
     }
 
     public function create()

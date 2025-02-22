@@ -173,6 +173,7 @@ class SaleController extends Controller
 
         foreach ($originalSale->products as $product) {
             $newSale->products()->attach($product->id, [
+                'product_name'      => $product->pivot->product_name,
                 'cut_id'            => $product->pivot->cut_id, 
                 'width'             => $product->pivot->width, 
                 'height'            => $product->pivot->height, 
@@ -229,6 +230,7 @@ class SaleController extends Controller
         for($i = 1; $i <= $request->products_count; $i++) {
             $sale->products()->attach([
                 $request['product'.$i.'_product_id'] => [
+                    'product_name'      => $request['product'.$i.'_product_name'],
                     'cut_id'            => $request['product'.$i.'_cut_id'], 
                     'width'             => $request['product'.$i.'_width'], 
                     'height'            => $request['product'.$i.'_height'], 
