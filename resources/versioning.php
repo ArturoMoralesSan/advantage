@@ -7,8 +7,8 @@ return [
     ],
 
     'js' => [
-        'admin'  => 5,
-        'main'   => 5,
+        'admin'  => 6,
+        'main'   => 6,
         'vendor' => 5,
     ]
 ];
