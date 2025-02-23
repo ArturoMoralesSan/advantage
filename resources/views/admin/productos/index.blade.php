@@ -13,7 +13,7 @@
         </h1>
 
         <p class="dashboard-heading__caption">
-            Hay {{ $products->count() }} productos registrados.
+            Hay {{ $ProductsItems->count() }} productos registrados.
         </p>
     </div>
 
@@ -35,13 +35,13 @@
                 Lista de productos
             </h3>
 
-            @if (! $products->count())
+            @if (!$ProductsItems->count())
                 <p class="text-center py-1">
                     Por el momento no hay productos registrados.
                 </p>
             @else
 
-                <resource-table :breakpoint="800" :model="{{ $products }}" inline-template>
+                <resource-table :breakpoint="800" :model="{{ $ProductsItems }}" inline-template>
                     <table class="table size-caption mx-auto mb-16 md:table--responsive">
                         <thead>
                             <tr class="table-resource__headings">
@@ -125,6 +125,8 @@
                     </table>
 
                 </resource-table>
+
+                {!! $links !!}
 
             @endif
 

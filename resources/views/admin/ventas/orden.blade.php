@@ -68,7 +68,7 @@
                 <div class="md:col-auto">
                     <section class="db-panel">
                         <h3 class="db-panel__title">
-                            Producto {{$product->name }}
+                            {{$product->pivot->product_name }}
                         </h3>
 
                         <div class="order-table">
@@ -79,6 +79,12 @@
                                             <th class="order-table__cell--heading">Categoría:</th>
                                             <td class="order-table__cell">
                                                 {{ $product->type->name }}
+                                            </td>
+                                        </tr>
+                                        <tr class="order-table__row">
+                                            <th class="order-table__cell--heading">Producto:</th>
+                                            <td class="order-table__cell">
+                                                {{ $product->name }}
                                             </td>
                                         </tr>
                                         <tr class="order-table__row">

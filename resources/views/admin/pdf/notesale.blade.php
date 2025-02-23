@@ -132,6 +132,7 @@
         <table class="products">
             <thead>
                 <tr>
+                    <th>Nombre</th>
                     <th>Producto</th>
                     <th>Categoría</th>
                     <th>Acabado</th>
@@ -143,6 +144,7 @@
             <tbody>
                 @foreach($sale->products as $product)
                     <tr>
+                        <td>{{ $product->pivot->product_name }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->type->name }}</td>
                         <td>{{ $product->cut_name }}</td>

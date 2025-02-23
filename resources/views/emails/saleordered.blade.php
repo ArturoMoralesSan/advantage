@@ -221,6 +221,7 @@
                                   <table cellpadding="3" cellspacing="0" width="100%" border="0" style="color:#000000;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:12px;line-height:22px;table-layout:auto;width:100%;border:none;"> @foreach($sale->products as $product) <tr style="border:1px solid #ecedee;text-align:left;padding:15px 0;">
                                       <th style="text-align:left; padding-right: 20px; padding-bottom: 10px;">Descripción de la order realizada:</th>
                                       <td style="padding-bottom: 10px;">
+                                        <strong>Nombre:</strong> {{ $product->pivot->product_name }}<br>
                                         <strong>producto:</strong> {{ $product->name }}<br>
                                         <strong>Categoría:</strong> {{ $product->type->name }}<br>
                                         <strong>Acabado:</strong> {{ $product->cut_name }}<br>

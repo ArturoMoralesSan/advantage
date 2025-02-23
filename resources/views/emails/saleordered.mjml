@@ -35,6 +35,7 @@
                         <tr style="border:1px solid #ecedee;text-align:left;padding:15px 0;">
                             <th style="text-align:left; padding-right: 20px; padding-bottom: 10px;">Descripción de la order realizada:</th>
                             <td style="padding-bottom: 10px;">
+                                <strong>Nombre:</strong> {{ $product->pivot->product_name }}<br>
                                 <strong>producto:</strong> {{ $product->name }}<br>
                                 <strong>Categoría:</strong> {{ $product->type->name }}<br>
                                 <strong>Acabado:</strong> {{ $product->cut_name }}<br>

@@ -1,7 +1,10 @@
 <template>
     <div class="box box--lg bg-white b-1 rounded relative">
         <h3>
-            Producto {{ index }}
+            {{ fields['product' + index + '_product_name'] ? fields['product' + index + '_product_name'] : 'Producto ' + index }}
+            <span v-if="fields['product' + index + '_product_name']" class="badge">
+                Producto {{ index }}
+            </span>
         </h3>
         <div v-if="index > minProduct" class="form-control clone-select-wrapper">
             <label>Clonar de:</label>
@@ -24,7 +27,17 @@
             Eliminar
         </button>
         <div class="md:row mb-4">
-            
+            <div class="md:col">
+                <div class="form-control">
+                    <label :for="'product' + index + '-product_name'">Nombre del producto</label>
+                    <text-field :name="'product' + index + '_product_name'" v-model="fields['product' + index + '_product_name']" maxlength="80" 
+                    :initial="((typeof assignedProducts[index-1] !== 'undefined') ? assignedProducts[index-1].pivot.product_name : '')">
+                    </text-field>
+                    <field-errors :name="'product' + index + '_product_name'"></field-errors>
+                </div>
+            </div>
+        </div>
+        <div class="md:row mb-4">
             <div class="md:col-1/3">
                 <div class="form-control">
                     <label :for="'product' + index + '-type_id'">Categoría</label>
@@ -342,6 +355,14 @@
     .clone-select-wrapper select {
         font-size: 11px;
     }
+    .badge {
+    background-color: #436eb3;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
 
 </style>
 
