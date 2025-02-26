@@ -35,7 +35,6 @@
                         maxlength="20" 
                         :initial="((typeof assignedPayments[index-1] !== 'undefined') ? assignedPayments[index-1].pivot.cost.toString(): '')"
                     ></text-field>
-                    <field-errors name="cost"></field-errors>
                     <field-errors :name="'payment' + index + '_cost'"></field-errors>
 
                 </div>

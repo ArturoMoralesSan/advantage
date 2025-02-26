@@ -132,7 +132,7 @@
                             <div class="md:col-1/2">
                                 <div class="form-control">
                                     <label for="utility">Utilidad</label>
-                                    <text-field name="utility" v-model="fields.utility" maxlength="80" type="number" initial="{{ $product->utility }}"></text-field>
+                                    <text-field name="utility" v-model="fields.utility" maxlength="80" initial="{{ $product->utility }}"></text-field>
                                     <field-errors name="utility"></field-errors>
                                 </div>
                             </div>

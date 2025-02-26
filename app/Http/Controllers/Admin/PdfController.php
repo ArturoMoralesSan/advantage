@@ -149,9 +149,7 @@ class PdfController extends Controller
     public function pdfSale($id)
     {
         
-        $sale = Sale::find($id);
-        $sale->load('products', 'user');
-        
+        $sale = Sale::with('products', 'user.customer')->find($id);
         $pdf = PDF::loadView('admin.pdf.notesale', compact('sale'));
         $pdf->setPaper('letter', 'portrait'); 
         return $pdf->stream();

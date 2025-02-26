@@ -44,6 +44,17 @@
                 <span v-else> Puedes registrar únicamente un producto.</span>
             </p>
         </div>
+        <div class="md:row">
+            <div class="md:col">
+                <div class="form-control">
+                    <label for="comment">Comentarios adicionales</label>
+                    <text-area name="comment" rows="10" cols="50" v-model="fields.comment" maxlength="2000">{{ sale.comment  || '' }} </text-area>
+                    <field-errors name="comment"></field-errors>
+
+                </div>
+            </div>
+        
+        </div>
         
         <div class="text-center pt-8">
             <form-button class="btn--primary btn--wide">

@@ -88,7 +88,7 @@ class SaleController extends Controller
 
    public function order($id) 
     {
-        abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
+        abort_unless(Gate::allows('view.quotations') || Gate::allows('create.quotations'), 403);
         
         $sale = Sale::with(['products.type', 'user'])->find($id);
         if (Auth::user()->isCustomer()) 
@@ -115,7 +115,7 @@ class SaleController extends Controller
     }
     public function orderupdate(OrderRequest $request, $id)
     {
-        abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
+        abort_unless(Gate::allows('view.quotations') || Gate::allows('create.quotations'), 403);
 
         $sale = Sale::find($id);
 
@@ -214,7 +214,7 @@ class SaleController extends Controller
 
     public function save(SaleRequest $request)
     {
-        abort_unless(Gate::allows('view.services') || Gate::allows('create.services'), 403);
+        abort_unless(Gate::allows('view.quotations') || Gate::allows('create.quotations'), 403);
         
         if ($request->sale_id == null) {
             $sale = New Sale;
@@ -224,6 +224,7 @@ class SaleController extends Controller
         }
 
         $sale->user_id = $request->user_id;
+        $sale->comment = $request->comment;
         $sale->save();
 
         $sale->products()->detach();
@@ -243,7 +244,7 @@ class SaleController extends Controller
         }
         $totalSalePrice = $sale->products()->sum('sale_price');
         $totaliva = $sale->products()->sum('iva');
-        $subtotal = $totalSalePrice;
+        $subtotal = $totalSalePrice - $totaliva;
         $sale->total_sale_price = $subtotal;
         $sale->iva = $totaliva;
         $sale->total_with_iva = $totalSalePrice;
@@ -286,7 +287,7 @@ class SaleController extends Controller
 
     public function edit($id)
     {
-        abort_unless(Gate::allows('view.quotations') || Gate::allows('edit.quotations'), 403);
+        abort_unless(Gate::allows('view.quotations') || Gate::allows('create.quotations'), 403);
         $sale = Sale::with('products.type')->find($id);
 
         if ($sale->status != 'quoted' || (Auth::user()->isCustomer() && $sale->user_id != Auth::user()->id)) 
@@ -294,14 +295,14 @@ class SaleController extends Controller
             return redirect('admin/ventas/');
         }
         
-        if (!Auth::user()->isSuperAdmin()) {
-            $users = User::where('id', Auth::user()->id)
-            ->selectRaw("CONCAT(name, ' ', last_name) as full_name, id")
-            ->pluck('full_name', 'id');
+        if (Auth::user()->isCustomer()) {
+            $users = Customer::where('user_id', Auth::user()->id)
+            ->selectRaw("CONCAT(trade_name, ' (',business_name,')') as full_name, user_id")
+            ->pluck('full_name', 'user_id');
         } else {
-            $users = User::selectRaw("CONCAT(name, ' ', last_name) as full_name, id")
-            ->pluck('full_name', 'id');        
-        }        
+            $users = Customer::selectRaw("CONCAT(trade_name, ' (', business_name,')') as full_name, user_id")
+            ->pluck('full_name', 'user_id');       
+        }           
         $products = Product::all();
         $types = Type::pluck('name','id');
         $cuts = Cut::all();

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lista de Productos</title>
+    <title>Cotización</title>
     <style>
-        @page {
+    @page {
             size: letter; /* Tamaño carta */
             margin: 0;
         }
@@ -18,157 +18,132 @@
             background-repeat: no-repeat;
             margin: 50px 40px;
         }
-        .container {
-            width: 100%;
-            margin-top: 150px; /* Aumenta el margen superior */
-        }
-
-        h2 {
-            color: #2d4f88;
-            text-align: center;
-            font-size: 16px;
-            margin-top: 100px;
-        }
         .info {
-            font-size: 11px;
-            margin-bottom: 10px;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 5px;
+            margin-top:130px;
         }
-        table {
+        .header, .footer {
+            width: 100%;
+            border: 1px solid #000;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .header td, .footer td {
+            padding: 5px;
+        }
+        .title {
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+        }
+        .table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 11px;
-            background: rgba(255, 255, 255, 0.9);
+            margin-top: 10px;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 6px;
+        .table th, .table td {
+            border: 1px solid #000;
+            padding: 8px;
             text-align: center;
         }
-        th {
-            background: #436eb3;
-            color: white;
+        .table th {
+            background:rgb(77, 77, 77);
+            color: #fff;
         }
-        .total {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 10px;
-            padding: 6px;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        /* Tabla de Productos */
-        .products {
-            width: 100%;
-            margin-top: 15px;
-            border-collapse: collapse;
-            font-size: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* Contenedor de la tabla de Totales */
-        .totals-container {
-            width: 50%;
-            float: right; /* Se coloca a la derecha */
-            margin-top: 20px; /* Espacio entre las tablas */
-        }
-
-        /* Tabla de Totales */
         .totals {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            overflow: hidden;
+            width: 40%;
+            float: right;
+            margin-top: 10px;
         }
-
-        /* Estilos de los encabezados */
-        .products th, .totals th {
-            background: #2d4f88; /* Azul oscuro */
-            color: white;
+        .totals td {
             padding: 8px;
-            text-align: left;
+            border: 1px solid #000;
         }
-
-        /* Estilos de las celdas */
-        .products td, .totals td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: right;
-            font-weight: bold;
-        }
-
-        /* Filas alternas */
-        .products tr:nth-child(even), .totals tr:nth-child(even) {
-            background-color: #f0f4fa;
-        }
-
-        .products tr:nth-child(odd), .totals tr:nth-child(odd) {
-            background-color: #ffffff;
-        }
-
-
-
-
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Cotización de productos</h2>
-
-        <!-- Información de la Venta -->
-        <div class="info">
+    <div class="info">
             <p><strong>Fecha:</strong> {{ $sale->created_at->format('d/m/Y') }}</p>
-            <p><strong>Cliente:</strong> {{ $sale->user->name }} {{ $sale->user->last_name }}</p>
         </div>
+    <table class="header">
+        <tr>
+            <td><strong>Razón social:</strong> {{ $sale->user->customer->business_name }}</td>
+            <td><strong>Nombre comercial:</strong> {{ $sale->user->customer->trade_name }} </td>
+            <td><strong>RFC:</strong> {{ $sale->user->customer->rfc }}</td>
 
-        <!-- Tabla de Productos -->
-        <!-- Tabla de Productos -->
-        <table class="products">
-            <thead>
+        </tr>
+        <tr>
+            <td><strong>Régimen Fiscal:</strong> {{ $sale->user->customer->tax_regime }}</td>
+            <td><strong>Contacto:</strong> {{ $sale->user->customer->contact }}</td>
+            <td><strong>Teléfono:</strong> {{ $sale->user->customer->phone }}</td>
+
+        </tr>
+        <tr>
+            <td><strong>Email:</strong> {{ $sale->user->customer->email }}</td>
+        </tr>
+        <tr>
+            <td><strong>Calle:</strong> {{ $sale->user->customer->street }}</td>
+            <td><strong>Número Ext.:</strong> {{ $sale->user->customer->ext_number }}</td>
+            <td><strong>Número Int.:</strong> {{ $sale->user->customer->int_number }}</td>
+        </tr>
+        <tr>
+            <td colspan="3"><strong>Entre Calles:</strong> {{ $sale->user->customer->between_streets }} y {{ $sale->user->customer->and_street }}</td>
+        </tr>
+        <tr>
+            <td><strong>Colonia:</strong> {{ $sale->user->customer->colony }}</td>
+            <td><strong>Código Postal:</strong> {{ $sale->user->customer->postal_code }}</td>
+            <td><strong>Municipio:</strong> {{ $sale->user->customer->municipality }}</td>
+        </tr>
+        <tr>
+            <td><strong>Población:</strong> {{ $sale->user->customer->population }}</td>
+            <td><strong>Estado:</strong> {{ $sale->user->customer->state }}</td>
+            <td><strong>País:</strong> {{ $sale->user->customer->country }}</td>
+        </tr>
+    </table>
+    
+    <div class="title">Cotización de Productos</div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Acabado</th>
+                <th>Ancho</th>
+                <th>Largo</th>
+                <th>Cantidad de producto utilizado</th>
+                <th>Total por producto</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($sale->products as $product)
                 <tr>
-                    <th>Nombre</th>
-                    <th>Producto</th>
-                    <th>Categoría</th>
-                    <th>Acabado</th>
-                    <th>Ancho</th>
-                    <th>Largo</th>
-                    <th>Total por producto</th>
+                    <td>{{ $product->pivot->product_name }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ $product->type->name }}</td>
+                    <td>{{ $product->cut_name }}</td>
+                    <td>{{ $product->pivot->width }} cm</td>
+                    <td>{{ $product->pivot->height }} cm</td>
+                    <td>{{ $product->pivot->quantity_product }}</td>
+                    <td>${{ number_format($product->pivot->sale_price - $product->iva, 2) }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($sale->products as $product)
-                    <tr>
-                        <td>{{ $product->pivot->product_name }}</td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->type->name }}</td>
-                        <td>{{ $product->cut_name }}</td>
-                        <td>{{ $product->pivot->width }} cm</td>
-                        <td>{{ $product->pivot->height }} cm</td>
-                        <td>${{ number_format($product->pivot->sale_price, 2) }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <!-- Tabla de Totales (A la derecha) -->
-        <div class="totals-container">
-            <table class="totals">
-                
-                <tr>
-                    <th>Total</th>
-                    <td><strong>${{ number_format($sale->total_with_iva, 2) }}</strong></td>
-                </tr>
-            </table>
-        </div>
-
-
-
-    </div>
+            @endforeach
+        </tbody>
+    </table>
+    
+    <table class="totals">
+        <tr>
+            <td>Subtotal</td>
+            <td>${{ number_format($sale->total_sale_price, 2) }}</td>
+        </tr>
+        <tr>
+            <td>IVA</td>
+            <td>${{ number_format($sale->iva, 2) }}</td>
+        </tr>
+        <tr>
+            <td><strong>total</strong></td>
+            <td><strong>${{ number_format($sale->total_with_iva, 2) }}</strong></td>
+        </tr>
+    </table>
 </body>
 </html>

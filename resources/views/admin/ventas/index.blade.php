@@ -107,7 +107,7 @@
                                             </td>
                                         @endif
                                         <td data-label="Nota:">
-                                            <a class="btn btn-nowrap btn--sm btn--blue table-resource__button" :href="$root.path + '/notas/' + salesItem.id">
+                                            <a class="btn btn-nowrap btn--sm btn--blue table-resource__button" :href="$root.path + '/notas/' + salesItem.id" target="_blank">
                                                 <img class="svg-icon-only" src="{{ url('img/svg/pdf.svg')}}">
                                             </a>
                                         </td>

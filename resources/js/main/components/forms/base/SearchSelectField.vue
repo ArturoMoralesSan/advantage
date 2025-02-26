@@ -84,13 +84,14 @@ export default {
             this.filteredOptions = this.options; // 🔹 Restaura las opciones originales
         },
         filterOptions() {
-            const filter = this.filter.toLowerCase();
+            const filter = (this.filter || '').toLowerCase();
             this.filteredOptions = Object.fromEntries(
                 Object.entries(this.options).filter(([key, value]) =>
-                    value.toLowerCase().includes(filter)
+                    (value ? value.toString().toLowerCase() : '').includes(filter)
                 )
             );
         },
+
         selectOption(key, option) {
             this.selectedValue = key;
             this.filter = option;

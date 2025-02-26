@@ -27,7 +27,7 @@
             :users="{{ $users }}"
             :cuts="{{ $cuts }}"
             :types="{{ $types }}"
-            :product="4"
+            :product="30"
             :min-product="1"
             :products="{{ $products }}"
             :assigned-products="{{ $assigned_products}}"
