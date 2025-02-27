@@ -132,7 +132,7 @@
                 <div class="md:col">
                     <div class="sale-price-wrapper">
                         <div class="sale-price-container">
-                            <label class="sale-price-label">Precio de venta</label>
+                            <label class="sale-price-label">Impote</label>
                             <p class="sale-price-value">${{ salePrice.toFixed(2) }}</p>
                         </div>
                     </div>
@@ -262,7 +262,9 @@
             salePrice() {
                 const basePrice = parseFloat(this.fields['product' + this.index + '_base_price']) || 0;
                 const profitPercentage = parseFloat(this.fields['product' + this.index + '_profit_percentage']) || 0;
-                return basePrice + (basePrice * profitPercentage / 100);
+                const priceWithProfit = basePrice + (basePrice * profitPercentage / 100);
+                
+                return priceWithProfit;
             }
         },
 
@@ -289,7 +291,7 @@
                 // Obtener el producto seleccionado
                 const selectedProduct = this.products.find(product => product.id == productId);
                 if (selectedProduct) {
-                    basePrice = (parseFloat(selectedProduct.costo_venta) || 0) * quantity;
+                    basePrice = (parseFloat(selectedProduct.costo_total) || 0) * quantity;
                 }
 
                 // Obtener el corte seleccionado y sumarlo

@@ -107,22 +107,21 @@
                         <div class="md:row mb-2">
                             <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="subtotal">Subtotal</label>
+                                    <label for="subtotal">Costo base</label>
                                     <text-field disabled name="subtotal" v-model="fields.subtotal" maxlength="80"  initial="{{ $product->subtotal }}"></text-field>
                                     <field-errors name="subtotal"></field-errors>
                                 </div>
                             </div>
-
                             <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="iva">IVA</label>
-                                    <text-field disabled name="iva" v-model="fields.iva" maxlength="80"  initial="{{ $product->iva }}"></text-field>
-                                    <field-errors name="iva"></field-errors>
+                                    <label for="utility">Utilidad</label>
+                                    <text-field name="utility" v-model="fields.utility" maxlength="80" initial="{{ $product->utility }}"></text-field>
+                                    <field-errors name="utility"></field-errors>
                                 </div>
                             </div>
                             <div class="md:col-1/3">
                                 <div class="form-control">
-                                    <label for="costo_total">Total</label>
+                                    <label for="costo_total">Subtotal</label>
                                     <text-field disabled name="costo_total" v-model="fields.costo_total" maxlength="80"  initial="{{ $product->costo_total }}"></text-field>
                                     <field-errors name="costo_total"></field-errors>
                                 </div>
@@ -131,9 +130,9 @@
                         <div class="md:row mb-2">
                             <div class="md:col-1/2">
                                 <div class="form-control">
-                                    <label for="utility">Utilidad</label>
-                                    <text-field name="utility" v-model="fields.utility" maxlength="80" initial="{{ $product->utility }}"></text-field>
-                                    <field-errors name="utility"></field-errors>
+                                    <label for="iva">IVA</label>
+                                    <text-field disabled name="iva" v-model="fields.iva" maxlength="80"  initial="{{ $product->iva }}"></text-field>
+                                    <field-errors name="iva"></field-errors>
                                 </div>
                             </div>
                             <div class="md:col-1/2">

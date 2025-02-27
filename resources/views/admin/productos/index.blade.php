@@ -51,10 +51,10 @@
                                 <th>Costo</th>
                                 <th>Costo de impresión</th>
                                 <th>Costo indirecto</th>
+                                <th>Costo base</th>
+                                <th>Utilidad</th>
                                 <th>Subtotal</th>
                                 <th>IVA</th>
-                                <th>Total</th>
-                                <th>Utilidad</th>
                                 <th>Costo total de venta</th>
                                 <th class="pr-4">Acciones</th>
                             </tr>
@@ -80,18 +80,19 @@
                                 <td data-label="Costo indirecto:">
                                     $@{{ productItem.indirect_cost }}
                                 </td>
-                                <td data-label="Subtotal:">
+                                <td data-label="Costo base:">
                                     $@{{ productItem.subtotal }}
+                                </td>
+                                <td data-label="Utilidad:">
+                                    @{{ productItem.utility }}%
+                                </td>
+                                <td data-label="Subtotal:">
+                                    $@{{ productItem.costo_total }}
                                 </td>
                                 <td data-label="IVA:">
                                     $@{{ productItem.iva }}
                                 </td>
-                                <td data-label="Total:">
-                                    $@{{ productItem.costo_total }}
-                                </td>
-                                <td data-label="Utilidad:">
-                                    $@{{ productItem.utility }}%
-                                </td>
+                                
                                 <td data-label="Costo total de venta:">
                                     $@{{ productItem.costo_venta }}
                                 </td>

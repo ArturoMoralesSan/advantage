@@ -20,6 +20,11 @@
         }
         .info {
             margin-top:130px;
+            display:block;
+        }
+        .id_cotización {
+            float:right;
+            text-align:right;
         }
         .header, .footer {
             width: 100%;
@@ -61,9 +66,17 @@
     </style>
 </head>
 <body>
+    
     <div class="info">
-            <p><strong>Fecha:</strong> {{ $sale->created_at->format('d/m/Y') }}</p>
-        </div>
+        <table width="100%">
+            <tr>
+                <td><strong>Fecha:</strong> {{ $sale->created_at->format('d/m/Y') }}</td>
+                <td style="text-align: right;"><strong>ID de cotización:</strong> {{ $sale->id }}</td>
+            </tr>
+        </table>
+    </div>
+
+    
     <table class="header">
         <tr>
             <td><strong>Razón social:</strong> {{ $sale->user->customer->business_name }}</td>
@@ -112,7 +125,7 @@
                 <th>Ancho</th>
                 <th>Largo</th>
                 <th>Cantidad de producto utilizado</th>
-                <th>Total por producto</th>
+                <th>Importe</th>
             </tr>
         </thead>
         <tbody>
@@ -125,7 +138,7 @@
                     <td>{{ $product->pivot->width }} cm</td>
                     <td>{{ $product->pivot->height }} cm</td>
                     <td>{{ $product->pivot->quantity_product }}</td>
-                    <td>${{ number_format($product->pivot->sale_price - $product->iva, 2) }}</td>
+                    <td>${{ number_format($product->pivot->sale_price , 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -141,7 +154,7 @@
             <td>${{ number_format($sale->iva, 2) }}</td>
         </tr>
         <tr>
-            <td><strong>total</strong></td>
+            <td><strong>Total</strong></td>
             <td><strong>${{ number_format($sale->total_with_iva, 2) }}</strong></td>
         </tr>
     </table>

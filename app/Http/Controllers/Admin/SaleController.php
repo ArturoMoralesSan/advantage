@@ -242,13 +242,14 @@ class SaleController extends Controller
             ]);
             
         }
-        $totalSalePrice = $sale->products()->sum('sale_price');
-        $totaliva = $sale->products()->sum('iva');
-        $subtotal = $totalSalePrice - $totaliva;
+        $subtotal = $sale->products()->sum('sale_price');
+        $total    = $subtotal * 1.16;
+        $iva      = $total - $subtotal;
+
         $sale->total_sale_price = $subtotal;
-        $sale->iva = $totaliva;
-        $sale->total_with_iva = $totalSalePrice;
-        $sale->save(); 
+        $sale->iva = $iva;
+        $sale->total_with_iva = $total;
+        $sale->save();
 
         
         if ($request->sale_id == null) {
