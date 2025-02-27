@@ -38,10 +38,10 @@
                     const utility = parseNumber(this.fields.utility);
 
                     // Calcular valores
-                    this.fields.subtotal = (vinil + impresion + indirecto).toFixed(2);
-                    this.fields.costo_total = (parseNumber(this.fields.subtotal) * (1 + utility / 100)).toFixed(2);
-                    this.fields.iva = (parseNumber(this.fields.costo_total) * 0.16).toFixed(2);
-                    this.fields.costo_venta = (parseNumber(this.fields.costo_total) + parseNumber(this.fields.iva)).toFixed(2);
+                    this.fields.subtotal = (vinil + impresion + indirecto).toFixed(4);
+                    this.fields.costo_total = (parseNumber(this.fields.subtotal) * (1 + utility / 100)).toFixed(4);
+                    this.fields.iva = (parseNumber(this.fields.costo_total) * 0.16).toFixed(4);
+                    this.fields.costo_venta = (parseNumber(this.fields.costo_total) + parseNumber(this.fields.iva)).toFixed(4);
 
                 }
             }

@@ -132,8 +132,8 @@
                 <div class="md:col">
                     <div class="sale-price-wrapper">
                         <div class="sale-price-container">
-                            <label class="sale-price-label">Impote</label>
-                            <p class="sale-price-value">${{ salePrice.toFixed(2) }}</p>
+                            <label class="sale-price-label">Importe</label>
+                            <p class="sale-price-value">${{ salePrice.toFixed(4) }}</p>
                         </div>
                     </div>
                 </div>
