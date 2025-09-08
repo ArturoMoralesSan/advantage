@@ -50,10 +50,17 @@
                                     </span>
                                 </td>
                             </tr>
-                
+                            <tr class="order-table__row">
+                                <th class="order-table__cell--heading">Subtotal:</th>
+                                <td class="order-table__cell">$ {{ number_format($sale->total_sale_price, 4) }}</td>
+                            </tr>
+                            <tr class="order-table__row">
+                                <th class="order-table__cell--heading">IVA:</th>
+                                <td class="order-table__cell">$ {{ number_format($sale->iva, 4) }}</td>
+                            </tr>
                             <tr class="order-table__row">
                                 <th class="order-table__cell--heading">Total:</th>
-                                <td class="order-table__cell">$ {{ number_format($sale->total_with_iva, 2) }}</td>
+                                <td class="order-table__cell">$ {{ number_format($sale->total_with_iva, 4) }}</td>
                             </tr>
                         </tbody>
                     </table>

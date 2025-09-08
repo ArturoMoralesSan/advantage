@@ -72,9 +72,12 @@
                             <table class="table size-caption mx-auto mb-16 md:table--responsive">
                                 <thead>
                                     <tr class="table-resource__headings">
+                                        <th>ID</th>
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Cliente</th>
+                                        <th>Subtotal</th>
+                                        <th>IVA</th>
                                         <th>Total</th>
                                         @if(auth()->user()->isSuperAdmin() || auth()->user()->isEmployee())
                                         <th>Orden</th>
@@ -87,6 +90,9 @@
                                 <tbody>
                                     <tr v-for="salesItem in resourceList" class="table-resource__row" :key="salesItem.id">
                                         <td data-label="Fecha:">
+                                            @{{ salesItem.id }}
+                                        </td>
+                                        <td data-label="Fecha:">
                                             @{{ salesItem.formated_date }}
                                         </td>
                                         <td data-label="Hora:">
@@ -94,6 +100,12 @@
                                         </td>
                                         <td data-label="Cliente:">
                                             @{{ salesItem.user.name }} @{{ salesItem.user.last_name }}
+                                        </td>
+                                        <td data-label="Subtotal:">
+                                            $@{{ salesItem.total_sale_price }}
+                                        </td>
+                                        <td data-label="IVA:">
+                                            $@{{ salesItem.iva }}
                                         </td>
                                         <td data-label="Total:">
                                             $@{{ salesItem.total_with_iva }}

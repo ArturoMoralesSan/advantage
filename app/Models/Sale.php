@@ -20,7 +20,8 @@ class Sale extends Model
      */
     public function getFormatedDateAttribute()
     {
-        return Carbon::parse($this->date)->format('d/m/Y');
+        $created_at = $this->created_at;
+        return Carbon::parse($created_at)->format('d/m/Y');
     }
 
 

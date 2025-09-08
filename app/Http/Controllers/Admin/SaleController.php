@@ -21,6 +21,8 @@ use Auth;
 use PDF;
 use App\Mail\SaleMail;
 use Illuminate\Support\Facades\Mail;
+use Luecano\NumeroALetras\NumeroALetras;
+
 
 class SaleController extends Controller
 {
@@ -249,6 +251,10 @@ class SaleController extends Controller
         $sale->total_sale_price = $subtotal;
         $sale->iva = $iva;
         $sale->total_with_iva = $total;
+
+        $formatter = new NumeroALetras();
+        $formatter->conector = 'Y';
+        $sale->letter = $formatter->toMoney($total, 2, 'pesos', 'centavos');
         $sale->save();
 
         
