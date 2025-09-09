@@ -76,12 +76,6 @@
                         </div>
                     </a>
                 </div> -->
-            
-                <p class="text_reset-pass m-0 mt-2">
-                    <a href="{{ url('register') }}">
-                        ¿Aún no tienes cuenta? Regístrate
-                    </a>
-                </p>
             </form>
         </div>
                 
