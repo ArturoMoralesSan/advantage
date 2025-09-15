@@ -75,10 +75,17 @@ class SaleController extends Controller
             if (Auth::user()->isCustomer()) {
                 $query->where('user_id', Auth::user()->id)->orderBy('created_at', 'desc');
             }
+
             if ($search) {
-                $query->where('product_name', 'LIKE', '%' . $search . '%')->orderBy('created_at', 'desc');
+                $query->whereHas('user', function ($q) use ($search) {
+                    $q->where(function ($q2) use ($search) {
+                        $q2->where('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('last_name', 'LIKE', '%' . $search . '%');
+                    });
+                });
             }
-            $paginatedSales = $query->paginate(10);
+
+            $paginatedSales = $query->paginate(10)->appends(request()->all());
             $salesByStatus[$status] = [
                 'items' => collect($paginatedSales->items()),
                 'links' => $paginatedSales->links('layout.pagination') 

@@ -36,6 +36,8 @@ import OrderStatusForm from '../main/components/forms/order-status-form/OrderSta
 
 import Notifications from './components/Notifications.vue';
 
+import TagCalculator from './components/TagCalculator.vue';
+
 
 (function() {
     /* Base components
@@ -75,6 +77,7 @@ import Notifications from './components/Notifications.vue';
     Vue.component('customer-form', CustomerForm);
     Vue.component('order-status-form', OrderStatusForm);
     Vue.component('notifications', Notifications);
+    Vue.component('tag-calculator', TagCalculator);
 
 
 

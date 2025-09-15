@@ -73,7 +73,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::put('usuarios/{id}/actualizar',[UserController::class, 'update']);
     Route::delete('usuarios/eliminar/{id}',[UserController::class, 'destroy']);
 
-
     // clientes
     Route::get('clientes', [CustomerController::class, 'index']);
     Route::get('agregar-cliente', [CustomerController::class, 'create']);
@@ -81,7 +80,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::get('clientes/{id}/editar',[CustomerController::class, 'edit']);
     Route::put('clientes/{id}/actualizar',[CustomerController::class, 'update']);
     Route::delete('clientes/eliminar/{id}',[CustomerController::class, 'destroy']);
-
 
     //permisos
     Route::get('permisos', [PermissionController::class, 'index']);
@@ -189,22 +187,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'noCache']], functio
     Route::view('cambiar-contrasena', 'principal.cambiar-contrasena');
     Route::post('cambiar-contrasena', 'Auth\PasswordController@update');
 
-    //Carreras
-    Route::get('carreras', [RaceController::class, 'index']);
-    Route::view('carreras/crear', 'admin.carreras.crear');
-    Route::post('carreras/crear', [RaceController::class, 'save']);
-    Route::get('carreras/{id}/editar', [RaceController::class, 'edit']);
-    Route::put('carreras/{id}/actualizar', [RaceController::class, 'update']);
-    Route::delete('carreras/eliminar/{id}', [RaceController::class, 'delete']);
-
-    //Participantes
-    Route::get('carrera-participantes', [RaceRegistrationController::class, 'index']);
-    Route::get('carrera-participantes/crear', [RaceRegistrationController::class, 'create']);
-    Route::post('carrera-participantes/crear', [RaceRegistrationController::class, 'save']);
-    Route::get('carrera-participantes/{id}/editar', [RaceRegistrationController::class, 'edit']);
-    Route::put('carrera-participantes/{id}/actualizar', [RaceRegistrationController::class, 'update']);
-    Route::delete('carrera-participantes/eliminar/{id}', [RaceRegistrationController::class, 'delete']);
-
-    Route::get('carrera-estadistica', [RaceRegistrationController::class, 'statics']);
+    //Calculadora
+    Route::view('calculadora', 'admin.calculadora.index');
 
 });
